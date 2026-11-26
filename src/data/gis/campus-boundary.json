@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "pbr-vits-academic-boundary",
+      "properties": {
+        "id": "pbr-vits-academic-boundary",
+        "name": "PBR VITS Academic Campus Boundary",
+        "category": "boundary",
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297901220",
+        "accuracyLevel": "1-2m Cadastral Boundary",
+        "areaSqm": 21850
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.982804,
+              14.9135032
+            ],
+            [
+              79.9837832,
+              14.9135852
+            ],
+            [
+              79.9837864,
+              14.9137413
+            ],
+            [
+              79.984361,
+              14.9137742
+            ],
+            [
+              79.9844068,
+              14.9132925
+            ],
+            [
+              79.9840523,
+              14.9132694
+            ],
+            [
+              79.9841335,
+              14.9124052
+            ],
+            [
+              79.9828641,
+              14.9122789
+            ],
+            [
+              79.982804,
+              14.9135032
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "pbr-vits-playground-boundary",
+      "properties": {
+        "id": "pbr-vits-playground-boundary",
+        "name": "PBR VITS Athletic & Sports Grounds Boundary",
+        "category": "boundary",
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297896001",
+        "accuracyLevel": "1-2m Cadastral Boundary",
+        "areaSqm": 27400
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9811385,
+              14.9138698
+            ],
+            [
+              79.981804,
+              14.9139174
+            ],
+            [
+              79.9825558,
+              14.9139234
+            ],
+            [
+              79.9826482,
+              14.9131731
+            ],
+            [
+              79.982679,
+              14.9127503
+            ],
+            [
+              79.9826913,
+              14.9121549
+            ],
+            [
+              79.9818533,
+              14.912143
+            ],
+            [
+              79.9811755,
+              14.9120834
+            ],
+            [
+              79.9811631,
+              14.9128575
+            ],
+            [
+              79.9811385,
+              14.9134351
+            ],
+            [
+              79.9811385,
+              14.9138698
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "pbr-vits-overall-boundary",
+      "properties": {
+        "id": "pbr-vits-overall-boundary",
+        "name": "PBR VITS Unified Campus Perimeter",
+        "category": "boundary",
+        "verificationStatus": "APPROXIMATE",
+        "source": "Synthesized from OSM ways 1297901220, 1297896001, and 1297901221",
+        "accuracyLevel": "3-5m Cadastral Perimeter",
+        "areaSqm": 62500
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9811385,
+              14.9120834
+            ],
+            [
+              79.9828641,
+              14.9122789
+            ],
+            [
+              79.9841335,
+              14.9124052
+            ],
+            [
+              79.9847,
+              14.91245
+            ],
+            [
+              79.98475,
+              14.9142
+            ],
+            [
+              79.9844068,
+              14.9145
+            ],
+            [
+              79.9837864,
+              14.91445
+            ],
+            [
+              79.9825558,
+              14.9143
+            ],
+            [
+              79.9811385,
+              14.9139234
+            ],
+            [
+              79.9811385,
+              14.9120834
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

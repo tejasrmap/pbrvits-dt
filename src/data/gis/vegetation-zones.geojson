@@ -1,0 +1,125 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "veg-entrance-avenue",
+      "properties": {
+        "id": "veg-entrance-avenue",
+        "name": "Main Entrance Royal Palm Boulevard",
+        "category": "landscaping",
+        "treeSpecies": "Royal Palm (Roystonea regia) & Ashoka Trees",
+        "verificationStatus": "APPROXIMATE",
+        "source": "Campus entrance visual references",
+        "treeCountEstimated": 48
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98358,
+              14.91235
+            ],
+            [
+              79.98374,
+              14.91236
+            ],
+            [
+              79.98372,
+              14.913
+            ],
+            [
+              79.98356,
+              14.91299
+            ],
+            [
+              79.98358,
+              14.91235
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "veg-central-botanical-lawn",
+      "properties": {
+        "id": "veg-central-botanical-lawn",
+        "name": "Central Academic Quadrangle Botanical Garden",
+        "category": "lawn",
+        "treeSpecies": "Neem, Gulmohar, Bougainvillea, Carpet Grass",
+        "verificationStatus": "APPROXIMATE",
+        "source": "Enclosed garden quad between Admin and CSE blocks",
+        "areaSqm": 1800
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98335,
+              14.9133
+            ],
+            [
+              79.9838,
+              14.91332
+            ],
+            [
+              79.98378,
+              14.9135
+            ],
+            [
+              79.98333,
+              14.91348
+            ],
+            [
+              79.98335,
+              14.9133
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "veg-west-green-belt",
+      "properties": {
+        "id": "veg-west-green-belt",
+        "name": "Playground Windbreak Green Belt",
+        "category": "green_belt",
+        "treeSpecies": "Teak, Eucalyptus & Indian Rosewood windbreak",
+        "verificationStatus": "VERIFIED",
+        "source": "Playground perimeter tree line",
+        "treeCountEstimated": 64
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9811,
+              14.91205
+            ],
+            [
+              79.98118,
+              14.91206
+            ],
+            [
+              79.98116,
+              14.9139
+            ],
+            [
+              79.98108,
+              14.91389
+            ],
+            [
+              79.9811,
+              14.91205
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

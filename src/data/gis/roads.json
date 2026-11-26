@@ -1,0 +1,173 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "road-kondapuram",
+      "properties": {
+        "id": "road-kondapuram",
+        "name": "Kondapuram Road / Udayagiri State Highway",
+        "category": "primary",
+        "widthMeters": 12.0,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297896011",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.981,
+            14.912
+          ],
+          [
+            79.9828312,
+            14.912028
+          ],
+          [
+            79.9836878,
+            14.9121294
+          ],
+          [
+            79.9841335,
+            14.91225
+          ],
+          [
+            79.9855,
+            14.91235
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "road-entrance-boulevard",
+      "properties": {
+        "id": "road-entrance-boulevard",
+        "name": "Visvodaya Central Entrance Boulevard",
+        "category": "campus_artery",
+        "widthMeters": 8.0,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297901222 alignment",
+        "surface": "paved_concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.9836878,
+            14.9121294
+          ],
+          [
+            79.9836627,
+            14.9124157
+          ],
+          [
+            79.9836428,
+            14.9126436
+          ],
+          [
+            79.9836678,
+            14.9126656
+          ],
+          [
+            79.983686,
+            14.9127139
+          ],
+          [
+            79.9836542,
+            14.912749
+          ],
+          [
+            79.9836246,
+            14.9127687
+          ],
+          [
+            79.9836065,
+            14.9130518
+          ],
+          [
+            79.9836,
+            14.9135
+          ],
+          [
+            79.9836,
+            14.9141
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "road-east-perimeter",
+      "properties": {
+        "id": "road-east-perimeter",
+        "name": "East Academic Ring Road",
+        "category": "service",
+        "widthMeters": 6.0,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Inter-college service artery between VITS & VEC",
+        "surface": "paved"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.9841335,
+            14.91225
+          ],
+          [
+            79.9841,
+            14.9128
+          ],
+          [
+            79.9844,
+            14.91325
+          ],
+          [
+            79.98442,
+            14.9138
+          ],
+          [
+            79.9844,
+            14.9144
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "road-west-playground-perimeter",
+      "properties": {
+        "id": "road-west-playground-perimeter",
+        "name": "Athletic Grounds Perimeter Avenue",
+        "category": "service",
+        "widthMeters": 6.0,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297896001 eastern edge",
+        "surface": "gravel_paved"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.9826913,
+            14.9121549
+          ],
+          [
+            79.982679,
+            14.9127503
+          ],
+          [
+            79.9826482,
+            14.9131731
+          ],
+          [
+            79.9825558,
+            14.9139234
+          ]
+        ]
+      }
+    }
+  ]
+}

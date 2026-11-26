@@ -1,0 +1,171 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "path-admin-quad-loop",
+      "properties": {
+        "id": "path-admin-quad-loop",
+        "name": "Administrative Quadrangle Loop Walkway",
+        "category": "pedestrian",
+        "widthMeters": 3.0,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297901225",
+        "wheelchairAccessible": true
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.9836428,
+            14.9126436
+          ],
+          [
+            79.9835883,
+            14.9126678
+          ],
+          [
+            79.9835906,
+            14.9127051
+          ],
+          [
+            79.9836042,
+            14.9127468
+          ],
+          [
+            79.9836246,
+            14.9127687
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "path-ece-mech-connector",
+      "properties": {
+        "id": "path-ece-mech-connector",
+        "name": "Engineering Blocks Cross Connector Path",
+        "category": "pedestrian",
+        "widthMeters": 3.5,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297901224",
+        "wheelchairAccessible": true
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.9836065,
+            14.9130518
+          ],
+          [
+            79.9834628,
+            14.9130305
+          ],
+          [
+            79.9833271,
+            14.9130195
+          ],
+          [
+            79.983335,
+            14.912885
+          ],
+          [
+            79.9833455,
+            14.9127402
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "path-library-approach",
+      "properties": {
+        "id": "path-library-approach",
+        "name": "Central Library Promenade",
+        "category": "pedestrian",
+        "widthMeters": 4.0,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Paved walkway connecting Central Boulevard to Library entrance",
+        "wheelchairAccessible": true
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.9836,
+            14.9135
+          ],
+          [
+            79.9838,
+            14.91352
+          ],
+          [
+            79.98395,
+            14.91355
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "path-workshops-access",
+      "properties": {
+        "id": "path-workshops-access",
+        "name": "Mechanical Workshops Paved Corridor",
+        "category": "pedestrian",
+        "widthMeters": 3.5,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Accessway connecting Mechanical block to central workshops",
+        "wheelchairAccessible": true
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.983,
+            14.91351
+          ],
+          [
+            79.983,
+            14.91365
+          ],
+          [
+            79.983,
+            14.9138
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "path-sports-link",
+      "properties": {
+        "id": "path-sports-link",
+        "name": "Athletic Field Pedestrian Link",
+        "category": "pedestrian",
+        "widthMeters": 3.0,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Pathway from ECE/Mech blocks to Sports Pavilion bleachers",
+        "wheelchairAccessible": true
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.98288,
+            14.9132
+          ],
+          [
+            79.98275,
+            14.9132
+          ],
+          [
+            79.9826,
+            14.9132
+          ]
+        ]
+      }
+    }
+  ]
+}

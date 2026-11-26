@@ -1,0 +1,138 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "poi-main-entrance",
+      "properties": {
+        "id": "poi-main-entrance",
+        "name": "Main Entrance Gate & Security Cabin",
+        "category": "entrance",
+        "verificationStatus": "VERIFIED",
+        "source": "OSM Entrance Point",
+        "description": "Primary vehicle and visitor entrance on Kondapuram Road"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98366,
+          14.91233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poi-admin-entrance",
+      "properties": {
+        "id": "poi-admin-entrance",
+        "name": "Principal & Administrative Foyer",
+        "category": "administrative",
+        "verificationStatus": "VERIFIED",
+        "source": "OSM Building 1297903400 portico",
+        "description": "Main entrance portico to Admin Block"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98387,
+          14.91315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poi-library-foyer",
+      "properties": {
+        "id": "poi-library-foyer",
+        "name": "Central Library Circulation Foyer",
+        "category": "library",
+        "verificationStatus": "VERIFIED",
+        "source": "OSM Building 1297903411 entrance",
+        "description": "Double-height glass atrium entrance to Central Library"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98395,
+          14.91355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poi-ece-foyer",
+      "properties": {
+        "id": "poi-ece-foyer",
+        "name": "ECE Department Portico",
+        "category": "academic",
+        "verificationStatus": "VERIFIED",
+        "source": "OSM Building 1297903395 entrance",
+        "description": "Main academic entrance to Electronics Block"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98355,
+          14.9132
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poi-mech-foyer",
+      "properties": {
+        "id": "poi-mech-foyer",
+        "name": "Mechanical Department Portico",
+        "category": "academic",
+        "verificationStatus": "VERIFIED",
+        "source": "OSM Building 1297903402 entrance",
+        "description": "Ground floor portico to Mechanical Engineering Block"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98305,
+          14.9132
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poi-canteen",
+      "properties": {
+        "id": "poi-canteen",
+        "name": "Campus Food Court & Refreshments",
+        "category": "canteen",
+        "verificationStatus": "ESTIMATED",
+        "source": "East campus service quadrant",
+        "description": "Dining hall, juice stall, and cafeteria"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98439,
+          14.91312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poi-substation",
+      "properties": {
+        "id": "poi-substation",
+        "name": "Campus Electrical Substation",
+        "category": "utility",
+        "verificationStatus": "VERIFIED",
+        "source": "Southwest transformer yard",
+        "description": "High-voltage switchyard and backup generators"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.98279,
+          14.91247
+        ]
+      }
+    }
+  ]
+}

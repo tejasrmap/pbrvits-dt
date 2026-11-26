@@ -1,0 +1,848 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ece-eee-block",
+      "properties": {
+        "id": "ece-eee-block",
+        "name": "Electronics & Electrical Sciences Block",
+        "shortName": "ECE & EEE Block",
+        "category": "academic",
+        "departments": [
+          "Electronics & Communication Engineering (ECE)",
+          "Electrical & Electronics Engineering (EEE)"
+        ],
+        "floors": 4,
+        "height": 16.0,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297903395 (building:college)",
+        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "centroid": [
+          79.9836044,
+          14.9133719
+        ],
+        "localCoordinates": [
+          -6.63,
+          0,
+          -12.35
+        ],
+        "dimensions": {
+          "width": 61.6,
+          "depth": 40.8,
+          "height": 16.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9833631,
+              14.9131941
+            ],
+            [
+              79.983893,
+              14.913217
+            ],
+            [
+              79.9838415,
+              14.9135602
+            ],
+            [
+              79.9833199,
+              14.9135164
+            ],
+            [
+              79.9833631,
+              14.9131941
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mech-civil-block",
+      "properties": {
+        "id": "mech-civil-block",
+        "name": "Mechanical & Civil Engineering Block",
+        "shortName": "Mechanical Block",
+        "category": "academic",
+        "departments": [
+          "Mechanical Engineering (ME)",
+          "Civil Engineering (CE)"
+        ],
+        "floors": 3,
+        "height": 13.5,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297903402 (building:college)",
+        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "centroid": [
+          79.9830419,
+          14.9133427
+        ],
+        "localCoordinates": [
+          -67.14,
+          0,
+          -9.09
+        ],
+        "dimensions": {
+          "width": 36.4,
+          "depth": 37.1,
+          "height": 13.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9828707,
+              14.9134817
+            ],
+            [
+              79.9831992,
+              14.9135086
+            ],
+            [
+              79.9832089,
+              14.9132055
+            ],
+            [
+              79.9828886,
+              14.913175
+            ],
+            [
+              79.9828707,
+              14.9134817
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "admin-block",
+      "properties": {
+        "id": "admin-block",
+        "name": "Administrative & Executive Chambers Block",
+        "shortName": "Admin Block",
+        "category": "administrative",
+        "departments": [
+          "Principal Office",
+          "Academic Affairs",
+          "Examination Cell",
+          "Fee Counters"
+        ],
+        "floors": 3,
+        "height": 13.5,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297903400 (building:yes)",
+        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "centroid": [
+          79.983966,
+          14.9131576
+        ],
+        "localCoordinates": [
+          32.27,
+          0,
+          11.51
+        ],
+        "dimensions": {
+          "width": 21.7,
+          "depth": 95.1,
+          "height": 13.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.983878,
+              14.913586
+            ],
+            [
+              79.98405,
+              14.91358
+            ],
+            [
+              79.98408,
+              14.91315
+            ],
+            [
+              79.983944,
+              14.912732
+            ],
+            [
+              79.983878,
+              14.91274
+            ],
+            [
+              79.983878,
+              14.913586
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "central-library",
+      "properties": {
+        "id": "central-library",
+        "name": "Central Library & Knowledge Resource Center",
+        "shortName": "Central Library",
+        "category": "library",
+        "departments": [
+          "Digital Library",
+          "Reference Stack",
+          "Periodicals"
+        ],
+        "floors": 3,
+        "height": 14.0,
+        "verificationStatus": "VERIFIED",
+        "source": "OpenStreetMap way 1297903411 (building:yes)",
+        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "centroid": [
+          79.9841641,
+          14.9135802
+        ],
+        "localCoordinates": [
+          53.58,
+          0,
+          -35.53
+        ],
+        "dimensions": {
+          "width": 53.1,
+          "depth": 50.8,
+          "height": 14.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9838764,
+              14.9137707
+            ],
+            [
+              79.9843592,
+              14.9138096
+            ],
+            [
+              79.98437,
+              14.9133871
+            ],
+            [
+              79.9840508,
+              14.9133534
+            ],
+            [
+              79.9838764,
+              14.9137707
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cse-it-block",
+      "properties": {
+        "id": "cse-it-block",
+        "name": "Computer Science & IT Block",
+        "shortName": "CSE & AI Block",
+        "category": "academic",
+        "departments": [
+          "Computer Science & Engineering",
+          "Artificial Intelligence & ML",
+          "Data Science"
+        ],
+        "floors": 4,
+        "height": 16.5,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Georeferenced Academic Core North Quad (Derived from campus zoning)",
+        "accuracyLevel": "2-3m Estimated Footprint",
+        "centroid": [
+          79.983515,
+          14.913785
+        ],
+        "localCoordinates": [
+          -16.24,
+          0,
+          -58.33
+        ],
+        "dimensions": {
+          "width": 50.6,
+          "depth": 36.7,
+          "height": 16.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9833,
+              14.91362
+            ],
+            [
+              79.98375,
+              14.91365
+            ],
+            [
+              79.98373,
+              14.91395
+            ],
+            [
+              79.98328,
+              14.91392
+            ],
+            [
+              79.9833,
+              14.91362
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "central-workshops",
+      "properties": {
+        "id": "central-workshops",
+        "name": "Central Engineering Workshops & Testing Labs",
+        "shortName": "Workshops Block",
+        "category": "laboratory",
+        "departments": [
+          "Mechanical Engineering Workshops",
+          "Civil Engineering Labs"
+        ],
+        "floors": 2,
+        "height": 10.0,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Northwest Academic Utility Sector",
+        "accuracyLevel": "3-5m Estimated Footprint",
+        "centroid": [
+          79.98298,
+          14.913725
+        ],
+        "localCoordinates": [
+          -73.79,
+          0,
+          -51.65
+        ],
+        "dimensions": {
+          "width": 47.3,
+          "depth": 39.0,
+          "height": 10.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98278,
+              14.91355
+            ],
+            [
+              79.9832,
+              14.91357
+            ],
+            [
+              79.98318,
+              14.9139
+            ],
+            [
+              79.98276,
+              14.91388
+            ],
+            [
+              79.98278,
+              14.91355
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "auditorium",
+      "properties": {
+        "id": "auditorium",
+        "name": "Visvodaya Central Auditorium & Convention Hall",
+        "shortName": "Auditorium",
+        "category": "facility",
+        "departments": [
+          "Cultural Affairs",
+          "Placement Auditorium"
+        ],
+        "floors": 2,
+        "height": 12.5,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Central Gathering Quad / Northeast Pavilion Zone",
+        "accuracyLevel": "3-5m Estimated Footprint",
+        "centroid": [
+          79.98359,
+          14.91413
+        ],
+        "localCoordinates": [
+          -8.18,
+          0,
+          -96.74
+        ],
+        "dimensions": {
+          "width": 45.2,
+          "depth": 33.4,
+          "height": 12.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9834,
+              14.91398
+            ],
+            [
+              79.9838,
+              14.914
+            ],
+            [
+              79.98378,
+              14.91428
+            ],
+            [
+              79.98338,
+              14.91426
+            ],
+            [
+              79.9834,
+              14.91398
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sh-mba-block",
+      "properties": {
+        "id": "sh-mba-block",
+        "name": "Basic Sciences, Humanities & MBA Block",
+        "shortName": "S&H / MBA Block",
+        "category": "academic",
+        "departments": [
+          "Basic Sciences & Humanities",
+          "MBA Management Studies"
+        ],
+        "floors": 3,
+        "height": 13.5,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Central Academic Entrance Quad",
+        "accuracyLevel": "2-3m Estimated Footprint",
+        "centroid": [
+          79.98354,
+          14.91294
+        ],
+        "localCoordinates": [
+          -13.55,
+          0,
+          35.73
+        ],
+        "dimensions": {
+          "width": 45.2,
+          "depth": 31.2,
+          "height": 13.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98335,
+              14.9128
+            ],
+            [
+              79.98375,
+              14.91282
+            ],
+            [
+              79.98373,
+              14.91308
+            ],
+            [
+              79.98333,
+              14.91306
+            ],
+            [
+              79.98335,
+              14.9128
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sports-pavilion",
+      "properties": {
+        "id": "sports-pavilion",
+        "name": "Sports Pavilion & Athletics Command",
+        "shortName": "Sports Pavilion",
+        "category": "sports",
+        "departments": [
+          "Physical Education"
+        ],
+        "floors": 1,
+        "height": 7.0,
+        "verificationStatus": "APPROXIMATE",
+        "source": "Athletic Ground East Border (adjacent to way 1297896001)",
+        "accuracyLevel": "2-3m Estimated Footprint",
+        "centroid": [
+          79.982645,
+          14.9131
+        ],
+        "localCoordinates": [
+          -109.83,
+          0,
+          17.92
+        ],
+        "dimensions": {
+          "width": 22.6,
+          "depth": 33.4,
+          "height": 7.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98255,
+              14.91295
+            ],
+            [
+              79.98275,
+              14.91296
+            ],
+            [
+              79.98274,
+              14.91325
+            ],
+            [
+              79.98254,
+              14.91324
+            ],
+            [
+              79.98255,
+              14.91295
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "canteen-cafeteria",
+      "properties": {
+        "id": "canteen-cafeteria",
+        "name": "Campus Canteen & Cafeteria",
+        "shortName": "Campus Canteen",
+        "category": "canteen",
+        "departments": [
+          "Food & Hospitality"
+        ],
+        "floors": 2,
+        "height": 8.5,
+        "verificationStatus": "ESTIMATED",
+        "source": "East Campus Inter-College Service Corridor",
+        "accuracyLevel": "5m Estimated Location",
+        "centroid": [
+          79.98439,
+          14.913125
+        ],
+        "localCoordinates": [
+          77.88,
+          0,
+          15.14
+        ],
+        "dimensions": {
+          "width": 34.4,
+          "depth": 27.8,
+          "height": 8.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98425,
+              14.913
+            ],
+            [
+              79.98455,
+              14.91302
+            ],
+            [
+              79.98453,
+              14.91325
+            ],
+            [
+              79.98423,
+              14.91323
+            ],
+            [
+              79.98425,
+              14.913
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "boys-hostel",
+      "properties": {
+        "id": "boys-hostel",
+        "name": "Boys Hostel Residential Complex",
+        "shortName": "Boys Hostel",
+        "category": "hostel",
+        "departments": [
+          "Student Housing (Male)"
+        ],
+        "floors": 4,
+        "height": 16.0,
+        "verificationStatus": "ESTIMATED",
+        "source": "Northeast Campus Residential Zone",
+        "accuracyLevel": "5m Estimated Location",
+        "centroid": [
+          79.984335,
+          14.91415
+        ],
+        "localCoordinates": [
+          71.96,
+          0,
+          -98.96
+        ],
+        "dimensions": {
+          "width": 57.0,
+          "depth": 44.5,
+          "height": 16.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9841,
+              14.91395
+            ],
+            [
+              79.9846,
+              14.91398
+            ],
+            [
+              79.98457,
+              14.91435
+            ],
+            [
+              79.98407,
+              14.91432
+            ],
+            [
+              79.9841,
+              14.91395
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "girls-hostel",
+      "properties": {
+        "id": "girls-hostel",
+        "name": "Girls Hostel Residential Complex",
+        "shortName": "Girls Hostel",
+        "category": "hostel",
+        "departments": [
+          "Student Housing (Female)"
+        ],
+        "floors": 4,
+        "height": 16.0,
+        "verificationStatus": "ESTIMATED",
+        "source": "Northwest Secure Enclosed Residential Zone",
+        "accuracyLevel": "5m Estimated Location",
+        "centroid": [
+          79.982315,
+          14.914135
+        ],
+        "localCoordinates": [
+          -145.33,
+          0,
+          -97.29
+        ],
+        "dimensions": {
+          "width": 50.6,
+          "depth": 41.2,
+          "height": 16.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9821,
+              14.91395
+            ],
+            [
+              79.98255,
+              14.91397
+            ],
+            [
+              79.98253,
+              14.91432
+            ],
+            [
+              79.98208,
+              14.9143
+            ],
+            [
+              79.9821,
+              14.91395
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "main-gate",
+      "properties": {
+        "id": "main-gate",
+        "name": "Main Entrance Arch & Security Command Plaza",
+        "shortName": "Main Entrance",
+        "category": "entrance",
+        "departments": [
+          "Campus Security",
+          "Visitor Passes"
+        ],
+        "floors": 1,
+        "height": 8.0,
+        "verificationStatus": "VERIFIED",
+        "source": "Kondapuram Road / Campus Frontage Axis (OSM way 1297901222 entry)",
+        "accuracyLevel": "Sub-meter Georeferenced Entrance Point",
+        "centroid": [
+          79.983655,
+          14.91234
+        ],
+        "localCoordinates": [
+          -1.18,
+          0,
+          102.53
+        ],
+        "dimensions": {
+          "width": 31.2,
+          "depth": 8.9,
+          "height": 8.0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.98352,
+              14.9123
+            ],
+            [
+              79.9838,
+              14.91231
+            ],
+            [
+              79.98379,
+              14.91238
+            ],
+            [
+              79.98351,
+              14.91237
+            ],
+            [
+              79.98352,
+              14.9123
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "solar-substation",
+      "properties": {
+        "id": "solar-substation",
+        "name": "Campus Electrical Substation & Transformer Yard",
+        "shortName": "Power Substation",
+        "category": "facility",
+        "departments": [
+          "Electrical Maintenance"
+        ],
+        "floors": 1,
+        "height": 5.5,
+        "verificationStatus": "VERIFIED",
+        "source": "Southwest Utility Zone (Corresponds to SPDCL Kavali Substation vicinity)",
+        "accuracyLevel": "3-5m Georeferenced Location",
+        "centroid": [
+          79.982795,
+          14.912475
+        ],
+        "localCoordinates": [
+          -93.69,
+          0,
+          87.5
+        ],
+        "dimensions": {
+          "width": 22.6,
+          "depth": 16.7,
+          "height": 5.5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9827,
+              14.9124
+            ],
+            [
+              79.9829,
+              14.91241
+            ],
+            [
+              79.98289,
+              14.91255
+            ],
+            [
+              79.98269,
+              14.91254
+            ],
+            [
+              79.9827,
+              14.9124
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
