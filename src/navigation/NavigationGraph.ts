@@ -1,5 +1,6 @@
 import type { NavNode, NavRoute } from '../types';
 import { campusNavNodes } from '../data/campusPaths';
+import { localToWgs84 } from '../data/gis';
 
 /**
  * Calculates Euclidean 3D distance between two points
@@ -125,9 +126,12 @@ export function findShortestRoute(
   }
   instructions.push(`Arrive at ${pathNodes[pathNodes.length - 1].name}`);
 
+  const geoPoints: [number, number][] = points.map((p) => localToWgs84(p[0], p[2]));
+
   return {
     nodes: pathNodes,
     points,
+    geoPoints,
     distanceMeters: Math.round(totalDistance),
     walkingMinutes,
     instructions

@@ -3,163 +3,149 @@ import type { NavNode } from '../types';
 export const campusNavNodes: NavNode[] = [
   {
     id: "node-main-gate",
-    name: "Main Entrance Gate",
+    name: "Main Entrance Gate (Kondapuram Road)",
     type: "gate",
-    position: [0, 0, 180],
-    connections: ["node-security-plaza", "node-bus-bay"]
+    position: [-1.2, 0, 102.5],
+    connections: ["node-security-plaza", "node-bus-bay", "node-visitor-parking"]
   },
   {
     id: "node-bus-bay",
-    name: "College Bus Bay",
+    name: "College Bus Transit Bay",
     type: "parking",
-    position: [-30, 0, 155],
-    connections: ["node-main-gate", "node-security-plaza", "node-visitor-parking"]
+    position: [-28.0, 0, 98.0],
+    connections: ["node-main-gate", "node-security-plaza", "node-solar-substation"]
   },
   {
     id: "node-visitor-parking",
     name: "Visitor & Two-Wheeler Parking",
     type: "parking",
-    position: [-35, 0, 120],
-    connections: ["node-bus-bay", "node-admin-entrance"]
+    position: [25.0, 0, 95.0],
+    connections: ["node-main-gate", "node-security-plaza", "node-admin-junction"]
   },
   {
     id: "node-security-plaza",
-    name: "Central Entrance Avenue",
+    name: "Central Boulevard Entry Plaza",
     type: "junction",
-    position: [0, 0, 140],
-    connections: ["node-main-gate", "node-bus-bay", "node-admin-junction", "node-sports-junction"]
+    position: [-0.5, 0, 80.0],
+    connections: ["node-main-gate", "node-bus-bay", "node-visitor-parking", "node-admin-junction", "node-solar-substation"]
   },
   {
     id: "node-admin-junction",
     name: "Administration Boulevard Junction",
     type: "junction",
-    position: [0, 0, 80],
-    connections: ["node-security-plaza", "node-admin-entrance", "node-library-entrance", "node-central-quad"]
+    position: [0.0, 0, 45.0],
+    connections: ["node-security-plaza", "node-visitor-parking", "node-admin-entrance", "node-sh-mba-entrance", "node-central-quad", "node-canteen-entrance"]
   },
   {
     id: "node-admin-entrance",
-    name: "Administrative Bhavan Entrance",
+    name: "Administrative Block Portico",
     type: "building",
-    position: [-45, 0, 80],
-    connections: ["node-admin-junction", "node-visitor-parking", "node-girls-hostel"]
-  },
-  {
-    id: "node-library-entrance",
-    name: "Central Library Entrance",
-    type: "building",
-    position: [45, 0, 80],
-    connections: ["node-admin-junction", "node-sports-junction", "node-ece-entrance"]
-  },
-  {
-    id: "node-sports-junction",
-    name: "Sports Complex Avenue Junction",
-    type: "junction",
-    position: [80, 0, 100],
-    connections: ["node-security-plaza", "node-library-entrance", "node-sports-pavilion", "node-basketball-court"]
-  },
-  {
-    id: "node-sports-pavilion",
-    name: "Sports Pavilion & Track",
-    type: "sports",
-    position: [130, 0, 30],
-    connections: ["node-sports-junction", "node-basketball-court", "node-boys-hostel"]
-  },
-  {
-    id: "node-basketball-court",
-    name: "Basketball & Volleyball Courts",
-    type: "sports",
-    position: [110, 0, 60],
-    connections: ["node-sports-junction", "node-sports-pavilion"]
-  },
-  {
-    id: "node-central-quad",
-    name: "Central Campus Quadrangle",
-    type: "junction",
-    position: [0, 0, 10],
-    connections: ["node-admin-junction", "node-cse-entrance", "node-ece-entrance", "node-auditorium-entrance", "node-sh-mba-entrance"]
+    position: [20.0, 0, 12.0],
+    connections: ["node-admin-junction", "node-central-quad", "node-canteen-entrance", "node-library-entrance"]
   },
   {
     id: "node-sh-mba-entrance",
     name: "S&H / MBA Block Entrance",
     type: "building",
-    position: [-35, 0, -25],
-    connections: ["node-central-quad", "node-cse-entrance", "node-auditorium-entrance"]
+    position: [-14.0, 0, 20.0],
+    connections: ["node-admin-junction", "node-central-quad", "node-sports-junction"]
   },
   {
-    id: "node-cse-entrance",
-    name: "CSE & AI Block Entrance",
-    type: "building",
-    position: [-60, 0, 0],
-    connections: ["node-central-quad", "node-mech-entrance", "node-girls-hostel"]
+    id: "node-central-quad",
+    name: "Central Academic Quadrangle",
+    type: "junction",
+    position: [0.0, 0, 0.0],
+    connections: ["node-admin-junction", "node-admin-entrance", "node-sh-mba-entrance", "node-ece-entrance", "node-mech-entrance", "node-library-entrance", "node-cse-entrance"]
   },
   {
     id: "node-ece-entrance",
     name: "ECE & EEE Block Entrance",
     type: "building",
-    position: [60, 0, 0],
-    connections: ["node-central-quad", "node-library-entrance", "node-canteen-entrance"]
-  },
-  {
-    id: "node-auditorium-entrance",
-    name: "Central Auditorium Portico",
-    type: "building",
-    position: [0, 0, -35],
-    connections: ["node-central-quad", "node-canteen-junction", "node-west-avenue"]
-  },
-  {
-    id: "node-canteen-junction",
-    name: "Canteen & North Campus Junction",
-    type: "junction",
-    position: [25, 0, -85],
-    connections: ["node-auditorium-entrance", "node-canteen-entrance", "node-boys-hostel", "node-mech-entrance"]
-  },
-  {
-    id: "node-canteen-entrance",
-    name: "Campus Canteen & Cafeteria",
-    type: "amenity",
-    position: [45, 0, -95],
-    connections: ["node-canteen-junction", "node-ece-entrance", "node-boys-hostel"]
-  },
-  {
-    id: "node-west-avenue",
-    name: "West Engineering Avenue",
-    type: "junction",
-    position: [-60, 0, -60],
-    connections: ["node-auditorium-entrance", "node-cse-entrance", "node-mech-entrance"]
+    position: [-6.0, 0, 6.0],
+    connections: ["node-central-quad", "node-mech-entrance", "node-cse-entrance"]
   },
   {
     id: "node-mech-entrance",
-    name: "Mech & Civil Block Entrance",
+    name: "Mechanical Block Entrance",
     type: "building",
-    position: [-75, 0, -90],
-    connections: ["node-west-avenue", "node-canteen-junction", "node-workshops-entrance"]
+    position: [-50.0, 0, -9.0],
+    connections: ["node-central-quad", "node-ece-entrance", "node-sports-junction", "node-workshops-entrance", "node-cse-entrance"]
+  },
+  {
+    id: "node-sports-junction",
+    name: "Athletic Ground Connector Path",
+    type: "junction",
+    position: [-85.0, 0, 18.0],
+    connections: ["node-sh-mba-entrance", "node-mech-entrance", "node-sports-pavilion", "node-solar-substation"]
+  },
+  {
+    id: "node-sports-pavilion",
+    name: "Sports Pavilion & Track Command",
+    type: "sports",
+    position: [-98.0, 0, 18.0],
+    connections: ["node-sports-junction", "node-basketball-court"]
+  },
+  {
+    id: "node-basketball-court",
+    name: "Basketball & Volleyball Hardcourt",
+    type: "sports",
+    position: [-90.0, 0, -45.0],
+    connections: ["node-sports-pavilion", "node-workshops-entrance", "node-girls-hostel"]
+  },
+  {
+    id: "node-library-entrance",
+    name: "Central Library Glass Atrium Foyer",
+    type: "building",
+    position: [30.0, 0, -35.0],
+    connections: ["node-central-quad", "node-admin-entrance", "node-cse-entrance", "node-canteen-entrance", "node-auditorium-entrance"]
+  },
+  {
+    id: "node-cse-entrance",
+    name: "CSE & AI Block Entrance",
+    type: "building",
+    position: [-16.0, 0, -40.0],
+    connections: ["node-central-quad", "node-ece-entrance", "node-mech-entrance", "node-library-entrance", "node-auditorium-entrance", "node-workshops-entrance"]
   },
   {
     id: "node-workshops-entrance",
-    name: "Central Workshops & Labs",
+    name: "Central Workshops & Testing Bays",
     type: "building",
-    position: [-75, 0, -150],
-    connections: ["node-mech-entrance", "node-solar-substation"]
+    position: [-74.0, 0, -32.0],
+    connections: ["node-mech-entrance", "node-cse-entrance", "node-basketball-court", "node-girls-hostel"]
+  },
+  {
+    id: "node-auditorium-entrance",
+    name: "Visvodaya Central Auditorium Portico",
+    type: "building",
+    position: [-8.0, 0, -78.0],
+    connections: ["node-cse-entrance", "node-library-entrance", "node-boys-hostel", "node-girls-hostel"]
+  },
+  {
+    id: "node-canteen-entrance",
+    name: "Campus Canteen & Cafeteria Patio",
+    type: "amenity",
+    position: [62.0, 0, 15.0],
+    connections: ["node-admin-junction", "node-admin-entrance", "node-library-entrance", "node-boys-hostel"]
   },
   {
     id: "node-solar-substation",
-    name: "Power Grid Substation",
+    name: "Campus Electrical Substation",
     type: "amenity",
-    position: [-145, 0, -140],
-    connections: ["node-workshops-entrance"]
+    position: [-82.0, 0, 80.0],
+    connections: ["node-bus-bay", "node-security-plaza", "node-sports-junction"]
   },
   {
     id: "node-boys-hostel",
     name: "Swami Vivekananda Boys Hostel",
     type: "building",
-    position: [120, 0, -115],
-    connections: ["node-canteen-junction", "node-canteen-entrance", "node-sports-pavilion"]
+    position: [55.0, 0, -80.0],
+    connections: ["node-library-entrance", "node-auditorium-entrance", "node-canteen-entrance"]
   },
   {
     id: "node-girls-hostel",
     name: "Sarojini Naidu Girls Hostel",
     type: "building",
-    position: [-135, 0, 70],
-    connections: ["node-admin-entrance", "node-cse-entrance"]
+    position: [-120.0, 0, -80.0],
+    connections: ["node-workshops-entrance", "node-basketball-court", "node-auditorium-entrance"]
   }
 ];

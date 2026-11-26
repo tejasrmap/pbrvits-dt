@@ -8,8 +8,8 @@ export const SportsFacilities: React.FC = () => {
   const selectFacility = useCampusStore((s) => s.selectFacility);
 
   return (
-    <group position={[150, 0, 40]}>
-      {/* 400m Athletic Running Track Oval */}
+    <group position={[-140, 0, 18]}>
+      {/* 400m Athletic Running Track Oval (OSM Verified way 1297896001) */}
       <mesh
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, 0.03, 0]}
@@ -48,9 +48,9 @@ export const SportsFacilities: React.FC = () => {
         <meshBasicMaterial color="#ffffff" />
       </mesh>
 
-      {/* Basketball Court (Next to track) */}
+      {/* Basketball Court (East of track) */}
       <group
-        position={[-40, 0, 25]}
+        position={[45, 0, -25]}
         onClick={(e) => {
           e.stopPropagation();
           selectFacility('fac-basketball-court');
@@ -99,7 +99,7 @@ export const SportsFacilities: React.FC = () => {
 
       {/* Volleyball Court with Net */}
       <group
-        position={[-40, 0, -25]}
+        position={[45, 0, 25]}
         onClick={(e) => {
           e.stopPropagation();
           selectFacility('fac-volleyball-court');

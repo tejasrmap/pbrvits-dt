@@ -4,8 +4,8 @@ export const campusConfig = {
   society: "Visvodaya Society",
   location: "Kavali, SPSR Nellore District, Andhra Pradesh, India - 524201",
   coordinates: {
-    lat: 14.9142,
-    lng: 79.9918
+    lat: 14.913261,
+    lng: 79.983666
   },
   established: 1998,
   affiliations: "JNTUA Ananthapuramu, Approved by AICTE, Accredited by NAAC with 'A' Grade",

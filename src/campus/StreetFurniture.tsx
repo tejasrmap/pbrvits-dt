@@ -10,16 +10,16 @@ export const StreetFurniture: React.FC<StreetFurnitureProps> = ({ timeOfDay }) =
   const isSunset = timeOfDay === 'sunset';
   const isGoldenHour = timeOfDay === 'goldenHour';
 
-  // Light positions along the main avenue and ring roads
+  // Light positions along the main avenue and ring roads (Z: 10 to 100)
   const lampPositions: [number, number, number][] = [
-    [-7.5, 0, 30], [7.5, 0, 30],
-    [-7.5, 0, 70], [7.5, 0, 70],
-    [-7.5, 0, 110], [7.5, 0, 110],
-    [-7.5, 0, 150], [7.5, 0, 150],
-    [-35, 0, 80], [35, 0, 80],
-    [-65, 0, 10], [65, 0, 10],
+    [-6.5, 0, 20], [6.5, 0, 20],
+    [-6.5, 0, 45], [6.5, 0, 45],
+    [-6.5, 0, 70], [6.5, 0, 70],
+    [-6.5, 0, 95], [6.5, 0, 95],
+    [-35, 0, 0], [35, 0, 0],
+    [-70, 0, 0], [70, 0, 0],
     [-25, 0, -40], [25, 0, -40],
-    [-25, 0, -120], [25, 0, -120]
+    [-25, 0, -75], [25, 0, -75]
   ];
 
   // Bench positions in gardens and quad
