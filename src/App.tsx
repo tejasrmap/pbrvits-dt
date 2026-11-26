@@ -31,6 +31,9 @@ function LoadingScreen() {
 }
 
 export function App() {
+  if (typeof window !== 'undefined') {
+    (window as any).useCampusStore = useCampusStore;
+  }
   const graphicsQuality = useCampusStore((s) => s.graphicsQuality);
   const layers = useCampusStore((s) => s.layers);
   const appViewMode = useCampusStore((s) => s.appViewMode);

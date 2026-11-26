@@ -22,7 +22,7 @@ function copyToArtifact(filename) {
 }
 
 async function run() {
-  console.log('Launching Chrome for Final Reality-Based Audit Capture...');
+  console.log('Launching Chrome for Radical Reality-Based Audit Capture...');
   const browser = await puppeteer.launch({
     executablePath: chromePath,
     headless: true,
@@ -47,147 +47,134 @@ async function run() {
 
   // -------------------------------------------------------------
   // Screenshot 1: 01-premium-campus-overview.png
-  // Premium campus overview (Cinematic aerial perspective)
+  // Desktop campus overview (Unobstructed aerial view)
   // -------------------------------------------------------------
   console.log('Capturing 01-premium-campus-overview.png...');
+  await page.evaluate(() => {
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().setAppViewMode('3d');
+      window.useCampusStore.getState().flyTo([0, 105, 205], [0, 0, 0]);
+      window.useCampusStore.getState().selectBuilding(null);
+      window.useCampusStore.getState().setActiveSidebarTab(null);
+    }
+  });
+  await new Promise(r => setTimeout(r, 4000));
   await page.screenshot({ path: path.join(outputDir, '01-premium-campus-overview.png') });
   copyToArtifact('01-premium-campus-overview.png');
 
   // -------------------------------------------------------------
   // Screenshot 2: 02-actual-campus-3d-model.png
-  // Actual campus 3D model (Isometric angle showing architectural blocks)
+  // Close-up of Academic Blocks (Admin Bhavan, ECE & Mech blocks)
   // -------------------------------------------------------------
-  console.log('Adjusting camera for 02-actual-campus-3d-model.png...');
+  console.log('Capturing 02-actual-campus-3d-model.png...');
   await page.evaluate(() => {
-    // Click on Academic Quad preset in bottom bar
-    const quadBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Academic Quad'));
-    if (quadBtn) quadBtn.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().flyTo([20, 38, 55], [0, 8, -10]);
+    }
   });
   await new Promise(r => setTimeout(r, 4000));
-  console.log('Capturing 02-actual-campus-3d-model.png...');
   await page.screenshot({ path: path.join(outputDir, '02-actual-campus-3d-model.png') });
   copyToArtifact('02-actual-campus-3d-model.png');
 
   // -------------------------------------------------------------
   // Screenshot 3: 03-main-entrance.png
-  // Main entrance gate view
+  // Main Entrance gateway on Udayagiri Road
   // -------------------------------------------------------------
-  console.log('Focusing Main Entrance for 03-main-entrance.png...');
+  console.log('Capturing 03-main-entrance.png...');
   await page.evaluate(() => {
-    const gateBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Main Entrance'));
-    if (gateBtn) gateBtn.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().flyTo([0, 16, 138], [0, 6, 95]);
+    }
   });
   await new Promise(r => setTimeout(r, 4000));
-  console.log('Capturing 03-main-entrance.png...');
   await page.screenshot({ path: path.join(outputDir, '03-main-entrance.png') });
   copyToArtifact('03-main-entrance.png');
 
   // -------------------------------------------------------------
   // Screenshot 4: 04-academic-building-close-up.png
-  // Close-up on Admin Bhavan or Central Library
+  // Library Close-up (Glazed atrium & canopy)
   // -------------------------------------------------------------
-  console.log('Selecting Admin Bhavan for 04-academic-building-close-up.png...');
+  console.log('Capturing 04-academic-building-close-up.png...');
   await page.evaluate(() => {
-    const buildingsNav = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Buildings'));
-    if (buildingsNav) buildingsNav.click();
-  });
-  await new Promise(r => setTimeout(r, 1500));
-  await page.evaluate(() => {
-    const adminCard = Array.from(document.querySelectorAll('*')).find(el => el.textContent && el.textContent.includes('Administrative & Executive'));
-    if (adminCard) adminCard.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().flyTo([68, 26, -2], [53.6, 8, -35.5]);
+    }
   });
   await new Promise(r => setTimeout(r, 4000));
-  console.log('Capturing 04-academic-building-close-up.png...');
   await page.screenshot({ path: path.join(outputDir, '04-academic-building-close-up.png') });
   copyToArtifact('04-academic-building-close-up.png');
 
   // -------------------------------------------------------------
   // Screenshot 5: 05-playground.png
-  // Sports pavilion and athletic oval
+  // Playground & Sports Pavilion
   // -------------------------------------------------------------
-  console.log('Focusing Playground for 05-playground.png...');
+  console.log('Capturing 05-playground.png...');
   await page.evaluate(() => {
-    const ovalBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Athletic Oval'));
-    if (ovalBtn) ovalBtn.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().flyTo([-150, 48, 85], [-199, 0, 0]);
+    }
   });
   await new Promise(r => setTimeout(r, 4000));
-  console.log('Capturing 05-playground.png...');
   await page.screenshot({ path: path.join(outputDir, '05-playground.png') });
   copyToArtifact('05-playground.png');
 
   // -------------------------------------------------------------
   // Screenshot 6: 06-gis-street-map.png
-  // Switch to GIS Map (OSM streets)
+  // GIS Street mode (OSM with clean restrained overlays)
   // -------------------------------------------------------------
-  console.log('Switching to GIS Street Map for 06-gis-street-map.png...');
+  console.log('Capturing 06-gis-street-map.png...');
   await page.evaluate(() => {
-    const gisBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && (b.textContent.includes('Campus GIS') || b.textContent.includes('Campus Map')));
-    if (gisBtn) gisBtn.click();
-  });
-  await new Promise(r => setTimeout(r, 3500));
-  await page.evaluate(() => {
-    const osmBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && (b.textContent.includes('Streets') || b.textContent.includes('OSM') || b.textContent.includes('osm')));
-    if (osmBtn) osmBtn.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().setAppViewMode('gis');
+    }
   });
   await new Promise(r => setTimeout(r, 4000));
-  console.log('Capturing 06-gis-street-map.png...');
   await page.screenshot({ path: path.join(outputDir, '06-gis-street-map.png') });
   copyToArtifact('06-gis-street-map.png');
 
   // -------------------------------------------------------------
   // Screenshot 7: 07-gis-satellite-map.png
-  // Switch to Satellite basemap
+  // GIS Satellite mode
   // -------------------------------------------------------------
-  console.log('Switching to Satellite basemap for 07-gis-satellite-map.png...');
+  console.log('Capturing 07-gis-satellite-map.png...');
   await page.evaluate(() => {
-    const satBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && (b.textContent.includes('Satellite') || b.textContent.includes('satellite')));
-    if (satBtn) satBtn.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().setAppViewMode('satellite');
+    }
   });
   await new Promise(r => setTimeout(r, 4500));
-  console.log('Capturing 07-gis-satellite-map.png...');
   await page.screenshot({ path: path.join(outputDir, '07-gis-satellite-map.png') });
   copyToArtifact('07-gis-satellite-map.png');
 
   // -------------------------------------------------------------
   // Screenshot 8: 08-building-selection-panel.png
-  // Building selection panel with architectural dossier
+  // Building selection with compact Apple Maps-style card
   // -------------------------------------------------------------
-  console.log('Selecting building in 3D for 08-building-selection-panel.png...');
-  await page.evaluate(() => {
-    const exploreBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && (b.textContent.includes('3D Twin') || b.textContent.includes('Explore')));
-    if (exploreBtn) exploreBtn.click();
-  });
-  await new Promise(r => setTimeout(r, 3000));
-  await page.evaluate(() => {
-    const buildingsNav = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Buildings'));
-    if (buildingsNav) buildingsNav.click();
-  });
-  await new Promise(r => setTimeout(r, 1500));
-  await page.evaluate(() => {
-    const libCard = Array.from(document.querySelectorAll('*')).find(el => el.textContent && el.textContent.includes('Central Library'));
-    if (libCard) libCard.click();
-  });
-  await new Promise(r => setTimeout(r, 3000));
   console.log('Capturing 08-building-selection-panel.png...');
+  await page.evaluate(() => {
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().setAppViewMode('3d');
+      window.useCampusStore.getState().selectBuilding('admin-block');
+      window.useCampusStore.getState().flyTo([30, 26, 45], [0, 8, 0]);
+    }
+  });
+  await new Promise(r => setTimeout(r, 4000));
   await page.screenshot({ path: path.join(outputDir, '08-building-selection-panel.png') });
   copyToArtifact('08-building-selection-panel.png');
 
   // -------------------------------------------------------------
   // Screenshot 9: 09-navigation-route.png
-  // Active navigation route plotted
+  // Active Navigation Route
   // -------------------------------------------------------------
-  console.log('Calculating route for 09-navigation-route.png...');
-  await page.evaluate(() => {
-    const navBtn = Array.from(document.querySelectorAll('button')).find(b => b.title === 'Navigation' || (b.textContent && b.textContent.includes('Navigation')));
-    if (navBtn) navBtn.click();
-  });
-  await new Promise(r => setTimeout(r, 1500));
-  await page.evaluate(() => {
-    const calcBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Calculate'));
-    if (calcBtn) calcBtn.click();
-  });
-  await new Promise(r => setTimeout(r, 3000));
   console.log('Capturing 09-navigation-route.png...');
+  await page.evaluate(() => {
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().setActiveSidebarTab('navigation');
+      const calcBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Calculate'));
+      if (calcBtn) calcBtn.click();
+    }
+  });
+  await new Promise(r => setTimeout(r, 3500));
   await page.screenshot({ path: path.join(outputDir, '09-navigation-route.png') });
   copyToArtifact('09-navigation-route.png');
 
@@ -195,20 +182,21 @@ async function run() {
   // Screenshot 10: 10-mobile-experience.png
   // Mobile responsive layout (390 x 844)
   // -------------------------------------------------------------
-  console.log('Switching to mobile viewport (390 x 844) for 10-mobile-experience.png...');
+  console.log('Capturing 10-mobile-experience.png...');
   await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
   await page.evaluate(() => {
-    // Reset camera target or presets
-    const overviewPreset = Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Campus Aerial'));
-    if (overviewPreset) overviewPreset.click();
+    if (window.useCampusStore) {
+      window.useCampusStore.getState().selectBuilding(null);
+      window.useCampusStore.getState().setActiveSidebarTab(null);
+      window.useCampusStore.getState().flyTo([0, 105, 205], [0, 0, 0]);
+    }
   });
   await new Promise(r => setTimeout(r, 4000));
-  console.log('Capturing 10-mobile-experience.png...');
   await page.screenshot({ path: path.join(outputDir, '10-mobile-experience.png') });
   copyToArtifact('10-mobile-experience.png');
 
   await browser.close();
-  console.log('All 10 required audit screenshots captured successfully!');
+  console.log('All 10 radical reconstruction screenshots captured successfully!');
 }
 
 run().catch(err => {
