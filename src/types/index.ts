@@ -9,7 +9,14 @@ export type BuildingCategory =
   | 'facility'
   | 'entrance';
 
-export type VerificationStatus = 'VERIFIED' | 'APPROXIMATED' | 'ESTIMATED' | 'UNVERIFIED';
+export type VerificationStatus = 'VERIFIED' | 'APPROXIMATE' | 'ESTIMATED' | 'UNVERIFIED';
+
+export type AppViewMode = '3d' | 'gis' | 'satellite' | 'firstPerson';
+
+export interface GeoCoordinates {
+  lat: number;
+  lng: number;
+}
 
 export type WindowStyle = 'standard' | 'large' | 'lab' | 'curtain' | 'balcony' | 'minimal';
 export type RoofType = 'flat' | 'parapet' | 'terrace' | 'sloped' | 'solar';
@@ -51,6 +58,9 @@ export interface BuildingData {
   hours?: string;
   navNodeId: string;
   wingType?: 'standard' | 'stepped' | 'atrium' | 'courtyard' | 'industrial' | 'pavilion';
+  geoCoordinates?: GeoCoordinates;
+  source?: string;
+  accuracyLevel?: string;
 }
 
 export interface CampusFacility {
@@ -85,6 +95,7 @@ export interface NavNode {
 export interface NavRoute {
   nodes: NavNode[];
   points: [number, number, number][];
+  geoPoints?: [number, number][];
   distanceMeters: number;
   walkingMinutes: number;
   instructions: string[];

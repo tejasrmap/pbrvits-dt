@@ -43,10 +43,10 @@ export const ShowcaseWelcomeModal: React.FC = () => {
 
           <div className="flex items-center gap-2 mb-3">
             <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold uppercase tracking-widest bg-sky-500/20 text-sky-300 border border-sky-400/30">
-              SMART CAMPUS PLATFORM
+              SMART CAMPUS GIS TWIN
             </span>
             <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold uppercase tracking-widest bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" /> NAAC 'A' GRADE
+              <ShieldCheck className="w-3.5 h-3.5" /> OSM GEOREFERENCED
             </span>
           </div>
 
@@ -54,10 +54,10 @@ export const ShowcaseWelcomeModal: React.FC = () => {
             PBR VITS DIGITAL TWIN
           </h1>
           <p className="text-sm font-semibold text-sky-400 mt-1 tracking-wide">
-            Interactive 3D Campus Experience
+            Real GIS Campus Map & 3D Environment (14.91326° N, 79.98367° E)
           </p>
           <p className="text-xs text-slate-400 mt-1">
-            PBR Visvodaya Institute of Technology & Science • Kavali, SPSR Nellore, AP
+            PBR Visvodaya Institute of Technology & Science • Kondapuram Rd, Kavali, SPSR Nellore, AP
           </p>
         </div>
 
@@ -70,8 +70,8 @@ export const ShowcaseWelcomeModal: React.FC = () => {
           </div>
           <div className="p-3 rounded-2xl bg-slate-800/40 border border-white/5 flex flex-col items-center text-center">
             <Compass className="w-5 h-5 text-indigo-400 mb-1.5" />
-            <div className="font-bold text-white">35+ Acres</div>
-            <div className="text-[10px] text-slate-400">Green Kavali Campus</div>
+            <div className="font-bold text-white">GIS Map & Satellite</div>
+            <div className="text-[10px] text-slate-400">MapLibre + OSM</div>
           </div>
           <div className="p-3 rounded-2xl bg-slate-800/40 border border-white/5 flex flex-col items-center text-center">
             <Navigation className="w-5 h-5 text-emerald-400 mb-1.5" />

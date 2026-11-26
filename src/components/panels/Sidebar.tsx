@@ -210,7 +210,15 @@ export const Sidebar: React.FC = () => {
                     </div>
                     <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5 text-[10px] text-slate-500">
                       <span>{b.category.toUpperCase()}</span>
-                      <span className="flex items-center gap-1 text-emerald-400">
+                      <span
+                        className={`flex items-center gap-1 font-bold ${
+                          b.verified === 'VERIFIED'
+                            ? 'text-emerald-400'
+                            : b.verified === 'APPROXIMATE'
+                            ? 'text-amber-400'
+                            : 'text-purple-400'
+                        }`}
+                      >
                         <CheckCircle2 className="w-3 h-3" /> {b.verified}
                       </span>
                     </div>

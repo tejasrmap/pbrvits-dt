@@ -1,20 +1,59 @@
 # PBR VITS DIGITAL TWIN
-### 3D Browser-Based Interactive Digital Twin & Campus GIS Platform
+### Real GIS-Based & Georeferenced 3D Campus Digital Twin Platform
 **PBR Visvodaya Institute of Technology & Science (PBR VITS), Kavali, Andhra Pradesh, India**
+**Geographic Anchor:** `14.913261° N, 79.983666° E` • EPSG:4326 (WGS84)
 
 ---
 
 ## 🌟 Overview
 
-The **PBR VITS Digital Twin** is an interactive, browser-based 3D digital replica of the PBR Visvodaya Institute of Technology & Science campus located in Kavali, SPSR Nellore District, Andhra Pradesh.
+The **PBR VITS Digital Twin** is an interactive, browser-based GIS and 3D digital twin of the PBR Visvodaya Institute of Technology & Science campus located along Kondapuram Road in Kavali, SPSR Nellore District, Andhra Pradesh.
 
-Built using **React 19, Vite, TypeScript, Three.js, React Three Fiber, Drei, and Tailwind CSS**, this platform delivers a smart-campus visualization with 1:1 metric scale, procedural PBR textures, architectural facade generation, graph-based A* navigation, dynamic 4-state diurnal lighting (Day, Golden Hour, Sunset, Night), first-person walking simulation with building collision detection, and an automated **Cinematic Guided Tour** showcase mode.
+Built upon **genuine OpenStreetMap cadastral survey data and satellite imagery**, this platform unifies an interactive **MapLibre GL GIS Map** with a **Three.js 3D Smart Campus Environment**. All 3D building locations, road alignments, sports grounds, and pedestrian navigation networks are mathematically georeferenced from real-world WGS84 geographic footprints.
+
+---
+
+## 🗺️ Real GIS Foundations & Georeferencing
+
+### 1. Geographic Anchor & Coordinate Projection
+- **Campus Anchor:** Latitude `14.913261° N`, Longitude `79.983666° E` (EPSG:4326 WGS84).
+- **Metric Local Projection:** Local tangent plane centered on the academic core, converting geographic longitude/latitude directly to metric Three.js units (1 unit = 1 meter):
+  - $+X$ = Easting ($(\text{lng} - \text{lng}_0) \times R_{\text{lng}}$)
+  - $-Z$ = Northing ($(\text{lat} - \text{lat}_0) \times R_{\text{lat}}$)
+  - $+Y$ = Elevation above terrain ($0\text{m}$ base plane)
+
+### 2. OpenStreetMap Cadastral Data Sources
+- **Academic Campus Perimeter:** OSM Way `1297901220` (`amenity: college`, Visvodaya Institute of Technology & Science).
+- **Athletic Grounds & Playground:** OSM Way `1297896001` (`leisure: playground`, PBR VITS playground).
+- **Electronics & Electrical Sciences Block:** OSM Way `1297903395` (`building: college`).
+- **Mechanical & Civil Engineering Block:** OSM Way `1297903402` (`building: college`).
+- **Administrative Bhavan:** OSM Way `1297903400` (`building: yes`).
+- **Central Library & North Quad:** OSM Way `1297903411` (`building: yes`).
+- **Kondapuram Road / State Highway Frontage:** OSM Way `1297896011` (`highway: secondary`).
+- **Central Boulevard Walkway:** OSM Way `1297901222` (`highway: path/pedestrian`).
+
+### 3. Transparent Accuracy Classifications
+- `VERIFIED`: Directly surveyed OpenStreetMap footprint or GPS survey ground anchor.
+- `APPROXIMATE`: Geographically grounded from aerial imagery and architectural evidence.
+- `ESTIMATED`: Zone sector placement based on official campus layout documentation.
 
 ---
 
 ## 🚀 Key Features
 
-### 1. Cinematic Tour Showcase Mode
+### 1. Unified GIS & 3D Mode Selector
+- **`3D Twin`**: Real-time 3D orbital visualization with procedural PBR materials, diurnal lighting, and building selection.
+- **`Campus GIS`**: Fullscreen MapLibre GL map with OpenStreetMap streets, vector cadastral boundary overlays, and 3D extruded footprints.
+- **`Satellite`**: High-resolution ESRI World Imagery aerial layer showing actual satellite views of Kavali and PBR VITS.
+- **`Walk`**: Immersive First-Person walking mode with WASD / mobile controls and wall collision detection.
+- **`PiP MiniMap`**: Expandable floating GIS map accessible directly within 3D mode.
+
+### 2. Synchronized 2D/3D Navigation
+- Clicking any building on the GIS map focuses the 3D camera onto the structure.
+- Selecting a building in 3D highlights its footprint on the GIS map.
+- Calculating an A* pedestrian route renders the glowing cyan path across **both** the 3D terrain and the 2D GIS map.
+
+### 3. Cinematic Tour Showcase Mode
 - **Automated Guided Choreography:** 12-stop curated camera tour across the campus:
   1. Full campus aerial overview
   2. Main Entrance Boulevard approach
@@ -30,16 +69,7 @@ Built using **React 19, Vite, TypeScript, Three.js, React Three Fiber, Drei, and
   12. Final Aerial Campus Finale
 - **Interactive Tour HUD:** Live step counter, destination title & dossier, Play / Pause toggle, Skip Forward, Skip Back, and Exit controls.
 
-### 2. Procedural 3D Architecture & Facades
-- **Architecturally Articulated Structures:**
-  - **`stepped` Multi-Wing Complexes:** CSE Block, ECE Block, and Admin Block feature projecting lateral wings, floor-divider accents, and recessed entrance porticos.
-  - **`atrium` Glazing:** Central Library features an expansive double-height curtain glass foyer flanked by vertical sun-control fins.
-  - **`industrial` High-Bay Workshops:** Central Workshops feature heavy-equipment steel roller shutters and sloped truss roof.
-  - **`courtyard` Living Quarters:** Boys and Girls hostels feature enclosed residential quadrangles and room balconies.
-  - **`pavilion` Architecture:** Visvodaya Auditorium and Sports Pavilion feature wide entrance plazas and expansive roof profiles.
-- **Rooftop Infrastructure:** Parapets, Sintex-style water storage tanks, HVAC chiller condenser units, and photovoltaic solar cell arrays.
-
-### 3. Diurnal Lighting & Atmosphere Engine
+### 4. Diurnal Lighting & Atmosphere Engine
 - **Day Mode:** Natural crisp daylight with soft directional sun shadows and clear sky.
 - **Golden Hour Mode:** Warm sunlight, long dramatic shadows, and golden atmospheric horizon.
 - **Sunset Mode:** Rich orange-pink evening sky, warm building illumination, and atmospheric depth.

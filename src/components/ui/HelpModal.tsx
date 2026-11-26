@@ -86,18 +86,18 @@ export const HelpModal: React.FC = () => {
           {/* Section 3: Digital Twin Features */}
           <div>
             <div className="text-xs font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-sky-400" />
-              Interactive Campus GIS Capabilities
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              Real GIS & Geographic Capabilities
             </div>
             <div className="space-y-1.5 text-slate-300">
               <div className="p-2 rounded-lg bg-slate-800/40">
-                <strong className="text-white">Day / Sunset / Night:</strong> Toggle lighting modes to view daytime sunlight, golden hour sunset, and nighttime building illumination with streetlamps.
+                <strong className="text-white">Real GIS Map Mode:</strong> Interactive MapLibre GL engine with OpenStreetMap, ESRI World Satellite imagery, and Topographic layers centered at 14.91326° N, 79.98367° E.
               </div>
               <div className="p-2 rounded-lg bg-slate-800/40">
-                <strong className="text-white">A* Graph Navigation:</strong> Plan walking routes between any two campus locations with exact meter distances and estimated walking time.
+                <strong className="text-white">Cadastral Data Accuracy:</strong> Buildings and sports ground boundaries are georeferenced from OpenStreetMap survey ways (1297901220, 1297896001, 1297903395, 1297903402) with transparent VERIFIED, APPROXIMATE, and ESTIMATED classifications.
               </div>
               <div className="p-2 rounded-lg bg-slate-800/40">
-                <strong className="text-white">Procedural PBR Materials:</strong> All buildings, asphalt roads, solar panels, and lawns use physically based rendering without external asset dependencies.
+                <strong className="text-white">3D & GIS Synchronization:</strong> Selecting a building, searching a facility, or planning an A* pedestrian route synchronizes seamlessly across both the 2D GIS map and the 3D Digital Twin.
               </div>
             </div>
           </div>

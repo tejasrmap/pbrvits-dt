@@ -7,8 +7,10 @@ import type {
   GraphicsQuality,
   LayerVisibility,
   NavRoute,
-  TourStep
+  TourStep,
+  AppViewMode
 } from '../types';
+import type { BasemapId } from '../data/gis';
 import { campusBuildings } from '../data/buildings';
 import { campusFacilities } from '../data/facilities';
 import { campusTourSteps } from '../data/campusTour';
@@ -24,6 +26,8 @@ interface CampusState {
   selectedFacility: CampusFacility | null;
 
   // Environment & View Modes
+  appViewMode: AppViewMode;
+  activeBasemap: BasemapId;
   timeOfDay: TimeOfDay;
   cameraMode: CameraMode;
   graphicsQuality: GraphicsQuality;
@@ -62,6 +66,8 @@ interface CampusState {
   firstPersonPosition: [number, number, number];
 
   // Actions
+  setAppViewMode: (mode: AppViewMode) => void;
+  setActiveBasemap: (basemap: BasemapId) => void;
   selectBuilding: (id: string | null) => void;
   hoverBuilding: (id: string | null) => void;
   selectFacility: (id: string | null) => void;
@@ -103,6 +109,8 @@ export const useCampusStore = create<CampusState>((set, get) => ({
   facilities: campusFacilities,
   selectedFacility: null,
 
+  appViewMode: '3d',
+  activeBasemap: 'satellite',
   timeOfDay: 'day',
   cameraMode: 'orbit',
   graphicsQuality: 'high',
@@ -147,6 +155,31 @@ export const useCampusStore = create<CampusState>((set, get) => ({
 
   isFirstPersonWalking: false,
   firstPersonPosition: [0, 1.7, 160],
+
+  setAppViewMode: (appViewMode) => {
+    if (appViewMode === 'firstPerson') {
+      set({
+        appViewMode: 'firstPerson',
+        cameraMode: 'firstPerson',
+        isTourActive: false,
+        isFirstPersonWalking: true
+      });
+    } else if (appViewMode === '3d') {
+      set({
+        appViewMode: '3d',
+        cameraMode: 'orbit',
+        isFirstPersonWalking: false
+      });
+    } else {
+      set({
+        appViewMode,
+        isFirstPersonWalking: false,
+        isTourActive: false
+      });
+    }
+  },
+
+  setActiveBasemap: (activeBasemap) => set({ activeBasemap }),
 
   selectBuilding: (id) => {
     if (!id) {

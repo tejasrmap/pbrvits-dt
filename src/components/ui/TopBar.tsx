@@ -13,7 +13,10 @@ import {
   RotateCcw,
   HelpCircle,
   Sparkles,
-  Sliders
+  Sliders,
+  Globe,
+  Layers,
+  Map as MapIcon
 } from 'lucide-react';
 import { useCampusStore } from '../../store/useCampusStore';
 import type { TimeOfDay, CameraMode } from '../../types';
@@ -23,6 +26,8 @@ export const TopBar: React.FC = () => {
   const setTimeOfDay = useCampusStore((s) => s.setTimeOfDay);
   const cameraMode = useCampusStore((s) => s.cameraMode);
   const setCameraMode = useCampusStore((s) => s.setCameraMode);
+  const appViewMode = useCampusStore((s) => s.appViewMode);
+  const setAppViewMode = useCampusStore((s) => s.setAppViewMode);
   const resetCameraTarget = useCampusStore((s) => s.resetCameraTarget);
   const isFullscreen = useCampusStore((s) => s.isFullscreen);
   const toggleFullscreen = useCampusStore((s) => s.toggleFullscreen);
@@ -34,23 +39,76 @@ export const TopBar: React.FC = () => {
 
   return (
     <header className="absolute top-3 left-3 right-3 z-30 flex items-center justify-between gap-2.5 pointer-events-none">
-      {/* Brand & Campus Identity */}
-      <div className="glass-panel px-3.5 py-2 rounded-xl flex items-center gap-3 pointer-events-auto border border-white/10 shadow-2xl">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-600 to-indigo-500 flex items-center justify-center font-black text-white text-sm shadow-md ring-2 ring-sky-400/30">
-          PV
-        </div>
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xs sm:text-sm font-bold tracking-wide text-white">
-              PBR VITS
-            </h1>
-            <span className="px-1.5 py-0.5 rounded text-[9px] font-extrabold uppercase bg-sky-500/20 text-sky-300 border border-sky-400/30 tracking-wider">
-              Digital Twin
-            </span>
+      {/* Brand & Mode Selector */}
+      <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="glass-panel px-3.5 py-2 rounded-xl flex items-center gap-3 border border-white/10 shadow-2xl">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-600 to-indigo-500 flex items-center justify-center font-black text-white text-sm shadow-md ring-2 ring-sky-400/30">
+            PV
           </div>
-          <p className="text-[10px] text-slate-400 font-medium hidden sm:block">
-            Visvodaya Institute of Technology & Science, Kavali
-          </p>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xs sm:text-sm font-bold tracking-wide text-white">
+                PBR VITS
+              </h1>
+              <span className="px-1.5 py-0.5 rounded text-[9px] font-extrabold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 tracking-wider">
+                Real GIS Twin
+              </span>
+            </div>
+            <p className="text-[10px] text-slate-400 font-medium hidden sm:block">
+              14.91326° N, 79.98367° E | Kavali, AP
+            </p>
+          </div>
+        </div>
+
+        {/* Primary Mode Selector: 3D DIGITAL TWIN, CAMPUS GIS, SATELLITE, FIRST PERSON */}
+        <div className="glass-panel p-1 rounded-xl border border-white/10 shadow-2xl flex items-center gap-1">
+          <button
+            onClick={() => setAppViewMode('3d')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              appViewMode === '3d'
+                ? 'bg-sky-500 text-white shadow-lg'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">3D Twin</span>
+          </button>
+
+          <button
+            onClick={() => setAppViewMode('gis')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              appViewMode === 'gis'
+                ? 'bg-sky-500 text-white shadow-lg'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">Campus GIS</span>
+          </button>
+
+          <button
+            onClick={() => setAppViewMode('satellite')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              appViewMode === 'satellite'
+                ? 'bg-sky-500 text-white shadow-lg'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <MapIcon className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden md:inline">Satellite</span>
+          </button>
+
+          <button
+            onClick={() => setAppViewMode('firstPerson')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              appViewMode === 'firstPerson'
+                ? 'bg-sky-500 text-white shadow-lg'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Footprints className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden md:inline">Walk</span>
+          </button>
         </div>
       </div>
 
