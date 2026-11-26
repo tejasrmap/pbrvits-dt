@@ -53,7 +53,7 @@ interface CampusState {
   isNavigating: boolean;
 
   // UI Panels
-  activeSidebarTab: 'overview' | 'buildings' | 'facilities' | 'navigation' | 'layers' | 'departments' | null;
+  activeSidebarTab: 'overview' | 'buildings' | 'facilities' | 'navigation' | 'layers' | 'departments' | 'sports' | 'parking' | null;
   searchOpen: boolean;
   searchQuery: string;
   isFullscreen: boolean;
@@ -83,7 +83,7 @@ interface CampusState {
   setRoutingMode: (mode: 'shortest' | 'accessible' | 'scenic') => void;
   setActiveRoute: (route: NavRoute | null) => void;
   clearNavigation: () => void;
-  setActiveSidebarTab: (tab: 'overview' | 'buildings' | 'facilities' | 'navigation' | 'layers' | 'departments' | null) => void;
+  setActiveSidebarTab: (tab: 'overview' | 'buildings' | 'facilities' | 'navigation' | 'layers' | 'departments' | 'sports' | 'parking' | null) => void;
   setSearchOpen: (open: boolean) => void;
   setSearchQuery: (query: string) => void;
   toggleFullscreen: () => void;
@@ -145,13 +145,13 @@ export const useCampusStore = create<CampusState>((set, get) => ({
   activeRoute: null,
   isNavigating: false,
 
-  activeSidebarTab: 'overview',
+  activeSidebarTab: null,
   searchOpen: false,
   searchQuery: '',
   isFullscreen: false,
   helpModalOpen: false,
   graphicsSettingsModalOpen: false,
-  showcaseWelcomeOpen: true,
+  showcaseWelcomeOpen: false,
 
   isFirstPersonWalking: false,
   firstPersonPosition: [0, 1.7, 160],

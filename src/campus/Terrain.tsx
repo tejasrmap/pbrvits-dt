@@ -7,90 +7,100 @@ export const Terrain: React.FC = () => {
 
   return (
     <group>
-      {/* Primary Campus Ground (600m x 600m) */}
+      {/* 1. Primary Campus Ground with Natural Indian Institutional Tone */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]} receiveShadow>
-        <planeGeometry args={[600, 600, 16, 16]} />
+        <planeGeometry args={[750, 750, 24, 24]} />
         <meshStandardMaterial
           map={grassTexture}
-          roughness={0.95}
+          color="#859e6d" // Natural architectural lawn tone
+          roughness={0.92}
           metalness={0.05}
         />
       </mesh>
 
-      {/* Subtle elevation soil apron around campus perimeter */}
+      {/* 2. Natural Soil / Semi-Arid Kavali Regional Apron */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.08, 0]} receiveShadow>
-        <planeGeometry args={[900, 900]} />
-        <meshStandardMaterial color="#2d3725" roughness={1.0} />
+        <planeGeometry args={[1200, 1200]} />
+        <meshStandardMaterial color="#424536" roughness={1.0} />
       </mesh>
 
-      {/* Central Quadrangle Paved Plaza */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 10]} receiveShadow>
-        <planeGeometry args={[60, 50]} />
+      {/* 3. Central Academic Quadrangle Interlocking Paver Plaza */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]} receiveShadow>
+        <planeGeometry args={[110, 65]} />
+        <meshStandardMaterial map={paverTexture} roughness={0.78} />
+      </mesh>
+
+      {/* 4. Library Entrance Paved Forecourt */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[53.6, 0.02, -35.5]} receiveShadow>
+        <planeGeometry args={[65, 55]} />
         <meshStandardMaterial map={paverTexture} roughness={0.8} />
       </mesh>
 
-      {/* Two-Wheeler / Four-Wheeler Parking Lot (West) */}
-      <group position={[-40, 0.02, 125]}>
+      {/* 5. Student & Visitor Parking Apron (West, near Highway Entrance) */}
+      <group position={[-55, 0.02, 75]}>
         <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-          <planeGeometry args={[35, 45]} />
-          <meshStandardMaterial color="#334155" roughness={0.9} />
+          <planeGeometry args={[45, 50]} />
+          <meshStandardMaterial color="#2d3748" roughness={0.9} />
         </mesh>
-        {/* Parking Bay Lines */}
-        {Array.from({ length: 8 }).map((_, i) => (
+        {/* Parking Bay Divider Lines */}
+        {Array.from({ length: 11 }).map((_, i) => (
           <mesh
-            key={`pkg-line-${i}`}
+            key={`pkg-west-${i}`}
             rotation={[-Math.PI / 2, 0, 0]}
-            position={[-12 + i * 3.4, 0.03, 0]}
+            position={[-18 + i * 3.6, 0.03, 0]}
+          >
+            <planeGeometry args={[0.2, 44]} />
+            <meshBasicMaterial color="#f8fafc" />
+          </mesh>
+        ))}
+      </group>
+
+      {/* 6. Faculty & Staff Parking Lot (East, near Admin Bhavan) */}
+      <group position={[85, 0.02, 10]}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+          <planeGeometry args={[40, 45]} />
+          <meshStandardMaterial color="#2d3748" roughness={0.9} />
+        </mesh>
+        {Array.from({ length: 9 }).map((_, i) => (
+          <mesh
+            key={`pkg-east-${i}`}
+            rotation={[-Math.PI / 2, 0, 0]}
+            position={[-14 + i * 3.6, 0.03, 0]}
           >
             <planeGeometry args={[0.2, 38]} />
-            <meshBasicMaterial color="#ffffff" />
+            <meshBasicMaterial color="#f8fafc" />
           </mesh>
         ))}
       </group>
 
-      {/* East Faculty Parking Lot */}
-      <group position={[85, 0.02, -40]}>
-        <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-          <planeGeometry args={[30, 40]} />
-          <meshStandardMaterial color="#334155" roughness={0.9} />
-        </mesh>
-        {Array.from({ length: 7 }).map((_, i) => (
-          <mesh
-            key={`pkg-line-east-${i}`}
-            rotation={[-Math.PI / 2, 0, 0]}
-            position={[-10 + i * 3.4, 0.03, 0]}
-          >
-            <planeGeometry args={[0.2, 32]} />
-            <meshBasicMaterial color="#ffffff" />
-          </mesh>
-        ))}
-      </group>
-
-      {/* Campus Boundary Wall & Pillars (240m x 240m perimeter) */}
+      {/* 7. Real Perimeter Boundary Wall (Georeferenced to OSM Campus Limits) */}
       <group>
-        {/* South Wall with Entrance Gap */}
-        <mesh position={[-130, 1.25, 220]} castShadow receiveShadow>
-          <boxGeometry args={[220, 2.5, 0.6]} />
-          <meshStandardMaterial color="#e2e8f0" roughness={0.8} />
+        {/* South Boundary Wall (along Kondapuram Road, with central gateway opening) */}
+        <mesh position={[-145, 1.25, 108]} castShadow receiveShadow>
+          <boxGeometry args={[250, 2.5, 0.6]} />
+          <meshStandardMaterial color="#e2e8f0" roughness={0.85} />
         </mesh>
-        <mesh position={[130, 1.25, 220]} castShadow receiveShadow>
-          <boxGeometry args={[220, 2.5, 0.6]} />
-          <meshStandardMaterial color="#e2e8f0" roughness={0.8} />
+        <mesh position={[145, 1.25, 108]} castShadow receiveShadow>
+          <boxGeometry args={[250, 2.5, 0.6]} />
+          <meshStandardMaterial color="#e2e8f0" roughness={0.85} />
         </mesh>
-        {/* North Wall */}
-        <mesh position={[0, 1.25, -220]} castShadow receiveShadow>
-          <boxGeometry args={[480, 2.5, 0.6]} />
-          <meshStandardMaterial color="#e2e8f0" roughness={0.8} />
+
+        {/* North Boundary Wall */}
+        <mesh position={[0, 1.25, -145]} castShadow receiveShadow>
+          <boxGeometry args={[560, 2.5, 0.6]} />
+          <meshStandardMaterial color="#e2e8f0" roughness={0.85} />
         </mesh>
-        {/* West Wall */}
-        <mesh position={[-240, 1.25, 0]} castShadow receiveShadow>
-          <boxGeometry args={[0.6, 2.5, 440]} />
-          <meshStandardMaterial color="#e2e8f0" roughness={0.8} />
+
+        {/* West Boundary Wall (Behind Sports Oval) */}
+        <mesh position={[-280, 1.25, -18.5]} castShadow receiveShadow>
+          <boxGeometry args={[0.6, 2.5, 253]} />
+          <meshStandardMaterial color="#e2e8f0" roughness={0.85} />
         </mesh>
-        {/* East Wall */}
-        <mesh position={[240, 1.25, 0]} castShadow receiveShadow>
-          <boxGeometry args={[0.6, 2.5, 440]} />
-          <meshStandardMaterial color="#e2e8f0" roughness={0.8} />
+
+        {/* East Boundary Wall */}
+        <mesh position={[240, 1.25, -18.5]} castShadow receiveShadow>
+          <boxGeometry args={[0.6, 2.5, 253]} />
+          <meshStandardMaterial color="#e2e8f0" roughness={0.85} />
         </mesh>
       </group>
     </group>

@@ -125,13 +125,29 @@ export const CampusSearch: React.FC = () => {
     return matches.slice(0, 10);
   }, [query, buildings, facilities]);
 
+  const flyTo = useCampusStore((s) => s.flyTo);
+
   const handleSelect = (item: (typeof results)[0]) => {
     if (item.type === 'building') {
       selectBuilding(item.id);
+      const b = buildings.find((x) => x.id === item.id);
+      if (b) {
+        flyTo([b.position[0] + 25, b.dimensions.height + 20, b.position[2] + 35], b.position);
+      }
     } else if (item.type === 'department') {
-      if (item.buildingId) selectBuilding(item.buildingId);
+      if (item.buildingId) {
+        selectBuilding(item.buildingId);
+        const b = buildings.find((x) => x.id === item.buildingId);
+        if (b) {
+          flyTo([b.position[0] + 25, b.dimensions.height + 20, b.position[2] + 35], b.position);
+        }
+      }
     } else if (item.type === 'facility') {
       selectFacility(item.id);
+      const f = facilities.find((x) => x.id === item.id);
+      if (f) {
+        flyTo([f.position[0] + 20, 20, f.position[2] + 25], f.position);
+      }
     }
     setSearchOpen(false);
   };

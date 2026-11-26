@@ -2,6 +2,7 @@ import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { CampusScene } from './campus/CampusScene';
 import { TopBar } from './components/ui/TopBar';
+import { BottomControlBar } from './components/controls/BottomControlBar';
 import { Sidebar } from './components/panels/Sidebar';
 import { BuildingInfoPanel } from './components/panels/BuildingInfoPanel';
 import { CampusSearch } from './components/search/CampusSearch';
@@ -131,6 +132,7 @@ export function App() {
 
       {/* UI Overlay Systems (Shared and Synchronized between 3D & GIS) */}
       <TopBar />
+      <BottomControlBar />
       <Sidebar />
       <BuildingInfoPanel />
       {!isGISActive && <CompassHUD />}

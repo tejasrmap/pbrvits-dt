@@ -1,243 +1,152 @@
 import React from 'react';
 import {
-  Sun,
-  Sunrise,
-  Sunset,
-  Moon,
   Search,
-  Compass,
-  Eye,
-  Footprints,
-  Maximize2,
-  Minimize2,
-  RotateCcw,
-  HelpCircle,
-  Sparkles,
   Sliders,
-  Globe,
-  Layers,
-  Map as MapIcon
+  HelpCircle,
+  Play,
+  Building2,
+  Sparkles,
+  Map as MapIcon,
+  Globe
 } from 'lucide-react';
 import { useCampusStore } from '../../store/useCampusStore';
-import type { TimeOfDay, CameraMode } from '../../types';
 
 export const TopBar: React.FC = () => {
-  const timeOfDay = useCampusStore((s) => s.timeOfDay);
-  const setTimeOfDay = useCampusStore((s) => s.setTimeOfDay);
-  const cameraMode = useCampusStore((s) => s.cameraMode);
-  const setCameraMode = useCampusStore((s) => s.setCameraMode);
   const appViewMode = useCampusStore((s) => s.appViewMode);
   const setAppViewMode = useCampusStore((s) => s.setAppViewMode);
-  const resetCameraTarget = useCampusStore((s) => s.resetCameraTarget);
-  const isFullscreen = useCampusStore((s) => s.isFullscreen);
-  const toggleFullscreen = useCampusStore((s) => s.toggleFullscreen);
   const setSearchOpen = useCampusStore((s) => s.setSearchOpen);
   const setHelpModalOpen = useCampusStore((s) => s.setHelpModalOpen);
   const setGraphicsSettingsModalOpen = useCampusStore((s) => s.setGraphicsSettingsModalOpen);
+  const setActiveSidebarTab = useCampusStore((s) => s.setActiveSidebarTab);
+  const activeSidebarTab = useCampusStore((s) => s.activeSidebarTab);
   const startTour = useCampusStore((s) => s.startTour);
   const isTourActive = useCampusStore((s) => s.isTourActive);
 
   return (
-    <header className="absolute top-3 left-3 right-3 z-30 flex items-center justify-between gap-2.5 pointer-events-none">
-      {/* Brand & Mode Selector */}
-      <div className="flex items-center gap-2 pointer-events-auto">
-        <div className="glass-panel px-3.5 py-2 rounded-xl flex items-center gap-3 border border-white/10 shadow-2xl">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-600 to-indigo-500 flex items-center justify-center font-black text-white text-sm shadow-md ring-2 ring-sky-400/30">
+    <header className="absolute top-3 left-3 right-3 z-30 flex items-center justify-between gap-2 pointer-events-none">
+      {/* Left: Institutional Logo and Title */}
+      <div className="flex items-center gap-2.5 pointer-events-auto">
+        <div className="glass-panel px-3 py-1.5 rounded-2xl flex items-center gap-2.5 border border-white/10 shadow-2xl backdrop-blur-xl bg-slate-950/80">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-black text-white text-xs shadow-md ring-2 ring-sky-400/20">
             PV
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xs sm:text-sm font-bold tracking-wide text-white">
+            <div className="flex items-center gap-1.5">
+              <h1 className="text-xs font-bold tracking-tight text-white">
                 PBR VITS
               </h1>
-              <span className="px-1.5 py-0.5 rounded text-[9px] font-extrabold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 tracking-wider">
-                Real GIS Twin
+              <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-300 border border-sky-400/30">
+                Digital Twin
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 font-medium hidden sm:block">
-              14.91326° N, 79.98367° E | Kavali, AP
+            <p className="text-[10px] text-slate-400 font-mono hidden sm:block">
+              14.91326° N, 79.98367° E &bull; Kavali, AP
             </p>
           </div>
         </div>
-
-        {/* Primary Mode Selector: 3D DIGITAL TWIN, CAMPUS GIS, SATELLITE, FIRST PERSON */}
-        <div className="glass-panel p-1 rounded-xl border border-white/10 shadow-2xl flex items-center gap-1">
-          <button
-            onClick={() => setAppViewMode('3d')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-              appViewMode === '3d'
-                ? 'bg-sky-500 text-white shadow-lg'
-                : 'text-slate-300 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <Globe className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">3D Twin</span>
-          </button>
-
-          <button
-            onClick={() => setAppViewMode('gis')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-              appViewMode === 'gis'
-                ? 'bg-sky-500 text-white shadow-lg'
-                : 'text-slate-300 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">Campus GIS</span>
-          </button>
-
-          <button
-            onClick={() => setAppViewMode('satellite')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-              appViewMode === 'satellite'
-                ? 'bg-sky-500 text-white shadow-lg'
-                : 'text-slate-300 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <MapIcon className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="hidden md:inline">Satellite</span>
-          </button>
-
-          <button
-            onClick={() => setAppViewMode('firstPerson')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-              appViewMode === 'firstPerson'
-                ? 'bg-sky-500 text-white shadow-lg'
-                : 'text-slate-300 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <Footprints className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden md:inline">Walk</span>
-          </button>
-        </div>
       </div>
 
-      {/* Center Search Trigger */}
-      <button
-        onClick={() => setSearchOpen(true)}
-        className="glass-panel px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs text-slate-300 hover:text-white hover:border-sky-400/50 transition-all duration-200 pointer-events-auto shadow-xl group cursor-pointer"
-      >
-        <Search className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
-        <span className="hidden md:inline">Search buildings, departments, labs...</span>
-        <span className="md:hidden">Search</span>
-        <kbd className="hidden lg:inline-block px-1.5 py-0.5 text-[10px] bg-slate-800 text-slate-400 rounded border border-slate-700">
-          Ctrl+K
-        </kbd>
-      </button>
-
-      {/* Right Controls: Showcase Tour, Time of Day, Camera Mode, Viewport */}
-      <div className="glass-panel px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 sm:gap-2 pointer-events-auto shadow-2xl">
-        {/* Guided Showcase Tour Button */}
+      {/* Center: Main Navigation Modes (Explore, Campus Map, Buildings, Facilities, Guided Tour) */}
+      <nav className="glass-panel p-1 rounded-2xl border border-white/10 shadow-2xl flex items-center gap-1 pointer-events-auto backdrop-blur-xl bg-slate-950/80 hidden md:flex">
         <button
-          onClick={startTour}
-          title="Start Guided Showcase Tour"
-          className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-md ${
-            isTourActive
-              ? 'bg-amber-500 text-slate-950 ring-2 ring-amber-400/50 animate-pulse'
-              : 'bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white'
+          onClick={() => {
+            setAppViewMode('3d');
+            setActiveSidebarTab(null);
+          }}
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+            appViewMode === '3d' && !activeSidebarTab
+              ? 'bg-sky-500 text-white shadow-md'
+              : 'text-slate-300 hover:text-white hover:bg-white/5'
           }`}
         >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Tour</span>
+          <Globe className="w-3.5 h-3.5" />
+          <span>Explore</span>
         </button>
 
-        <div className="h-4 w-[1px] bg-slate-700/80" />
+        <button
+          onClick={() => {
+            setAppViewMode('gis');
+            setActiveSidebarTab(null);
+          }}
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+            appViewMode === 'gis'
+              ? 'bg-sky-500 text-white shadow-md'
+              : 'text-slate-300 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <MapIcon className="w-3.5 h-3.5 text-emerald-400" />
+          <span>Campus Map</span>
+        </button>
 
-        {/* Time of Day Switcher: Day, Golden Hour, Sunset, Night */}
-        <div className="flex items-center bg-slate-900/80 p-0.5 rounded-lg border border-slate-700/60">
-          {(
-            [
-              { id: 'day', label: 'Day', icon: Sun },
-              { id: 'goldenHour', label: 'Golden', icon: Sunrise },
-              { id: 'sunset', label: 'Sunset', icon: Sunset },
-              { id: 'night', label: 'Night', icon: Moon }
-            ] as const
-          ).map((item) => {
-            const Icon = item.icon;
-            const active = timeOfDay === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setTimeOfDay(item.id as TimeOfDay)}
-                title={`${item.label} Lighting`}
-                className={`p-1.5 rounded-md text-xs transition-all flex items-center gap-1 cursor-pointer ${
-                  active
-                    ? 'bg-sky-500 text-white shadow'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline text-[10px] font-medium">{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <button
+          onClick={() => setActiveSidebarTab(activeSidebarTab === 'buildings' ? null : 'buildings')}
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+            activeSidebarTab === 'buildings'
+              ? 'bg-sky-500 text-white shadow-md'
+              : 'text-slate-300 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <Building2 className="w-3.5 h-3.5 text-sky-400" />
+          <span>Buildings</span>
+        </button>
 
-        <div className="h-4 w-[1px] bg-slate-700/80 hidden sm:block" />
+        <button
+          onClick={() => setActiveSidebarTab(activeSidebarTab === 'facilities' ? null : 'facilities')}
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+            activeSidebarTab === 'facilities'
+              ? 'bg-sky-500 text-white shadow-md'
+              : 'text-slate-300 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <span>Facilities</span>
+        </button>
 
-        {/* Camera Mode Switcher */}
-        <div className="hidden sm:flex items-center bg-slate-900/80 p-0.5 rounded-lg border border-slate-700/60">
-          {(
-            [
-              { id: 'orbit', label: 'Orbit', icon: Eye },
-              { id: 'aerial', label: 'Aerial', icon: Compass },
-              { id: 'firstPerson', label: 'Walk', icon: Footprints }
-            ] as const
-          ).map((item) => {
-            const Icon = item.icon;
-            const active = cameraMode === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setCameraMode(item.id as CameraMode)}
-                title={`${item.label} Camera`}
-                className={`p-1.5 rounded-md text-xs transition-all flex items-center gap-1 cursor-pointer ${
-                  active
-                    ? 'bg-sky-500 text-white shadow'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline text-[10px] font-medium">{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <button
+          onClick={() => {
+            setAppViewMode('3d');
+            startTour();
+          }}
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+            isTourActive
+              ? 'bg-amber-500 text-slate-950 font-bold shadow-md'
+              : 'text-slate-300 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <Play className="w-3.5 h-3.5 fill-current" />
+          <span>Guided Tour</span>
+        </button>
+      </nav>
 
-        <div className="h-4 w-[1px] bg-slate-700/80" />
+      {/* Right: Search, Settings, Help */}
+      <div className="flex items-center gap-1.5 pointer-events-auto">
+        {/* Quick Search Trigger */}
+        <button
+          onClick={() => setSearchOpen(true)}
+          title="Search Campus (⌘K)"
+          className="glass-panel px-3 py-1.5 rounded-xl border border-white/10 hover:border-sky-400/40 text-slate-200 hover:text-white flex items-center gap-2 transition-all cursor-pointer shadow-xl backdrop-blur-xl bg-slate-950/80"
+        >
+          <Search className="w-3.5 h-3.5 text-sky-400" />
+          <span className="text-xs text-slate-400 hidden sm:inline">Search</span>
+          <kbd className="hidden sm:inline text-[10px] font-mono px-1 py-0.5 rounded bg-white/10 text-slate-400">
+            ⌘K
+          </kbd>
+        </button>
 
-        {/* Graphics Settings */}
+        {/* Settings Button */}
         <button
           onClick={() => setGraphicsSettingsModalOpen(true)}
-          title="Graphics Quality & Performance"
-          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+          title="Campus Settings & Environment"
+          className="glass-panel p-2 rounded-xl border border-white/10 hover:border-sky-400/40 text-slate-300 hover:text-white transition-all cursor-pointer shadow-xl backdrop-blur-xl bg-slate-950/80"
         >
           <Sliders className="w-3.5 h-3.5" />
         </button>
 
-        {/* Camera Reset */}
-        <button
-          onClick={resetCameraTarget}
-          title="Reset Camera View"
-          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-        </button>
-
-        {/* Fullscreen Toggle */}
-        <button
-          onClick={toggleFullscreen}
-          title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer hidden sm:block"
-        >
-          {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-        </button>
-
-        {/* Help / Guide */}
+        {/* Help Button */}
         <button
           onClick={() => setHelpModalOpen(true)}
-          title="Controls & Campus Info"
-          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+          title="Navigation & Controls Help"
+          className="glass-panel p-2 rounded-xl border border-white/10 hover:border-sky-400/40 text-slate-300 hover:text-white transition-all cursor-pointer shadow-xl backdrop-blur-xl bg-slate-950/80"
         >
           <HelpCircle className="w-3.5 h-3.5" />
         </button>

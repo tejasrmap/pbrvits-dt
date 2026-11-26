@@ -113,7 +113,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
             'pbr-vits-playground-boundary', '#16a34a',
             '#0369a1'
           ],
-          'fill-opacity': 0.12
+          'fill-opacity': 0.08
         }
       });
 
@@ -148,7 +148,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
         source: 'sports-facilities',
         paint: {
           'fill-color': '#22c55e',
-          'fill-opacity': 0.25
+          'fill-opacity': 0.15
         }
       });
 
@@ -229,17 +229,10 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
         type: 'fill-extrusion',
         source: 'campus-buildings',
         paint: {
-          'fill-extrusion-color': [
-            'match',
-            ['get', 'verificationStatus'],
-            'OSM-MAPPED', '#0284c7',
-            'IMAGE-ESTIMATED', '#d97706',
-            'UNVERIFIED ESTIMATE', '#9333ea',
-            '#64748b'
-          ],
+          'fill-extrusion-color': '#e2e8f0', // Restrained, elegant neutral architectural footprint
           'fill-extrusion-height': ['get', 'height'],
           'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': 0.85
+          'fill-extrusion-opacity': 0.75
         }
       });
 
@@ -250,7 +243,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
         paint: {
           'line-color': '#ffffff',
           'line-width': 1.5,
-          'line-opacity': 0.9
+          'line-opacity': 0.85
         }
       });
     }

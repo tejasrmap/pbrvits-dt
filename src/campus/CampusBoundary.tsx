@@ -3,58 +3,61 @@ import React from 'react';
 export const CampusBoundary: React.FC = () => {
   return (
     <group>
-      {/* Surrounding Farmland & Landscape Masses outside campus bounds */}
-      {/* North External Landscape */}
-      <mesh position={[0, -0.15, -340]} receiveShadow>
-        <planeGeometry args={[720, 200]} />
-        <meshStandardMaterial color="#2d3725" roughness={1.0} />
-      </mesh>
-      {/* South External Landscape (Across Highway) */}
-      <mesh position={[0, -0.15, 360]} receiveShadow>
-        <planeGeometry args={[720, 200]} />
-        <meshStandardMaterial color="#354028" roughness={1.0} />
-      </mesh>
-      {/* West External Landscape */}
-      <mesh position={[-360, -0.15, 0]} receiveShadow>
-        <planeGeometry args={[220, 720]} />
-        <meshStandardMaterial color="#2c3a26" roughness={1.0} />
-      </mesh>
-      {/* East External Landscape */}
-      <mesh position={[360, -0.15, 0]} receiveShadow>
-        <planeGeometry args={[220, 720]} />
-        <meshStandardMaterial color="#33422a" roughness={1.0} />
+      {/* 1. Surrounding Agricultural Buffer Landscape Masses */}
+      {/* North Landscape Apron (Towards Kovali bypass / fields) */}
+      <mesh position={[0, -0.15, -280]} receiveShadow>
+        <planeGeometry args={[800, 260]} />
+        <meshStandardMaterial color="#3b4028" roughness={1.0} />
       </mesh>
 
-      {/* Distant Kavali Landscape Hills Silhouette */}
-      <group position={[0, 0, -420]}>
-        {[-220, -110, 0, 110, 220].map((x, i) => (
-          <mesh key={`hill-${i}`} position={[x, 15 + (i % 3) * 8, 0]}>
-            <coneGeometry args={[75 + (i % 2) * 20, 35 + (i % 3) * 10, 16]} />
+      {/* South Landscape Apron (Across Udayagiri / Kondapuram Road) */}
+      <mesh position={[0, -0.15, 240]} receiveShadow>
+        <planeGeometry args={[800, 240]} />
+        <meshStandardMaterial color="#3e3d2a" roughness={1.0} />
+      </mesh>
+
+      {/* West Landscape Apron (Farmlands beyond Athletic Oval) */}
+      <mesh position={[-420, -0.15, 0]} receiveShadow>
+        <planeGeometry args={[260, 800]} />
+        <meshStandardMaterial color="#364028" roughness={1.0} />
+      </mesh>
+
+      {/* East Landscape Apron (Beyond College East Wall) */}
+      <mesh position={[380, -0.15, 0]} receiveShadow>
+        <planeGeometry args={[260, 800]} />
+        <meshStandardMaterial color="#383e29" roughness={1.0} />
+      </mesh>
+
+      {/* 2. Distant Kavali Regional Low Hillocks on Northern Horizon */}
+      <group position={[0, 0, -380]}>
+        {[-260, -130, 0, 130, 260].map((x, i) => (
+          <mesh key={`distant-hill-${i}`} position={[x, 12 + (i % 3) * 6, 0]}>
+            <coneGeometry args={[90 + (i % 2) * 25, 28 + (i % 3) * 8, 16]} />
             <meshStandardMaterial color="#1e293b" roughness={1.0} />
           </mesh>
         ))}
       </group>
 
-      {/* Highway Signboard "VISVODAYA / PBR VITS CAMPUS" */}
-      <group position={[18, 0, 225]} rotation={[0, Math.PI, 0]}>
-        {/* Support Posts */}
-        <mesh position={[-2.5, 2.5, 0]}>
-          <cylinderGeometry args={[0.08, 0.08, 5, 8]} />
-          <meshStandardMaterial color="#64748b" metalness={0.8} />
+      {/* 3. Highway Institutional Landmark Signboard (Along Kondapuram Road at Z = 114) */}
+      <group position={[18, 0, 114]} rotation={[0, Math.PI, 0]}>
+        {/* Steel Support Uprights */}
+        <mesh position={[-2.4, 2.4, 0]}>
+          <cylinderGeometry args={[0.08, 0.08, 4.8, 8]} />
+          <meshStandardMaterial color="#475569" metalness={0.8} roughness={0.3} />
         </mesh>
-        <mesh position={[2.5, 2.5, 0]}>
-          <cylinderGeometry args={[0.08, 0.08, 5, 8]} />
-          <meshStandardMaterial color="#64748b" metalness={0.8} />
+        <mesh position={[2.4, 2.4, 0]}>
+          <cylinderGeometry args={[0.08, 0.08, 4.8, 8]} />
+          <meshStandardMaterial color="#475569" metalness={0.8} roughness={0.3} />
         </mesh>
-        {/* Signboard */}
-        <mesh position={[0, 4.2, 0]}>
-          <boxGeometry args={[6.5, 1.8, 0.1]} />
-          <meshStandardMaterial color="#15803d" roughness={0.4} />
+        {/* Institutional Signboard Surface */}
+        <mesh position={[0, 4.0, 0]}>
+          <boxGeometry args={[6.2, 1.6, 0.1]} />
+          <meshStandardMaterial color="#1e3a8a" roughness={0.3} metalness={0.2} />
         </mesh>
-        {/* Border */}
-        <mesh position={[0, 4.2, 0.06]}>
-          <boxGeometry args={[6.3, 1.6, 0.02]} />
-          <meshStandardMaterial color="#ffffff" roughness={0.3} />
+        {/* High-visibility White Border */}
+        <mesh position={[0, 4.0, 0.06]}>
+          <boxGeometry args={[6.0, 1.4, 0.02]} />
+          <meshStandardMaterial color="#ffffff" roughness={0.2} />
         </mesh>
       </group>
     </group>

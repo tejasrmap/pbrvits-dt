@@ -4,11 +4,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Navigation,
-  Sparkles,
-  Phone,
-  Clock,
-  MapPin,
-  Layers
+  Compass
 } from 'lucide-react';
 import { useCampusStore } from '../../store/useCampusStore';
 import { findShortestRoute } from '../../navigation/NavigationGraph';
@@ -19,14 +15,12 @@ export const BuildingInfoPanel: React.FC = () => {
   const setActiveSidebarTab = useCampusStore((s) => s.setActiveSidebarTab);
   const setNavigationNodes = useCampusStore((s) => s.setNavigationNodes);
   const setActiveRoute = useCampusStore((s) => s.setActiveRoute);
-  const setAppViewMode = useCampusStore((s) => s.setAppViewMode);
   const startNodeId = useCampusStore((s) => s.startNodeId);
   const routingMode = useCampusStore((s) => s.routingMode);
 
   if (!selectedBuilding) return null;
 
   const handleNavigateHere = () => {
-    // Exact mapping to building's configured nav node
     const targetNodeId = selectedBuilding.navNodeId || 'node-admin-entrance';
     setNavigationNodes(startNodeId, targetNodeId);
     const route = findShortestRoute(startNodeId, targetNodeId, routingMode);
@@ -34,118 +28,126 @@ export const BuildingInfoPanel: React.FC = () => {
     setActiveSidebarTab('navigation');
   };
 
+  const isVerified =
+    selectedBuilding.verified === 'OSM-MAPPED' || selectedBuilding.verified === 'VERIFIED';
+
   return (
-    <aside className="absolute top-20 right-3 bottom-5 w-84 md:w-96 glass-panel rounded-2xl border border-white/10 shadow-2xl flex flex-col overflow-hidden pointer-events-auto z-20 animate-in fade-in slide-in-from-right-4 duration-200">
-      {/* Top Banner / Color Accent */}
+    <aside className="absolute top-16 right-3 bottom-16 w-84 md:w-96 glass-panel rounded-2xl border border-white/10 shadow-2xl flex flex-col overflow-hidden pointer-events-auto z-20 animate-in fade-in slide-in-from-right-4 duration-200 backdrop-blur-xl bg-slate-950/90">
+      {/* Top Banner with Architectural Header */}
       <div
-        className="h-24 p-4 flex items-start justify-between relative overflow-hidden"
+        className="p-4 flex items-start justify-between relative overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${selectedBuilding.secondaryColor || '#0284c7'}dd, #0f172a)`
+          background: `linear-gradient(135deg, ${selectedBuilding.secondaryColor || '#0284c7'}cc, #090d16)`
         }}
       >
         <div>
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-black/40 text-sky-300 border border-white/10">
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-black/50 text-sky-300 border border-white/10">
             {selectedBuilding.category}
           </span>
           <h2 className="text-base font-bold text-white mt-1 leading-snug">
             {selectedBuilding.name}
           </h2>
+          {selectedBuilding.shortName && (
+            <div className="text-[11px] text-slate-300 font-medium">
+              {selectedBuilding.shortName}
+            </div>
+          )}
         </div>
         <button
           onClick={() => selectBuilding(null)}
-          className="p-1 rounded-lg bg-black/30 hover:bg-black/60 text-white transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg bg-black/40 hover:bg-black/70 text-white transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Content Body */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs">
-        {/* Verification Status */}
-        <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/40 border border-white/5">
+      <div className="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs">
+        {/* Verification Status & Survey Classification */}
+        <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-white/5">
           <div className="flex items-center gap-2">
-            {selectedBuilding.verified === 'OSM-MAPPED' ? (
+            {isVerified ? (
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
             ) : (
               <AlertCircle className="w-4 h-4 text-amber-400" />
             )}
-            <span className="text-slate-300 font-medium">Asset Accuracy</span>
+            <span className="text-slate-300 font-medium">Data Classification</span>
           </div>
           <span
             className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-mono ${
-              selectedBuilding.verified === 'OSM-MAPPED'
+              isVerified
                 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30'
-                : selectedBuilding.verified === 'IMAGE-ESTIMATED'
-                ? 'bg-sky-500/20 text-sky-300 border border-sky-400/30'
-                : selectedBuilding.verified === 'UNVERIFIED ESTIMATE'
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
-                : 'bg-rose-500/20 text-rose-300 border border-rose-400/30'
+                : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
             }`}
           >
             {selectedBuilding.verified}
           </span>
         </div>
 
+        {/* Real Geographic Coordinates */}
+        <div className="p-3 rounded-xl bg-slate-900/50 border border-white/5 space-y-1">
+          <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-bold uppercase">
+            <Compass className="w-3.5 h-3.5 text-sky-400" />
+            <span>Geographic Coordinates (WGS84)</span>
+          </div>
+          <div className="font-mono text-white text-[11px] flex justify-between">
+            <span>Lat: {selectedBuilding.geoCoordinates?.lat.toFixed(6) || '14.913261'}° N</span>
+            <span>Lng: {selectedBuilding.geoCoordinates?.lng.toFixed(6) || '79.983666'}° E</span>
+          </div>
+          <div className="text-[10px] text-slate-500 font-mono">
+            Local Grid: X: {selectedBuilding.position[0].toFixed(1)}m, Z: {selectedBuilding.position[2].toFixed(1)}m
+          </div>
+        </div>
+
+        {/* Architectural Metrics */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="p-2.5 rounded-xl bg-slate-900/50 border border-white/5">
+            <div className="text-slate-500 text-[10px] uppercase font-bold">Floors & Height</div>
+            <div className="text-sm font-bold text-white mt-0.5">
+              {selectedBuilding.floors} Floors ({selectedBuilding.dimensions.height}m)
+            </div>
+          </div>
+          <div className="p-2.5 rounded-xl bg-slate-900/50 border border-white/5">
+            <div className="text-slate-500 text-[10px] uppercase font-bold">Footprint Size</div>
+            <div className="text-sm font-bold text-white mt-0.5">
+              {selectedBuilding.dimensions.width}m &times; {selectedBuilding.dimensions.depth}m
+            </div>
+          </div>
+        </div>
+
+        {/* Architectural Style */}
+        {selectedBuilding.architecturalStyle && (
+          <div className="p-2.5 rounded-xl bg-slate-900/40 border border-white/5">
+            <div className="text-slate-500 text-[10px] uppercase font-bold mb-1">
+              Architectural Archetype
+            </div>
+            <div className="text-slate-200 text-[11px]">
+              {selectedBuilding.architecturalStyle}
+            </div>
+          </div>
+        )}
+
         {/* Description */}
         <div>
-          <div className="text-[11px] font-bold uppercase text-slate-400 mb-1">
+          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
             Overview
           </div>
-          <p className="text-slate-300 leading-relaxed">
+          <p className="text-slate-300 leading-relaxed text-[11.5px]">
             {selectedBuilding.description}
           </p>
         </div>
 
-        {/* Building Geometry Dossier */}
-        <div className="grid grid-cols-3 gap-2">
-          <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
-            <div className="text-slate-400 text-[10px]">Floors</div>
-            <div className="text-sm font-bold text-white mt-0.5">
-              {selectedBuilding.floors} Levels
-            </div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
-            <div className="text-slate-400 text-[10px]">Height</div>
-            <div className="text-sm font-bold text-white mt-0.5">
-              {selectedBuilding.dimensions.height}m
-            </div>
-          </div>
-          <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
-            <div className="text-slate-400 text-[10px]">Footprint</div>
-            <div className="text-sm font-bold text-white mt-0.5">
-              {selectedBuilding.dimensions.width}×{selectedBuilding.dimensions.depth}m
-            </div>
-          </div>
-        </div>
-
-        {/* Architectural Style & Solar */}
-        {selectedBuilding.architecturalStyle && (
-          <div className="p-2.5 rounded-xl bg-slate-800/40 border border-white/5">
-            <div className="text-[10px] text-slate-400 uppercase font-bold">
-              Architecture & Infrastructure
-            </div>
-            <div className="text-slate-200 mt-1 font-medium">
-              {selectedBuilding.architecturalStyle}
-            </div>
-            {selectedBuilding.hasSolarPanels && (
-              <div className="text-[11px] text-amber-300 mt-1 flex items-center gap-1.5 font-medium">
-                <Sparkles className="w-3.5 h-3.5" /> Equipped with Rooftop Solar Grid
-              </div>
-            )}
-          </div>
-        )}
-
         {/* Departments */}
-        {selectedBuilding.departments.length > 0 && (
+        {selectedBuilding.departments && selectedBuilding.departments.length > 0 && (
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-400 mb-1.5">
-              Academic Departments & Units
+            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+              Academic Departments
             </div>
             <div className="flex flex-wrap gap-1.5">
               {selectedBuilding.departments.map((dept, i) => (
                 <span
-                  key={`dept-${i}`}
-                  className="px-2 py-1 rounded-lg bg-sky-500/10 text-sky-300 border border-sky-400/20 text-[11px] font-medium"
+                  key={i}
+                  className="px-2 py-0.8 rounded-lg bg-slate-800/80 text-slate-200 border border-white/5 text-[10.5px]"
                 >
                   {dept}
                 </span>
@@ -154,81 +156,34 @@ export const BuildingInfoPanel: React.FC = () => {
           </div>
         )}
 
-        {/* Facilities */}
-        {selectedBuilding.facilities.length > 0 && (
+        {/* Facilities & Labs */}
+        {selectedBuilding.facilities && selectedBuilding.facilities.length > 0 && (
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-400 mb-1.5">
-              In-Building Facilities
+            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+              Laboratories & Facilities
             </div>
-            <ul className="space-y-1">
+            <div className="flex flex-wrap gap-1.5">
               {selectedBuilding.facilities.map((fac, i) => (
-                <li
-                  key={`fac-${i}`}
-                  className="flex items-center gap-2 text-slate-300 text-[11px]"
+                <span
+                  key={i}
+                  className="px-2 py-0.8 rounded-lg bg-sky-950/40 text-sky-200 border border-sky-400/20 text-[10.5px]"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                   {fac}
-                </li>
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         )}
-
-        {/* Geographic Coordinates & Source */}
-        {selectedBuilding.geoCoordinates && (
-          <div className="p-2.5 rounded-xl bg-slate-800/40 border border-white/5 space-y-1">
-            <div className="text-[10px] text-sky-400 uppercase font-bold flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-sky-400" />
-              <span>Geographic Position (WGS84)</span>
-            </div>
-            <div className="font-mono text-[11px] text-white">
-              {selectedBuilding.geoCoordinates.lat.toFixed(6)}° N, {selectedBuilding.geoCoordinates.lng.toFixed(6)}° E
-            </div>
-            {selectedBuilding.source && (
-              <div className="text-[10px] text-slate-400">
-                <strong className="text-slate-300">Source:</strong> {selectedBuilding.source}
-              </div>
-            )}
-            {selectedBuilding.accuracyLevel && (
-              <div className="text-[10px] text-slate-400">
-                <strong className="text-slate-300">Accuracy:</strong> {selectedBuilding.accuracyLevel}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Contact & Hours */}
-        <div className="p-3 rounded-xl bg-slate-800/40 border border-white/5 space-y-1.5 text-[11px] text-slate-300">
-          {selectedBuilding.hours && (
-            <div className="flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-              <span>{selectedBuilding.hours}</span>
-            </div>
-          )}
-          {selectedBuilding.contact && (
-            <div className="flex items-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span className="truncate">{selectedBuilding.contact}</span>
-            </div>
-          )}
-        </div>
       </div>
 
-      {/* Footer Navigation & GIS Button */}
-      <div className="p-3 border-t border-white/10 bg-slate-900/60 flex flex-col gap-2">
+      {/* Footer Navigation Action */}
+      <div className="p-3 border-t border-white/10 bg-slate-950/80">
         <button
           onClick={handleNavigateHere}
-          className="w-full py-2 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer text-xs"
+          className="w-full py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold transition-all shadow-lg shadow-sky-500/25 flex items-center justify-center gap-2 cursor-pointer"
         >
           <Navigation className="w-4 h-4" />
-          Get Walking Directions
-        </button>
-        <button
-          onClick={() => setAppViewMode('gis')}
-          className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-sky-300 hover:text-white font-semibold rounded-xl flex items-center justify-center gap-2 border border-sky-400/20 transition-all cursor-pointer text-xs"
-        >
-          <Layers className="w-4 h-4 text-sky-400" />
-          Focus in Campus GIS Map
+          <span>Get Walking Directions</span>
         </button>
       </div>
     </aside>

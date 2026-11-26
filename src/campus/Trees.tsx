@@ -2,61 +2,66 @@ import React, { useMemo, useRef, useLayoutEffect } from 'react';
 import * as THREE from 'three';
 
 export const Trees: React.FC = () => {
-  // 1. Avenue Ashoka Trees along Grand Entrance Avenue
-  const avenueAshokaCount = 28;
+  // 1. Avenue Ashoka Trees (Polyalthia longifolia) along Entrance Boulevard
+  const avenueAshokaCount = 16;
   const ashokaTrunkRef = useRef<THREE.InstancedMesh>(null!);
   const ashokaFoliageRef = useRef<THREE.InstancedMesh>(null!);
 
-  // 2. Shade Trees (Neem / Gulmohar) scattered in lawns
-  const shadeCount = 45;
+  // 2. Shade Trees (Neem / Gulmohar / Peepal) in Academic Courtyards & Lawns
+  const shadeCount = 36;
   const shadeTrunkRef = useRef<THREE.InstancedMesh>(null!);
   const shadeFoliageRef = useRef<THREE.InstancedMesh>(null!);
 
-  // 3. Royal Palm Trees along perimeter and gardens
-  const palmCount = 35;
+  // 3. Royal Palm Trees along Athletic Perimeter & Gardens
+  const palmCount = 28;
   const palmTrunkRef = useRef<THREE.InstancedMesh>(null!);
   const palmCrownRef = useRef<THREE.InstancedMesh>(null!);
 
-  // Generate deterministic positions for trees
+  // Avenue trees neatly aligned along the entrance boulevard (Z = 15m to 92m, inside the gate)
   const avenuePositions = useMemo(() => {
     const list: [number, number, number][] = [];
-    for (let i = 0; i < 14; i++) {
-      const z = 20 + i * 11;
-      list.push([-9.5, 0, z]);
-      list.push([9.5, 0, z]);
+    for (let i = 0; i < 8; i++) {
+      const z = 18 + i * 10;
+      list.push([-8.5, 0, z]);
+      list.push([8.5, 0, z]);
     }
     return list;
   }, []);
 
+  // Carefully curated shade trees in verified open spaces within campus boundary
   const shadePositions = useMemo(() => {
-    const list: [number, number, number][] = [];
-    const seeds = [
-      [-30, 0, 40], [-45, 0, 30], [-25, 0, -20], [-50, 0, -50],
-      [30, 0, 40], [45, 0, 30], [25, 0, -20], [50, 0, -50],
-      [-110, 0, 30], [-130, 0, -30], [-80, 0, 60],
-      [90, 0, 60], [110, 0, -60], [140, 0, -40],
-      [-20, 0, -110], [-40, 0, -130], [20, 0, -130],
-      [-10, 0, 160], [10, 0, 160], [-120, 0, 100], [120, 0, 100],
-      [-70, 0, 110], [70, 0, 110], [-140, 0, -100], [150, 0, -80]
-    ];
-    for (let i = 0; i < shadeCount; i++) {
-      if (i < seeds.length) {
-        list.push(seeds[i] as [number, number, number]);
-      } else {
-        const angle = (i / shadeCount) * Math.PI * 2;
-        const radius = 90 + ((i * 17) % 60);
-        list.push([Math.cos(angle) * radius, 0, Math.sin(angle) * radius]);
-      }
-    }
-    return list;
+    return [
+      // Central quad lawns
+      [-28, 0, 32], [-42, 0, 24], [-24, 0, -18], [-48, 0, -42],
+      [28, 0, 32], [42, 0, 24], [24, 0, -18], [48, 0, -42],
+      // Library forecourt
+      [75, 0, -15], [82, 0, -55], [35, 0, -65],
+      // Mechanical & Workshops quad
+      [-95, 0, -25], [-115, 0, -45], [-85, 0, 45],
+      // Auditorium entrance grove
+      [-25, 0, -85], [15, 0, -85], [-35, 0, -115], [25, 0, -115],
+      // Parking buffers
+      [-78, 0, 65], [-35, 0, 95], [68, 0, 35], [78, 0, -5],
+      // Sports field spectator shade
+      [-140, 0, 35], [-140, 0, -25], [-160, 0, 55], [-160, 0, -45],
+      // North campus boundary green belt
+      [-60, 0, -135], [-20, 0, -135], [20, 0, -135], [60, 0, -135],
+      [-100, 0, -135], [100, 0, -135], [-180, 0, -120], [-220, 0, -90],
+      // East perimeter
+      [140, 0, -30], [140, 0, 20], [120, 0, 60], [150, 0, -75]
+    ] as [number, number, number][];
   }, []);
 
+  // Perimeter palms bounding the athletic field & eastern garden
   const palmPositions = useMemo(() => {
     const list: [number, number, number][] = [];
-    for (let i = 0; i < palmCount; i++) {
-      const angle = (i / palmCount) * Math.PI * 2;
-      const radius = 175 + ((i * 7) % 30);
-      list.push([Math.cos(angle) * radius, 0, Math.sin(angle) * radius]);
+    // West sports field line
+    for (let i = 0; i < 16; i++) {
+      list.push([-265, 0, -90 + i * 11]);
+    }
+    // East perimeter line
+    for (let i = 0; i < 12; i++) {
+      list.push([175, 0, -60 + i * 13]);
     }
     return list;
   }, []);
@@ -65,19 +70,17 @@ export const Trees: React.FC = () => {
   useLayoutEffect(() => {
     const dummy = new THREE.Object3D();
 
-    // Setup Ashoka Avenue Trees
+    // 1. Avenue Ashoka Trees (Columnar)
     if (ashokaTrunkRef.current && ashokaFoliageRef.current) {
       avenuePositions.forEach((pos, i) => {
-        // Trunk
-        dummy.position.set(pos[0], 1.6, pos[2]);
+        dummy.position.set(pos[0], 1.2, pos[2]);
         dummy.scale.set(1, 1, 1);
         dummy.rotation.set(0, (i * 0.4) % Math.PI, 0);
         dummy.updateMatrix();
         ashokaTrunkRef.current.setMatrixAt(i, dummy.matrix);
 
-        // Foliage (Columnar cone)
-        dummy.position.set(pos[0], 5.0, pos[2]);
-        dummy.scale.set(1.1 + (i % 3) * 0.1, 1.1 + (i % 2) * 0.15, 1.1 + (i % 3) * 0.1);
+        dummy.position.set(pos[0], 4.2, pos[2]);
+        dummy.scale.set(0.95 + (i % 3) * 0.08, 1.0 + (i % 2) * 0.12, 0.95 + (i % 3) * 0.08);
         dummy.updateMatrix();
         ashokaFoliageRef.current.setMatrixAt(i, dummy.matrix);
       });
@@ -85,20 +88,17 @@ export const Trees: React.FC = () => {
       ashokaFoliageRef.current.instanceMatrix.needsUpdate = true;
     }
 
-    // Setup Shade Trees
+    // 2. Broad Shade Trees (Neem / Gulmohar)
     if (shadeTrunkRef.current && shadeFoliageRef.current) {
       shadePositions.forEach((pos, i) => {
-        const scaleRand = 0.85 + ((i * 3) % 4) * 0.1;
-        // Trunk
-        dummy.position.set(pos[0], 1.8 * scaleRand, pos[2]);
-        dummy.scale.set(scaleRand, scaleRand, scaleRand);
-        dummy.rotation.set(0, (i * 0.7) % (Math.PI * 2), 0);
+        dummy.position.set(pos[0], 1.6, pos[2]);
+        dummy.scale.set(1.1 + (i % 3) * 0.1, 1.1 + (i % 2) * 0.15, 1.1 + (i % 3) * 0.1);
+        dummy.rotation.set(0, (i * 0.8) % (Math.PI * 2), 0);
         dummy.updateMatrix();
         shadeTrunkRef.current.setMatrixAt(i, dummy.matrix);
 
-        // Canopy sphere
-        dummy.position.set(pos[0], 4.8 * scaleRand, pos[2]);
-        dummy.scale.set(scaleRand * 1.2, scaleRand * 0.8, scaleRand * 1.2);
+        dummy.position.set(pos[0], 4.8, pos[2]);
+        dummy.scale.set(1.4 + (i % 4) * 0.15, 1.2 + (i % 2) * 0.15, 1.4 + (i % 4) * 0.15);
         dummy.updateMatrix();
         shadeFoliageRef.current.setMatrixAt(i, dummy.matrix);
       });
@@ -106,19 +106,17 @@ export const Trees: React.FC = () => {
       shadeFoliageRef.current.instanceMatrix.needsUpdate = true;
     }
 
-    // Setup Royal Palm Trees
+    // 3. Royal Palms
     if (palmTrunkRef.current && palmCrownRef.current) {
       palmPositions.forEach((pos, i) => {
-        const heightScale = 1.0 + ((i * 5) % 5) * 0.15;
-        dummy.position.set(pos[0], 4.2 * heightScale, pos[2]);
-        dummy.scale.set(1, heightScale, 1);
-        dummy.rotation.set(0, (i * 0.9) % Math.PI, 0);
+        dummy.position.set(pos[0], 3.5, pos[2]);
+        dummy.scale.set(1, 1 + (i % 3) * 0.15, 1);
+        dummy.rotation.set(0, (i * 0.5) % Math.PI, 0);
         dummy.updateMatrix();
         palmTrunkRef.current.setMatrixAt(i, dummy.matrix);
 
-        // Crown
-        dummy.position.set(pos[0], 8.4 * heightScale, pos[2]);
-        dummy.scale.set(1.4, 1.2, 1.4);
+        dummy.position.set(pos[0], 7.2 + (i % 3) * 0.8, pos[2]);
+        dummy.scale.set(1.3, 1, 1.3);
         dummy.updateMatrix();
         palmCrownRef.current.setMatrixAt(i, dummy.matrix);
       });
@@ -129,60 +127,60 @@ export const Trees: React.FC = () => {
 
   return (
     <group>
-      {/* 1. Ashoka Trees */}
+      {/* 1. Ashoka Trees along Entrance Avenue */}
       <instancedMesh
         ref={ashokaTrunkRef}
-        args={[undefined, undefined, avenueAshokaCount]}
+        args={[undefined as any, undefined as any, avenueAshokaCount]}
         castShadow
       >
-        <cylinderGeometry args={[0.16, 0.22, 3.2, 8]} />
+        <cylinderGeometry args={[0.18, 0.22, 2.4, 8]} />
         <meshStandardMaterial color="#4a3728" roughness={0.9} />
       </instancedMesh>
       <instancedMesh
         ref={ashokaFoliageRef}
-        args={[undefined, undefined, avenueAshokaCount]}
+        args={[undefined as any, undefined as any, avenueAshokaCount]}
         castShadow
         receiveShadow
       >
-        <coneGeometry args={[1.3, 5.5, 9]} />
-        <meshStandardMaterial color="#1f4b20" roughness={0.7} />
+        <coneGeometry args={[1.3, 5.2, 8]} />
+        <meshStandardMaterial color="#2d5a27" roughness={0.8} />
       </instancedMesh>
 
-      {/* 2. Neem & Shade Trees */}
+      {/* 2. Broad Canopy Shade Trees (Neem/Gulmohar) */}
       <instancedMesh
         ref={shadeTrunkRef}
-        args={[undefined, undefined, shadeCount]}
+        args={[undefined as any, undefined as any, shadeCount]}
         castShadow
       >
-        <cylinderGeometry args={[0.3, 0.45, 3.6, 8]} />
+        <cylinderGeometry args={[0.35, 0.45, 3.2, 8]} />
         <meshStandardMaterial color="#3e2723" roughness={0.9} />
       </instancedMesh>
       <instancedMesh
         ref={shadeFoliageRef}
-        args={[undefined, undefined, shadeCount]}
+        args={[undefined as any, undefined as any, shadeCount]}
         castShadow
         receiveShadow
       >
-        <dodecahedronGeometry args={[3.4, 1]} />
-        <meshStandardMaterial color="#2e6930" roughness={0.75} />
+        <dodecahedronGeometry args={[3.2, 1]} />
+        <meshStandardMaterial color="#38662d" roughness={0.85} />
       </instancedMesh>
 
       {/* 3. Royal Palm Trees */}
       <instancedMesh
         ref={palmTrunkRef}
-        args={[undefined, undefined, palmCount]}
+        args={[undefined as any, undefined as any, palmCount]}
         castShadow
       >
-        <cylinderGeometry args={[0.2, 0.32, 8.4, 8]} />
-        <meshStandardMaterial color="#78716c" roughness={0.8} />
+        <cylinderGeometry args={[0.22, 0.32, 7.0, 8]} />
+        <meshStandardMaterial color="#5d4037" roughness={0.8} />
       </instancedMesh>
       <instancedMesh
         ref={palmCrownRef}
-        args={[undefined, undefined, palmCount]}
+        args={[undefined as any, undefined as any, palmCount]}
         castShadow
       >
-        <coneGeometry args={[3.2, 2.2, 7]} />
-        <meshStandardMaterial color="#15803d" roughness={0.65} />
+        <sphereGeometry args={[2.8, 8, 8]} />
+        <meshStandardMaterial color="#2e7d32" roughness={0.8} />
       </instancedMesh>
     </group>
   );
