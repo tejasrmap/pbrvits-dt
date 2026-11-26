@@ -44,6 +44,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
+  const boundaryMarkersRef = useRef<maplibregl.Marker[]>([]);
 
   const selectedBuilding = useCampusStore((s) => s.selectedBuilding);
   const selectBuilding = useCampusStore((s) => s.selectBuilding);
@@ -298,6 +299,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
     });
 
     mapRef.current = map;
+    (window as any).gisMapInstance = map;
     popupRef.current = new maplibregl.Popup({
       closeButton: false,
       closeOnClick: false,
@@ -307,6 +309,29 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
 
     map.on('load', () => {
       addCampusVectorLayers(map);
+
+      // Create boundary label badges
+      const createBadge = (text: string, color: string, dotColor: string) => {
+        const el = document.createElement('div');
+        el.className = 'gis-boundary-badge';
+        el.style.cssText = `background: ${color}; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.4); pointer-events: none; display: flex; align-items: center; gap: 5px;`;
+        el.innerHTML = `<span style="width: 7px; height: 7px; border-radius: 50%; background: ${dotColor};"></span>${text}`;
+        return el;
+      };
+
+      const m1 = new maplibregl.Marker({ element: createBadge('PBR VITS Academic Campus', 'rgba(14, 165, 233, 0.9)', '#38bdf8') })
+        .setLngLat([79.9835, 14.9133])
+        .addTo(map);
+
+      const m2 = new maplibregl.Marker({ element: createBadge('PBR VITS Sports Grounds', 'rgba(22, 163, 74, 0.9)', '#4ade80') })
+        .setLngLat([79.9818, 14.9130])
+        .addTo(map);
+
+      const m3 = new maplibregl.Marker({ element: createBadge('Neighboring: Visvodaya Engg College (VEC)', 'rgba(217, 119, 6, 0.9)', '#fde047') })
+        .setLngLat([79.9858, 14.9133])
+        .addTo(map);
+
+      boundaryMarkersRef.current = [m1, m2, m3];
     });
 
     map.on('mousemove', (e: maplibregl.MapMouseEvent) => {
@@ -374,9 +399,12 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
     });
 
     return () => {
+      boundaryMarkersRef.current.forEach((m) => m.remove());
+      boundaryMarkersRef.current = [];
       popupRef.current?.remove();
       map.remove();
       mapRef.current = null;
+      delete (window as any).gisMapInstance;
     };
   }, [getStyleForBasemap, currentBasemap, addCampusVectorLayers, selectBuilding]);
 
@@ -439,7 +467,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
   }, [activeRoute]);
 
   // Toggle basemap style
-  const handleBasemapChange = (newBasemap: BasemapId) => {
+  const handleBasemapChange = useCallback((newBasemap: BasemapId) => {
     setCurrentBasemap(newBasemap);
     if (!mapRef.current) return;
     const map = mapRef.current;
@@ -456,7 +484,16 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
       map.setPitch(pitch);
       map.setBearing(bearing);
     });
-  };
+  }, [addCampusVectorLayers, getStyleForBasemap]);
+
+  // Sync appViewMode with basemap
+  useEffect(() => {
+    if (appViewMode === 'satellite' && currentBasemap !== 'satellite') {
+      handleBasemapChange('satellite');
+    } else if (appViewMode === 'gis' && currentBasemap === 'satellite') {
+      handleBasemapChange('osm');
+    }
+  }, [appViewMode, currentBasemap, handleBasemapChange]);
 
   // Toggle overlay layer visibility
   const toggleLayer = (layerKey: keyof typeof layerVisibility) => {
