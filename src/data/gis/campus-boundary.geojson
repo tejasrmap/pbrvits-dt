@@ -180,6 +180,46 @@
           ]
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "id": "neighboring-vec-campus",
+      "properties": {
+        "id": "neighboring-vec-campus",
+        "name": "Neighboring Campus: Visvodaya Engineering College (VEC) & Trust Lands",
+        "category": "external-institution",
+        "verificationStatus": "IMAGE-ESTIMATED",
+        "source": "OpenStreetMap & Satellite Reference - External Neighboring Parcel",
+        "accuracyLevel": "Separate trust property along Udayagiri Road; excluded from PBR VITS campus model",
+        "areaSqm": 45000
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.9848,
+              14.9125
+            ],
+            [
+              79.9868,
+              14.9126
+            ],
+            [
+              79.9870,
+              14.9142
+            ],
+            [
+              79.9849,
+              14.9141
+            ],
+            [
+              79.9848,
+              14.9125
+            ]
+          ]
+        ]
+      }
     }
   ]
 }

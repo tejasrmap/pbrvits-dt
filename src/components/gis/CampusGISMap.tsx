@@ -111,9 +111,10 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
             ['get', 'id'],
             'pbr-vits-academic-boundary', '#0284c7',
             'pbr-vits-playground-boundary', '#16a34a',
+            'neighboring-vec-campus', '#f59e0b',
             '#0369a1'
           ],
-          'fill-opacity': 0.08
+          'fill-opacity': 0.06
         }
       });
 
@@ -127,10 +128,11 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
             ['get', 'id'],
             'pbr-vits-academic-boundary', '#38bdf8',
             'pbr-vits-playground-boundary', '#4ade80',
+            'neighboring-vec-campus', '#f59e0b',
             '#0ea5e9'
           ],
-          'line-width': 2.5,
-          'line-dasharray': [2, 1]
+          'line-width': 2.0,
+          'line-dasharray': [3, 2]
         }
       });
     }
