@@ -212,9 +212,9 @@ export const Sidebar: React.FC = () => {
                       <span>{b.category.toUpperCase()}</span>
                       <span
                         className={`flex items-center gap-1 font-bold ${
-                          b.verified === 'VERIFIED'
+                          b.verified === 'OSM-MAPPED'
                             ? 'text-emerald-400'
-                            : b.verified === 'APPROXIMATE'
+                            : b.verified === 'IMAGE-ESTIMATED'
                             ? 'text-amber-400'
                             : 'text-purple-400'
                         }`}

@@ -9,7 +9,7 @@
         "name": "Administrative Quadrangle Loop Walkway",
         "category": "pedestrian",
         "widthMeters": 3.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297901225",
         "wheelchairAccessible": true
       },
@@ -47,7 +47,7 @@
         "name": "Engineering Blocks Cross Connector Path",
         "category": "pedestrian",
         "widthMeters": 3.5,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297901224",
         "wheelchairAccessible": true
       },
@@ -85,7 +85,7 @@
         "name": "Central Library Promenade",
         "category": "pedestrian",
         "widthMeters": 4.0,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Paved walkway connecting Central Boulevard to Library entrance",
         "wheelchairAccessible": true
       },
@@ -115,7 +115,7 @@
         "name": "Mechanical Workshops Paved Corridor",
         "category": "pedestrian",
         "widthMeters": 3.5,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Accessway connecting Mechanical block to central workshops",
         "wheelchairAccessible": true
       },
@@ -145,7 +145,7 @@
         "name": "Athletic Field Pedestrian Link",
         "category": "pedestrian",
         "widthMeters": 3.0,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Pathway from ECE/Mech blocks to Sports Pavilion bleachers",
         "wheelchairAccessible": true
       },

@@ -10,7 +10,7 @@
         "category": "sports",
         "sport": "cricket",
         "surface": "turf_grass",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297896001 (PBR VITS playground)",
         "dimensionsMeters": [
           110,
@@ -54,7 +54,7 @@
         "category": "sports",
         "sport": "basketball",
         "surface": "acrylic_hardcourt",
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Northeast zone of athletic ground",
         "dimensionsMeters": [
           28,
@@ -98,7 +98,7 @@
         "category": "sports",
         "sport": "volleyball",
         "surface": "compacted_clay",
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "East perimeter of sports ground",
         "dimensionsMeters": [
           24,

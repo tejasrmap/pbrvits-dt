@@ -8,9 +8,9 @@
         "id": "pbr-vits-academic-boundary",
         "name": "PBR VITS Academic Campus Boundary",
         "category": "boundary",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297901220",
-        "accuracyLevel": "1-2m Cadastral Boundary",
+        "accuracyLevel": "OpenStreetMap-derived boundary; field survey accuracy not independently verified",
         "areaSqm": 21850
       },
       "geometry": {
@@ -64,9 +64,9 @@
         "id": "pbr-vits-playground-boundary",
         "name": "PBR VITS Athletic & Sports Grounds Boundary",
         "category": "boundary",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297896001",
-        "accuracyLevel": "1-2m Cadastral Boundary",
+        "accuracyLevel": "OpenStreetMap-derived boundary; field survey accuracy not independently verified",
         "areaSqm": 27400
       },
       "geometry": {
@@ -128,9 +128,9 @@
         "id": "pbr-vits-overall-boundary",
         "name": "PBR VITS Unified Campus Perimeter",
         "category": "boundary",
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Synthesized from OSM ways 1297901220, 1297896001, and 1297901221",
-        "accuracyLevel": "3-5m Cadastral Perimeter",
+        "accuracyLevel": "Estimated boundary synthesis; field survey accuracy not independently verified",
         "areaSqm": 62500
       },
       "geometry": {

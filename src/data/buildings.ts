@@ -38,9 +38,9 @@ export const campusBuildings: BuildingData[] = [
       "Visitor Lounge",
       "Conference Hall"
     ],
-    "verified": "VERIFIED",
+    "verified": "OSM-MAPPED",
     "source": "OpenStreetMap way 1297903400 (building:yes)",
-    "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+    "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
     "geoCoordinates": {
       "lat": 14.9131576,
       "lng": 79.983966
@@ -92,9 +92,9 @@ export const campusBuildings: BuildingData[] = [
       "Reference Reading Hall",
       "Reprography"
     ],
-    "verified": "VERIFIED",
+    "verified": "OSM-MAPPED",
     "source": "OpenStreetMap way 1297903411 (building:yes)",
-    "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+    "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
     "geoCoordinates": {
       "lat": 14.9135802,
       "lng": 79.9841641
@@ -149,7 +149,7 @@ export const campusBuildings: BuildingData[] = [
       "Faculty Chambers",
       "ICT-Enabled Smart Classrooms"
     ],
-    "verified": "APPROXIMATE",
+    "verified": "IMAGE-ESTIMATED",
     "source": "Georeferenced Academic Core North Quad (Derived from campus zoning)",
     "accuracyLevel": "2-3m Estimated Footprint",
     "geoCoordinates": {
@@ -204,9 +204,9 @@ export const campusBuildings: BuildingData[] = [
       "Robotics Innovation Hub",
       "Department Seminar Hall"
     ],
-    "verified": "VERIFIED",
+    "verified": "OSM-MAPPED",
     "source": "OpenStreetMap way 1297903395 (building:college)",
-    "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+    "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
     "geoCoordinates": {
       "lat": 14.9133719,
       "lng": 79.9836044
@@ -258,7 +258,7 @@ export const campusBuildings: BuildingData[] = [
       "MBA Case Study Discussion Room",
       "Business Analytics Lab"
     ],
-    "verified": "APPROXIMATE",
+    "verified": "IMAGE-ESTIMATED",
     "source": "Central Academic Entrance Quad",
     "accuracyLevel": "2-3m Estimated Footprint",
     "geoCoordinates": {
@@ -313,9 +313,9 @@ export const campusBuildings: BuildingData[] = [
       "Fluid Mechanics & Hydraulic Machinery Lab",
       "Thermal Engineering Lab"
     ],
-    "verified": "VERIFIED",
+    "verified": "OSM-MAPPED",
     "source": "OpenStreetMap way 1297903402 (building:college)",
-    "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+    "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
     "geoCoordinates": {
       "lat": 14.9133427,
       "lng": 79.9830419
@@ -368,7 +368,7 @@ export const campusBuildings: BuildingData[] = [
       "Foundry & Blacksmithy Bay",
       "Automotive Engine & Emissions Testing Rig"
     ],
-    "verified": "APPROXIMATE",
+    "verified": "IMAGE-ESTIMATED",
     "source": "Northwest Academic Utility Sector",
     "accuracyLevel": "3-5m Estimated Footprint",
     "geoCoordinates": {
@@ -422,7 +422,7 @@ export const campusBuildings: BuildingData[] = [
       "Air-Conditioned Green Rooms",
       "Foyer Exhibition & Registration Lobby"
     ],
-    "verified": "APPROXIMATE",
+    "verified": "IMAGE-ESTIMATED",
     "source": "Central Gathering Quad / Northeast Pavilion Zone",
     "accuracyLevel": "3-5m Estimated Footprint",
     "geoCoordinates": {
@@ -475,7 +475,7 @@ export const campusBuildings: BuildingData[] = [
       "RO Purified Water Station",
       "Outdoor Garden Pergola Seating"
     ],
-    "verified": "ESTIMATED",
+    "verified": "UNVERIFIED ESTIMATE",
     "source": "East Campus Inter-College Service Corridor",
     "accuracyLevel": "5m Estimated Location",
     "geoCoordinates": {
@@ -529,7 +529,7 @@ export const campusBuildings: BuildingData[] = [
       "Solar Water Heating System",
       "Warden Residence & First Aid Post"
     ],
-    "verified": "ESTIMATED",
+    "verified": "UNVERIFIED ESTIMATE",
     "source": "Northeast Campus Residential Zone",
     "accuracyLevel": "5m Estimated Location",
     "geoCoordinates": {
@@ -584,7 +584,7 @@ export const campusBuildings: BuildingData[] = [
       "Badminton Court inside perimeter",
       "24x7 Security & CCTV Vigilance"
     ],
-    "verified": "ESTIMATED",
+    "verified": "UNVERIFIED ESTIMATE",
     "source": "Northwest Secure Enclosed Residential Zone",
     "accuracyLevel": "5m Estimated Location",
     "geoCoordinates": {
@@ -638,7 +638,7 @@ export const campusBuildings: BuildingData[] = [
       "Changing Rooms & Shower Facility",
       "Cricket & Football Gear Store"
     ],
-    "verified": "APPROXIMATE",
+    "verified": "IMAGE-ESTIMATED",
     "source": "Athletic Ground East Border (adjacent to OSM way 1297896001)",
     "accuracyLevel": "2-3m Estimated Footprint",
     "geoCoordinates": {
@@ -692,9 +692,9 @@ export const campusBuildings: BuildingData[] = [
       "College Bus Pick-up Bay",
       "CCTV Surveillance Control"
     ],
-    "verified": "VERIFIED",
+    "verified": "OSM-MAPPED",
     "source": "Kondapuram Road / Campus Frontage Axis (OSM way 1297901222 entry)",
-    "accuracyLevel": "Sub-meter Georeferenced Entrance Point",
+    "accuracyLevel": "OpenStreetMap-derived entrance point; field survey accuracy not independently verified",
     "geoCoordinates": {
       "lat": 14.91234,
       "lng": 79.983655
@@ -744,7 +744,7 @@ export const campusBuildings: BuildingData[] = [
       "High Tension Switchyard",
       "Emergency Electrical Support Cell"
     ],
-    "verified": "VERIFIED",
+    "verified": "OSM-MAPPED",
     "source": "Southwest Utility Zone (Corresponds to SPDCL Kavali Substation vicinity)",
     "accuracyLevel": "3-5m Georeferenced Location",
     "geoCoordinates": {

@@ -9,7 +9,7 @@
         "name": "Main Entrance Royal Palm Boulevard",
         "category": "landscaping",
         "treeSpecies": "Royal Palm (Roystonea regia) & Ashoka Trees",
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Campus entrance visual references",
         "treeCountEstimated": 48
       },
@@ -49,7 +49,7 @@
         "name": "Central Academic Quadrangle Botanical Garden",
         "category": "lawn",
         "treeSpecies": "Neem, Gulmohar, Bougainvillea, Carpet Grass",
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Enclosed garden quad between Admin and CSE blocks",
         "areaSqm": 1800
       },
@@ -89,7 +89,7 @@
         "name": "Playground Windbreak Green Belt",
         "category": "green_belt",
         "treeSpecies": "Teak, Eucalyptus & Indian Rosewood windbreak",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "Playground perimeter tree line",
         "treeCountEstimated": 64
       },

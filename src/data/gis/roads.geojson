@@ -9,7 +9,7 @@
         "name": "Kondapuram Road / Udayagiri State Highway",
         "category": "primary",
         "widthMeters": 12.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297896011",
         "surface": "asphalt"
       },
@@ -47,7 +47,7 @@
         "name": "Visvodaya Central Entrance Boulevard",
         "category": "campus_artery",
         "widthMeters": 8.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297901222 alignment",
         "surface": "paved_concrete"
       },
@@ -105,7 +105,7 @@
         "name": "East Academic Ring Road",
         "category": "service",
         "widthMeters": 6.0,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Inter-college service artery between VITS & VEC",
         "surface": "paved"
       },
@@ -143,7 +143,7 @@
         "name": "Athletic Grounds Perimeter Avenue",
         "category": "service",
         "widthMeters": 6.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297896001 eastern edge",
         "surface": "gravel_paved"
       },

@@ -100,7 +100,7 @@ export const CampusSearch: React.FC = () => {
             title: dept,
             subtitle: `Department located in ${b.name}`,
             category: 'academic',
-            verified: 'VERIFIED',
+            verified: 'OSM-MAPPED',
             buildingId: b.id
           });
         }
@@ -216,7 +216,7 @@ export const CampusSearch: React.FC = () => {
                     <div className="min-w-0">
                       <div className="text-sm font-semibold truncate flex items-center gap-2">
                         <span>{item.title}</span>
-                        {item.verified === 'VERIFIED' && (
+                        {item.verified === 'OSM-MAPPED' && (
                           <span title="Verified Campus Asset">
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                           </span>

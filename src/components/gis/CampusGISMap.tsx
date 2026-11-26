@@ -227,9 +227,9 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
           'fill-extrusion-color': [
             'match',
             ['get', 'verificationStatus'],
-            'VERIFIED', '#0284c7',
-            'APPROXIMATE', '#d97706',
-            'ESTIMATED', '#9333ea',
+            'OSM-MAPPED', '#0284c7',
+            'IMAGE-ESTIMATED', '#d97706',
+            'UNVERIFIED ESTIMATE', '#9333ea',
             '#64748b'
           ],
           'fill-extrusion-height': ['get', 'height'],
@@ -332,9 +332,9 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
       const feat = e.features[0];
       const props = feat.properties as any;
       const statusColor =
-        props.verificationStatus === 'VERIFIED'
+        props.verificationStatus === 'OSM-MAPPED'
           ? '#22c55e'
-          : props.verificationStatus === 'APPROXIMATE'
+          : props.verificationStatus === 'IMAGE-ESTIMATED'
           ? '#f59e0b'
           : '#a855f7';
 
@@ -575,7 +575,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
                 GIS Vector Overlays
               </div>
               {[
-                { key: 'boundary', label: 'Cadastral Boundary', color: '#38bdf8' },
+                { key: 'boundary', label: 'Campus Boundary (OSM-Mapped)', color: '#38bdf8' },
                 { key: 'buildings', label: '3D Building Footprints', color: '#0284c7' },
                 { key: 'roads', label: 'Road Network', color: '#f59e0b' },
                 { key: 'pathways', label: 'Pedestrian Walkways', color: '#38bdf8' },
@@ -658,7 +658,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
       {/* Bottom Left: GIS Legend */}
       <div className="absolute bottom-6 left-4 z-10 glass-panel p-3 rounded-2xl border border-white/10 shadow-2xl max-w-xs flex flex-col gap-2">
         <div className="text-[11px] font-bold text-white flex items-center justify-between">
-          <span>Cadastral Verification Legend</span>
+          <span>Geographic Source & Verification Status</span>
           <span className="text-[9px] text-slate-400">PBR VITS GIS</span>
         </div>
         <div className="flex flex-col gap-1.5 text-[10px] text-slate-300">

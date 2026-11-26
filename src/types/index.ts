@@ -9,7 +9,7 @@ export type BuildingCategory =
   | 'facility'
   | 'entrance';
 
-export type VerificationStatus = 'VERIFIED' | 'APPROXIMATE' | 'ESTIMATED' | 'UNVERIFIED';
+export type VerificationStatus = 'OSM-MAPPED' | 'IMAGE-ESTIMATED' | 'UNVERIFIED ESTIMATE';
 
 export type AppViewMode = '3d' | 'gis' | 'satellite' | 'firstPerson';
 

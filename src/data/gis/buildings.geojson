@@ -15,9 +15,9 @@
         ],
         "floors": 4,
         "height": 16.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903395 (building:college)",
-        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
         "centroid": [
           79.9836044,
           14.9133719
@@ -75,9 +75,9 @@
         ],
         "floors": 3,
         "height": 13.5,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903402 (building:college)",
-        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
         "centroid": [
           79.9830419,
           14.9133427
@@ -137,9 +137,9 @@
         ],
         "floors": 3,
         "height": 13.5,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903400 (building:yes)",
-        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
         "centroid": [
           79.983966,
           14.9131576
@@ -202,9 +202,9 @@
         ],
         "floors": 3,
         "height": 14.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903411 (building:yes)",
-        "accuracyLevel": "Sub-meter Ground Cadastral Footprint",
+        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
         "centroid": [
           79.9841641,
           14.9135802
@@ -263,7 +263,7 @@
         ],
         "floors": 4,
         "height": 16.5,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Georeferenced Academic Core North Quad (Derived from campus zoning)",
         "accuracyLevel": "2-3m Estimated Footprint",
         "centroid": [
@@ -323,7 +323,7 @@
         ],
         "floors": 2,
         "height": 10.0,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Northwest Academic Utility Sector",
         "accuracyLevel": "3-5m Estimated Footprint",
         "centroid": [
@@ -383,7 +383,7 @@
         ],
         "floors": 2,
         "height": 12.5,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Central Gathering Quad / Northeast Pavilion Zone",
         "accuracyLevel": "3-5m Estimated Footprint",
         "centroid": [
@@ -443,7 +443,7 @@
         ],
         "floors": 3,
         "height": 13.5,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Central Academic Entrance Quad",
         "accuracyLevel": "2-3m Estimated Footprint",
         "centroid": [
@@ -502,7 +502,7 @@
         ],
         "floors": 1,
         "height": 7.0,
-        "verificationStatus": "APPROXIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Athletic Ground East Border (adjacent to way 1297896001)",
         "accuracyLevel": "2-3m Estimated Footprint",
         "centroid": [
@@ -561,7 +561,7 @@
         ],
         "floors": 2,
         "height": 8.5,
-        "verificationStatus": "ESTIMATED",
+        "verificationStatus": "UNVERIFIED ESTIMATE",
         "source": "East Campus Inter-College Service Corridor",
         "accuracyLevel": "5m Estimated Location",
         "centroid": [
@@ -620,7 +620,7 @@
         ],
         "floors": 4,
         "height": 16.0,
-        "verificationStatus": "ESTIMATED",
+        "verificationStatus": "UNVERIFIED ESTIMATE",
         "source": "Northeast Campus Residential Zone",
         "accuracyLevel": "5m Estimated Location",
         "centroid": [
@@ -679,7 +679,7 @@
         ],
         "floors": 4,
         "height": 16.0,
-        "verificationStatus": "ESTIMATED",
+        "verificationStatus": "UNVERIFIED ESTIMATE",
         "source": "Northwest Secure Enclosed Residential Zone",
         "accuracyLevel": "5m Estimated Location",
         "centroid": [
@@ -739,9 +739,9 @@
         ],
         "floors": 1,
         "height": 8.0,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "Kondapuram Road / Campus Frontage Axis (OSM way 1297901222 entry)",
-        "accuracyLevel": "Sub-meter Georeferenced Entrance Point",
+        "accuracyLevel": "OpenStreetMap-derived entrance point; field survey accuracy not independently verified",
         "centroid": [
           79.983655,
           14.91234
@@ -798,7 +798,7 @@
         ],
         "floors": 1,
         "height": 5.5,
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "Southwest Utility Zone (Corresponds to SPDCL Kavali Substation vicinity)",
         "accuracyLevel": "3-5m Georeferenced Location",
         "centroid": [

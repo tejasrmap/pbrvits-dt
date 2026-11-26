@@ -64,7 +64,7 @@ export const BuildingInfoPanel: React.FC = () => {
         {/* Verification Status */}
         <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/40 border border-white/5">
           <div className="flex items-center gap-2">
-            {selectedBuilding.verified === 'VERIFIED' ? (
+            {selectedBuilding.verified === 'OSM-MAPPED' ? (
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
             ) : (
               <AlertCircle className="w-4 h-4 text-amber-400" />
@@ -73,11 +73,11 @@ export const BuildingInfoPanel: React.FC = () => {
           </div>
           <span
             className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-mono ${
-              selectedBuilding.verified === 'VERIFIED'
+              selectedBuilding.verified === 'OSM-MAPPED'
                 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30'
-                : selectedBuilding.verified === 'APPROXIMATE'
+                : selectedBuilding.verified === 'IMAGE-ESTIMATED'
                 ? 'bg-sky-500/20 text-sky-300 border border-sky-400/30'
-                : selectedBuilding.verified === 'ESTIMATED'
+                : selectedBuilding.verified === 'UNVERIFIED ESTIMATE'
                 ? 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
                 : 'bg-rose-500/20 text-rose-300 border border-rose-400/30'
             }`}

@@ -8,7 +8,7 @@
         "id": "poi-main-entrance",
         "name": "Main Entrance Gate & Security Cabin",
         "category": "entrance",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OSM Entrance Point",
         "description": "Primary vehicle and visitor entrance on Kondapuram Road"
       },
@@ -27,7 +27,7 @@
         "id": "poi-admin-entrance",
         "name": "Principal & Administrative Foyer",
         "category": "administrative",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OSM Building 1297903400 portico",
         "description": "Main entrance portico to Admin Block"
       },
@@ -46,7 +46,7 @@
         "id": "poi-library-foyer",
         "name": "Central Library Circulation Foyer",
         "category": "library",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OSM Building 1297903411 entrance",
         "description": "Double-height glass atrium entrance to Central Library"
       },
@@ -65,7 +65,7 @@
         "id": "poi-ece-foyer",
         "name": "ECE Department Portico",
         "category": "academic",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OSM Building 1297903395 entrance",
         "description": "Main academic entrance to Electronics Block"
       },
@@ -84,7 +84,7 @@
         "id": "poi-mech-foyer",
         "name": "Mechanical Department Portico",
         "category": "academic",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "OSM Building 1297903402 entrance",
         "description": "Ground floor portico to Mechanical Engineering Block"
       },
@@ -103,7 +103,7 @@
         "id": "poi-canteen",
         "name": "Campus Food Court & Refreshments",
         "category": "canteen",
-        "verificationStatus": "ESTIMATED",
+        "verificationStatus": "UNVERIFIED ESTIMATE",
         "source": "East campus service quadrant",
         "description": "Dining hall, juice stall, and cafeteria"
       },
@@ -122,7 +122,7 @@
         "id": "poi-substation",
         "name": "Campus Electrical Substation",
         "category": "utility",
-        "verificationStatus": "VERIFIED",
+        "verificationStatus": "OSM-MAPPED",
         "source": "Southwest transformer yard",
         "description": "High-voltage switchyard and backup generators"
       },

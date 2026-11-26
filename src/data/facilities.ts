@@ -9,7 +9,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [53.6, 4.5, -35.5],
     description: "70 networked high-speed workstations with DELNET, IEEE Xplore, and NPTEL course repositories.",
     iconName: "BookOpen",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-ai-lab",
@@ -19,7 +19,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-16.2, 8.0, -58.3],
     description: "Equipped with NVIDIA GPU workstations, Python/PyTorch development environments, and cloud sandboxes.",
     iconName: "Cpu",
-    verified: "APPROXIMATE"
+    verified: "IMAGE-ESTIMATED"
   },
   {
     id: "fac-robotics-lab",
@@ -29,7 +29,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-6.6, 4.0, -12.4],
     description: "Dedicated prototyping hub for autonomous drones, microcontrollers, ARM processors, and sensor suites.",
     iconName: "Bot",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-cad-cam",
@@ -39,7 +39,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-67.1, 4.0, -9.1],
     description: "Industry-standard workstations running AutoCAD, SolidWorks, ANSYS, and Revit architecture software.",
     iconName: "Layers",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-auditorium-hall",
@@ -49,7 +49,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-8.2, 5.0, -96.7],
     description: "State-of-the-art auditorium with motorized stage lighting, acoustic wall panels, and green rooms.",
     iconName: "Megaphone",
-    verified: "APPROXIMATE"
+    verified: "IMAGE-ESTIMATED"
   },
   {
     id: "fac-cafeteria",
@@ -59,7 +59,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [77.9, 2.0, 15.1],
     description: "Clean multi-cuisine dining options, fresh juice bar, snacks, and outdoor garden seating.",
     iconName: "Coffee",
-    verified: "ESTIMATED"
+    verified: "UNVERIFIED ESTIMATE"
   },
   {
     id: "fac-sports-ground",
@@ -69,7 +69,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-140.0, 0.5, 20.0],
     description: "Sprawling grass athletic field supporting cricket matches, football tournaments, and athletic tracks (OSM way 1297896001).",
     iconName: "Trophy",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-basketball-court",
@@ -78,7 +78,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-90.0, 0.5, -45.0],
     description: "Regulation dimensions with acrylic surface coating, perimeter fencing, and LED floodlights.",
     iconName: "Activity",
-    verified: "APPROXIMATE"
+    verified: "IMAGE-ESTIMATED"
   },
   {
     id: "fac-volleyball-court",
@@ -87,7 +87,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-95.0, 0.5, 50.0],
     description: "Dual sand-filled court facilities with night lighting for intramural tournaments.",
     iconName: "Target",
-    verified: "APPROXIMATE"
+    verified: "IMAGE-ESTIMATED"
   },
   {
     id: "fac-bus-bay",
@@ -96,7 +96,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [-28.0, 0.5, 98.0],
     description: "Parking and boarding point for 30+ college buses connecting Kavali, Nellore, Udayagiri, and Singarayakonda.",
     iconName: "Bus",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-atm",
@@ -105,7 +105,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [15.0, 1.0, 95.0],
     description: "24-hour multi-bank ATM located safely inside the main security perimeter.",
     iconName: "CreditCard",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-health-center",
@@ -115,7 +115,7 @@ export const campusFacilities: CampusFacility[] = [
     position: [32.3, 1.0, 11.5],
     description: "On-duty resident physician, nursing assistant, emergency medicines, and tie-up ambulance service.",
     iconName: "HeartPulse",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   },
   {
     id: "fac-solar-plant",
@@ -125,6 +125,6 @@ export const campusFacilities: CampusFacility[] = [
     position: [-93.7, 4.0, 87.5],
     description: "Green energy solar photovoltaic setup reducing carbon footprint and feeding surplus back to grid.",
     iconName: "Sun",
-    verified: "VERIFIED"
+    verified: "OSM-MAPPED"
   }
 ];
