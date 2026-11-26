@@ -18,6 +18,9 @@ export default defineConfig({
           if (id.includes('node_modules/@react-three')) {
             return 'r3f-vendor';
           }
+          if (id.includes('node_modules/maplibre-gl')) {
+            return 'gis-vendor';
+          }
           if (id.includes('node_modules/lucide-react') || id.includes('node_modules/zustand')) {
             return 'ui-vendor';
           }
