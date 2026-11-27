@@ -2,12 +2,7 @@ import React from 'react';
 import { Html } from '@react-three/drei';
 import type { BuildingData, TimeOfDay } from '../types';
 import { useCampusStore } from '../store/useCampusStore';
-import { AdminBuilding } from './AdminBuilding';
-import { AcademicBlock } from './AcademicBlock';
-import { LibraryBuilding } from './LibraryBuilding';
-import { WorkshopBuilding } from './WorkshopBuilding';
-import { AuditoriumBuilding } from './AuditoriumBuilding';
-import { HostelBuilding } from './HostelBuilding';
+import { PolygonBuildingMesh } from './PolygonBuildingMesh';
 
 interface BuildingProps {
   data: BuildingData;
@@ -29,29 +24,6 @@ export const Building: React.FC<BuildingProps> = ({ data, timeOfDay }) => {
   }
 
   const { height } = data.dimensions;
-
-  // Dispatch to authentic architectural archetype
-  const renderArchitecturalModel = () => {
-    switch (data.id) {
-      case 'admin-block':
-        return <AdminBuilding data={data} timeOfDay={timeOfDay} isSelected={isSelected} />;
-      case 'central-library':
-        return <LibraryBuilding data={data} timeOfDay={timeOfDay} isSelected={isSelected} />;
-      case 'central-workshops':
-        return <WorkshopBuilding data={data} timeOfDay={timeOfDay} isSelected={isSelected} />;
-      case 'auditorium':
-        return <AuditoriumBuilding data={data} timeOfDay={timeOfDay} isSelected={isSelected} />;
-      case 'boys-hostel':
-      case 'girls-hostel':
-        return <HostelBuilding data={data} timeOfDay={timeOfDay} isSelected={isSelected} />;
-      case 'ece-eee-block':
-      case 'mech-civil-block':
-      case 'cse-it-block':
-      case 'sh-mba-block':
-      default:
-        return <AcademicBlock data={data} timeOfDay={timeOfDay} isSelected={isSelected} />;
-    }
-  };
 
   const statusBadgeColor =
     data.verified === 'OSM-MAPPED' || data.verified === 'VERIFIED'
@@ -103,8 +75,13 @@ export const Building: React.FC<BuildingProps> = ({ data, timeOfDay }) => {
         </Html>
       )}
 
-      {/* Render the specialized architectural model */}
-      {renderArchitecturalModel()}
+      {/* Authoritative Extruded Polygon Building Massing */}
+      <PolygonBuildingMesh
+        data={data}
+        timeOfDay={timeOfDay}
+        isSelected={isSelected}
+        isHovered={isHovered}
+      />
     </group>
   );
 };

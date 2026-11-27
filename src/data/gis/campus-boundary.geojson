@@ -186,36 +186,52 @@
       "id": "neighboring-vec-campus",
       "properties": {
         "id": "neighboring-vec-campus",
-        "name": "Neighboring Campus: Visvodaya Engineering College (VEC) & Trust Lands",
+        "name": "Neighboring Campus: Visvodaya Engineering College (VEC)",
         "category": "external-institution",
-        "verificationStatus": "IMAGE-ESTIMATED",
-        "source": "OpenStreetMap & Satellite Reference - External Neighboring Parcel",
-        "accuracyLevel": "Separate trust property along Udayagiri Road; excluded from PBR VITS campus model",
-        "areaSqm": 45000
+        "verificationStatus": "OSM-MAPPED",
+        "source": "OpenStreetMap way 1297901221 (amenity:college, name:Visvodaya Engineering College)",
+        "accuracyLevel": "Official OSM parcel polygon for adjacent sister institution; strictly excluded from PBR VITS 3D models",
+        "areaSqm": 48200
       },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
           [
             [
-              79.9848,
-              14.9125
+              79.9843304,
+              14.9152838
             ],
             [
-              79.9868,
-              14.9126
+              79.9843924,
+              14.9138655
             ],
             [
-              79.9870,
-              14.9142
+              79.9844518,
+              14.9132772
             ],
             [
-              79.9849,
-              14.9141
+              79.984083,
+              14.9132637
             ],
             [
-              79.9848,
-              14.9125
+              79.984155,
+              14.9124065
+            ],
+            [
+              79.9854582,
+              14.9125061
+            ],
+            [
+              79.9862234,
+              14.9126054
+            ],
+            [
+              79.9861161,
+              14.9153125
+            ],
+            [
+              79.9843304,
+              14.9152838
             ]
           ]
         ]

@@ -164,20 +164,20 @@
               14.913586
             ],
             [
-              79.98405,
-              14.91358
+              79.9839468,
+              14.9135804
             ],
             [
-              79.98408,
-              14.91315
+              79.9839825,
+              14.9133304
             ],
             [
-              79.983944,
-              14.912732
+              79.9840274,
+              14.9127279
             ],
             [
-              79.983878,
-              14.91274
+              79.9839444,
+              14.9127317
             ],
             [
               79.983878,
@@ -561,21 +561,21 @@
         ],
         "floors": 2,
         "height": 8.5,
-        "verificationStatus": "UNVERIFIED ESTIMATE",
-        "source": "East Campus Inter-College Service Corridor",
-        "accuracyLevel": "5m Estimated Location",
+        "verificationStatus": "IMAGE-ESTIMATED",
+        "source": "Southwest Student Amenity Quad (adjacent to athletics field)",
+        "accuracyLevel": "Satellite-aligned campus amenity block within academic boundary",
         "centroid": [
-          79.98439,
-          14.913125
+          79.98305,
+          14.91285
         ],
         "localCoordinates": [
-          77.88,
+          -66.27,
           0,
-          15.14
+          45.76
         ],
         "dimensions": {
-          "width": 34.4,
-          "depth": 27.8,
+          "width": 21.5,
+          "depth": 20.0,
           "height": 8.5
         }
       },
@@ -584,24 +584,24 @@
         "coordinates": [
           [
             [
-              79.98425,
-              14.913
+              79.98295,
+              14.91276
             ],
             [
-              79.98455,
-              14.91302
+              79.98315,
+              14.91276
             ],
             [
-              79.98453,
-              14.91325
+              79.98315,
+              14.91294
             ],
             [
-              79.98423,
-              14.91323
+              79.98295,
+              14.91294
             ],
             [
-              79.98425,
-              14.913
+              79.98295,
+              14.91276
             ]
           ]
         ]

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "validate:geometry": "node scripts/validate_geometry.cjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

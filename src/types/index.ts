@@ -67,6 +67,8 @@ export interface BuildingData {
   navNodeId: string;
   wingType?: 'standard' | 'stepped' | 'atrium' | 'courtyard' | 'industrial' | 'pavilion';
   geoCoordinates?: GeoCoordinates;
+  polygonCoordinates?: [number, number][];
+  localPolygonVertices?: [number, number, number][];
   source?: string;
   accuracyLevel?: string;
 }
