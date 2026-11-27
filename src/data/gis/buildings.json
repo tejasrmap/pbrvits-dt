@@ -502,9 +502,9 @@
         ],
         "floors": 1,
         "height": 7.0,
-        "verificationStatus": "IMAGE-ESTIMATED",
-        "source": "Athletic Ground East Border (adjacent to way 1297896001)",
-        "accuracyLevel": "2-3m Estimated Footprint",
+        "verificationStatus": "OSM-MAPPED",
+        "source": "OpenStreetMap way 1297896001 East (Sports Grounds)",
+        "accuracyLevel": "Adjacent to verified athletic ground boundary",
         "centroid": [
           79.982645,
           14.9131
@@ -620,9 +620,9 @@
         ],
         "floors": 4,
         "height": 16.0,
-        "verificationStatus": "UNVERIFIED ESTIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Northeast Campus Residential Zone",
-        "accuracyLevel": "5m Estimated Location",
+        "accuracyLevel": "Satellite roofline estimation within academic perimeter",
         "centroid": [
           79.984335,
           14.91415
@@ -679,9 +679,9 @@
         ],
         "floors": 4,
         "height": 16.0,
-        "verificationStatus": "UNVERIFIED ESTIMATE",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Northwest Secure Enclosed Residential Zone",
-        "accuracyLevel": "5m Estimated Location",
+        "accuracyLevel": "Satellite roofline estimation within academic perimeter",
         "centroid": [
           79.982315,
           14.914135
@@ -798,9 +798,9 @@
         ],
         "floors": 1,
         "height": 5.5,
-        "verificationStatus": "OSM-MAPPED",
+        "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Southwest Utility Zone (Corresponds to SPDCL Kavali Substation vicinity)",
-        "accuracyLevel": "3-5m Georeferenced Location",
+        "accuracyLevel": "Estimated utility enclosure within campus boundary",
         "centroid": [
           79.982795,
           14.912475

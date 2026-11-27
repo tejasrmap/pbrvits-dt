@@ -126,11 +126,11 @@
       "id": "pbr-vits-overall-boundary",
       "properties": {
         "id": "pbr-vits-overall-boundary",
-        "name": "PBR VITS Unified Campus Perimeter",
+        "name": "PBR VITS Campus Perimeter (Estimated Synthesis)",
         "category": "boundary",
         "verificationStatus": "IMAGE-ESTIMATED",
-        "source": "Synthesized from OSM ways 1297901220, 1297896001, and 1297901221",
-        "accuracyLevel": "Estimated boundary synthesis; field survey accuracy not independently verified",
+        "source": "Synthesized boundary from OSM ways 1297901220 (academic), 1297896001 (sports), and 1297901221 (VEC border)",
+        "accuracyLevel": "Estimated campus perimeter synthesis; not a cadastral legal boundary survey",
         "areaSqm": 62500
       },
       "geometry": {
@@ -143,23 +143,31 @@
             ],
             [
               79.9828641,
-              14.9122789
+              14.9122
             ],
             [
-              79.9841335,
-              14.9124052
+              79.98365,
+              14.91215
             ],
             [
-              79.9847,
-              14.91245
+              79.98412,
+              14.9124
             ],
             [
-              79.98475,
+              79.98405,
+              14.91326
+            ],
+            [
+              79.98436,
+              14.91386
+            ],
+            [
+              79.98435,
               14.9142
             ],
             [
-              79.9844068,
-              14.9145
+              79.98432,
+              14.91445
             ],
             [
               79.9837864,
@@ -167,7 +175,11 @@
             ],
             [
               79.9825558,
-              14.9143
+              14.9144
+            ],
+            [
+              79.981804,
+              14.914
             ],
             [
               79.9811385,

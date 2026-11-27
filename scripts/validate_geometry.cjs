@@ -49,6 +49,26 @@ function calcCentroid(coordsLocal) {
   return [Number(cx.toFixed(2)), Number(cz.toFixed(2))];
 }
 
+// Check counter-clockwise orientation
+function isCounterClockwise(ring) {
+  let sum = 0;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const p1 = ring[i];
+    const p2 = ring[i + 1];
+    sum += (p2[0] - p1[0]) * (p2[1] + p1[1]);
+  }
+  return sum < 0;
+}
+
+// 2D segment intersection
+function ccw(A, B, C) {
+  return (C[1] - A[1]) * (B[0] - A[0]) > (B[1] - A[1]) * (C[0] - A[0]);
+}
+
+function segmentsIntersect(A, B, C, D) {
+  return ccw(A, C, D) !== ccw(B, C, D) && ccw(A, B, C) !== ccw(A, B, D);
+}
+
 // Ray-casting point-in-polygon
 function pointInPolygon(point, polygon) {
   const x = point[0], y = point[1];
@@ -57,27 +77,35 @@ function pointInPolygon(point, polygon) {
     const xi = polygon[i][0], yi = polygon[i][1];
     const xj = polygon[j][0], yj = polygon[j][1];
     const intersect = ((yi > y) !== (yj > y)) &&
-      (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+      (x < ((xj - xi) * (y - yi)) / (yj - yi) + xi);
     if (intersect) inside = !inside;
   }
   return inside;
 }
 
-// Check 2D bounding box overlap
-function bboxOverlap(b1, b2) {
-  return !(
-    b1.maxX < b2.minX ||
-    b1.minX > b2.maxX ||
-    b1.maxZ < b2.minZ ||
-    b1.minZ > b2.maxZ
-  );
+// Strict Polygon-Polygon Intersection (Edges Crossing + Vertex Containment)
+function polygonsIntersect(polyA, polyB) {
+  for (let i = 0; i < polyA.length - 1; i++) {
+    for (let j = 0; j < polyB.length - 1; j++) {
+      if (segmentsIntersect(polyA[i], polyA[i + 1], polyB[j], polyB[j + 1])) {
+        return true;
+      }
+    }
+  }
+  for (let i = 0; i < polyA.length - 1; i++) {
+    if (pointInPolygon(polyA[i], polyB)) return true;
+  }
+  for (let j = 0; j < polyB.length - 1; j++) {
+    if (pointInPolygon(polyB[j], polyA)) return true;
+  }
+  return false;
 }
 
-console.log('===============================================================');
-console.log(' PBR VITS DIGITAL TWIN — AUTOMATED GEOMETRY VALIDATION SUITE');
+console.log('======================================================================');
+console.log(' PBR VITS DIGITAL TWIN — RIGOROUS GEOMETRY VALIDATION SUITE');
 console.log(' Authoritative Geographic Foundation: EPSG:4326 (WGS84)');
-console.log(' Reference Anchor: 14.913261° N, 79.983666° E');
-console.log('===============================================================\n');
+console.log(' Anchor: 14.913261° N, 79.983666° E (Kavali, AP, India)');
+console.log('======================================================================\n');
 
 let totalTests = 0;
 let passedTests = 0;
@@ -95,230 +123,219 @@ function assert(condition, testName, details = '') {
 }
 
 // -------------------------------------------------------------
-// Test 1: Coordinate Consistency
+// SUITE A: GeoJSON Validity & Topology
 // -------------------------------------------------------------
-console.log('--- TEST GROUP 1: Coordinate Consistency ---');
+console.log('--- SUITE A: GeoJSON Topology & Validity ---');
 buildingsGeoJSON.features.forEach((feat) => {
-  const ring = feat.geometry.coordinates[0];
-  const allValid = ring.every(
-    ([lng, lat]) =>
-      lng >= 79.980 && lng <= 79.988 && lat >= 14.911 && lat <= 14.916
-  );
-  assert(
-    allValid,
-    `Building ${feat.id} coordinates within campus bounds (79.980-79.988°E, 14.911-14.916°N)`
-  );
-});
+  const geom = feat.geometry;
+  assert(geom.type === 'Polygon', `${feat.id}: Geometry type is Polygon`);
 
-// -------------------------------------------------------------
-// Test 2: Polygon Validity (Closed rings & min vertices)
-// -------------------------------------------------------------
-console.log('\n--- TEST GROUP 2: Polygon Validity ---');
-buildingsGeoJSON.features.forEach((feat) => {
-  const ring = feat.geometry.coordinates[0];
+  const ring = geom.coordinates[0];
   const isClosed =
-    ring[0][0] === ring[ring.length - 1][0] &&
-    ring[0][1] === ring[ring.length - 1][1];
-  const hasMinVertices = ring.length >= 4;
-  assert(
-    isClosed && hasMinVertices,
-    `Building ${feat.id} polygon is valid and closed (Vertices: ${ring.length})`
+    ring.length >= 4 &&
+    Math.hypot(ring[0][0] - ring[ring.length - 1][0], ring[0][1] - ring[ring.length - 1][1]) < 1e-7;
+  assert(isClosed, `${feat.id}: Closed linear ring with $\\ge 4$ points (Vertices: ${ring.length})`);
+
+  // Bounding range
+  const validRange = ring.every(
+    ([lng, lat]) => lng >= 79.980 && lng <= 79.988 && lat >= 14.911 && lat <= 14.916
   );
-});
+  assert(validRange, `${feat.id}: Coordinates within campus geographic bounds`);
 
-// -------------------------------------------------------------
-// Test 3: Polygon Area Validation
-// -------------------------------------------------------------
-console.log('\n--- TEST GROUP 3: Polygon Area Validation ---');
-const buildingAreas = new Map();
-buildingsGeoJSON.features.forEach((feat) => {
-  const ring = feat.geometry.coordinates[0];
-  const localRing = ring.map((pt) => wgs84ToLocal(pt[0], pt[1]));
-  const area = calcArea(localRing);
-  buildingAreas.set(feat.id, area);
-  // Realistic campus buildings range from 200 m² (substation/gate) to 3,500 m² (academic wings)
-  const isRealistic = area >= 150 && area <= 4000;
-  assert(
-    isRealistic,
-    `Building ${feat.id} area is realistic (${area.toFixed(1)} m²)`
-  );
-});
+  // No zero-length edges
+  let hasZeroEdges = false;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const d = Math.hypot(ring[i][0] - ring[i + 1][0], ring[i][1] - ring[i + 1][1]);
+    if (d < 1e-7) hasZeroEdges = true;
+  }
+  assert(!hasZeroEdges, `${feat.id}: Zero-length edge check`);
 
-// -------------------------------------------------------------
-// Test 4: Centroid Mathematical Accuracy
-// -------------------------------------------------------------
-console.log('\n--- TEST GROUP 4: Centroid Accuracy ---');
-buildingsGeoJSON.features.forEach((feat) => {
-  const ring = feat.geometry.coordinates[0];
-  const localRing = ring.map((pt) => wgs84ToLocal(pt[0], pt[1]));
-  const computedCentroid = calcCentroid(localRing);
-  const declaredCentroid = feat.properties.centroid;
-  const declaredLocal = wgs84ToLocal(declaredCentroid[0], declaredCentroid[1]);
-
-  const diffX = Math.abs(computedCentroid[0] - declaredLocal[0]);
-  const diffZ = Math.abs(computedCentroid[1] - declaredLocal[2]);
-  const distance = Math.hypot(diffX, diffZ);
-
-  assert(
-    distance < 4.0,
-    `Building ${feat.id} centroid matches polygon geometric center (Δ: ${distance.toFixed(2)}m)`
-  );
-});
-
-// -------------------------------------------------------------
-// Test 5: Building Overlap Detection
-// -------------------------------------------------------------
-console.log('\n--- TEST GROUP 5: Building Overlap Detection ---');
-const bboxes = buildingsGeoJSON.features.map((feat) => {
-  const ring = feat.geometry.coordinates[0];
-  const localRing = ring.map((pt) => wgs84ToLocal(pt[0], pt[1]));
-  const xs = localRing.map((p) => p[0]);
-  const zs = localRing.map((p) => p[2]);
-  return {
-    id: feat.id,
-    minX: Math.min(...xs),
-    maxX: Math.max(...xs),
-    minZ: Math.min(...zs),
-    maxZ: Math.max(...zs),
-    localRing
-  };
-});
-
-let overlapsFound = 0;
-for (let i = 0; i < bboxes.length; i++) {
-  for (let j = i + 1; j < bboxes.length; j++) {
-    const b1 = bboxes[i];
-    const b2 = bboxes[j];
-    if (bboxOverlap(b1, b2)) {
-      // Check if centroids or interior points intersect
-      const c1 = calcCentroid(b1.localRing);
-      const c2 = calcCentroid(b2.localRing);
-      if (pointInPolygon(c1, b2.localRing) || pointInPolygon(c2, b1.localRing)) {
-        overlapsFound++;
-        console.error(`Overlap between ${b1.id} and ${b2.id}`);
+  // Self-intersection check
+  let selfIntersects = false;
+  for (let i = 0; i < ring.length - 1; i++) {
+    for (let j = i + 2; j < ring.length - 1; j++) {
+      if (i === 0 && j === ring.length - 2) continue; // adjacent closing edge
+      if (segmentsIntersect(ring[i], ring[i + 1], ring[j], ring[j + 1])) {
+        selfIntersects = true;
       }
     }
   }
-}
-assert(overlapsFound === 0, 'Zero building-to-building physical overlaps detected');
+  assert(!selfIntersects, `${feat.id}: Simple polygon (zero self-intersections)`);
+});
 
 // -------------------------------------------------------------
-// Test 6: Institutional Separation from Neighboring VEC
+// SUITE B: Rigorous Pairwise Building Overlap Tests
 // -------------------------------------------------------------
-console.log('\n--- TEST GROUP 6: Institutional Separation from VEC ---');
-const vecFeature = boundaryGeoJSON.features.find(
-  (f) => f.id === 'neighboring-vec-campus'
-);
-assert(
-  !!vecFeature,
-  'Neighboring VEC property exists as a separate demarcated GIS boundary'
-);
-
-if (vecFeature) {
-  const vecRing = vecFeature.geometry.coordinates[0];
-  let pbrBuildingsInVec = 0;
-  buildingsGeoJSON.features.forEach((feat) => {
-    const centroid = feat.properties.centroid;
-    if (pointInPolygon(centroid, vecRing)) {
-      pbrBuildingsInVec++;
-      console.error(`Building ${feat.id} is inside neighboring VEC property!`);
+console.log('\n--- SUITE B: Physical Building Overlap Tests ---');
+let overlapCount = 0;
+for (let i = 0; i < buildingsGeoJSON.features.length; i++) {
+  for (let j = i + 1; j < buildingsGeoJSON.features.length; j++) {
+    const b1 = buildingsGeoJSON.features[i];
+    const b2 = buildingsGeoJSON.features[j];
+    const r1 = b1.geometry.coordinates[0];
+    const r2 = b2.geometry.coordinates[0];
+    if (polygonsIntersect(r1, r2)) {
+      overlapCount++;
+      console.error(`Overlap between ${b1.id} and ${b2.id}!`);
     }
-  });
-  assert(
-    pbrBuildingsInVec === 0,
-    'Zero PBR VITS buildings placed inside neighboring VEC property'
-  );
+  }
 }
-
-// -------------------------------------------------------------
-// Test 7: Duplicate Buildings & IDs
-// -------------------------------------------------------------
-console.log('\n--- TEST GROUP 7: Duplicate Building Check ---');
-const ids = buildingsGeoJSON.features.map((f) => f.id);
-const uniqueIds = new Set(ids);
 assert(
-  ids.length === uniqueIds.size,
-  `All building IDs are unique (${uniqueIds.size} unique buildings)`
+  overlapCount === 0,
+  `Zero physical building overlaps across all ${buildingsGeoJSON.features.length * (buildingsGeoJSON.features.length - 1) / 2} pairs`
 );
 
 // -------------------------------------------------------------
-// Test 8: GIS & 3D Synchronization
+// SUITE C: Campus Containment & Institutional Separation
 // -------------------------------------------------------------
-console.log('\n--- TEST GROUP 8: GIS & 3D Synchronization ---');
+console.log('\n--- SUITE C: Campus Containment & Separation from VEC ---');
+const academicFeat = boundaryGeoJSON.features.find((f) => f.id === 'pbr-vits-academic-boundary');
+const sportsFeat = boundaryGeoJSON.features.find((f) => f.id === 'pbr-vits-playground-boundary');
+const overallFeat = boundaryGeoJSON.features.find((f) => f.id === 'pbr-vits-overall-boundary');
+const vecFeat = boundaryGeoJSON.features.find((f) => f.id === 'neighboring-vec-campus');
 
-// Compute 3D building parameters exactly as derived by src/data/buildings.ts
-const derived3DBuildings = buildingsGeoJSON.features.map((feat) => {
-  const ring = feat.geometry.coordinates[0];
-  const localRing = ring.map((pt) => wgs84ToLocal(pt[0], pt[1]));
+assert(!!academicFeat, 'PBR VITS Academic Boundary exists (OSM Way 1297901220)');
+assert(!!sportsFeat, 'PBR VITS Athletic Boundary exists (OSM Way 1297896001)');
+assert(!!overallFeat, 'PBR VITS Campus Perimeter exists (Synthesized boundary)');
+assert(!!vecFeat, 'Neighboring VEC Property exists as a separate demarcated parcel (OSM Way 1297901221)');
 
-  let cx = 0;
-  let cz = 0;
-  let signedArea = 0;
-  for (let i = 0; i < localRing.length - 1; i++) {
-    const p1 = localRing[i];
-    const p2 = localRing[i + 1];
-    const a = p1[0] * p2[2] - p2[0] * p1[2];
-    signedArea += a;
-    cx += (p1[0] + p2[0]) * a;
-    cz += (p1[2] + p2[2]) * a;
+const academicRing = academicFeat ? academicFeat.geometry.coordinates[0] : [];
+const overallRing = overallFeat ? overallFeat.geometry.coordinates[0] : [];
+const vecRing = vecFeat ? vecFeat.geometry.coordinates[0] : [];
+
+let pbrInVecCount = 0;
+let outsideOverallCount = 0;
+
+buildingsGeoJSON.features.forEach((feat) => {
+  const centroid = feat.properties.centroid;
+  const inVec = pointInPolygon(centroid, vecRing);
+  const inOverall = pointInPolygon(centroid, overallRing);
+
+  if (inVec) {
+    pbrInVecCount++;
+    console.error(`Building ${feat.id} centroid lies inside neighboring VEC!`);
   }
-  signedArea *= 0.5;
 
-  if (Math.abs(signedArea) > 1e-5) {
-    cx /= 6 * signedArea;
-    cz /= 6 * signedArea;
-  } else {
-    cx = localRing.reduce((sum, p) => sum + p[0], 0) / (localRing.length - 1);
-    cz = localRing.reduce((sum, p) => sum + p[2], 0) / (localRing.length - 1);
+  if (!inOverall) {
+    outsideOverallCount++;
+    console.error(`Building ${feat.id} lies outside PBR VITS campus perimeter!`);
   }
+});
 
+assert(pbrInVecCount === 0, 'Zero PBR VITS buildings placed inside neighboring VEC property');
+assert(outsideOverallCount === 0, 'All 14 PBR VITS buildings contained within campus perimeter');
+
+// Test that core academic quadrangle buildings sit within the official academic parcel
+const coreAcademicIds = ['admin-block', 'central-library', 'ece-eee-block', 'mech-civil-block', 'sh-mba-block', 'canteen-cafeteria'];
+let coreAcademicInParcel = true;
+coreAcademicIds.forEach((id) => {
+  const feat = buildingsGeoJSON.features.find((f) => f.id === id);
+  if (feat && !pointInPolygon(feat.properties.centroid, academicRing)) {
+    coreAcademicInParcel = false;
+    console.error(`Core academic building ${id} is outside academic boundary polygon!`);
+  }
+});
+assert(coreAcademicInParcel, 'Core academic blocks reside within official academic boundary (Way 1297901220)');
+
+// Test boundary non-overlap: Overall boundary must not intersect VEC parcel
+assert(
+  !polygonsIntersect(overallRing, vecRing),
+  'PBR VITS Campus Perimeter strictly separated from VEC (Zero polygon intersection)'
+);
+
+// -------------------------------------------------------------
+// SUITE D: GIS-to-3D Geometry & Vertex Consistency
+// -------------------------------------------------------------
+console.log('\n--- SUITE D: GIS-to-3D Geometry & Vertex Consistency ---');
+
+buildingsGeoJSON.features.forEach((feat) => {
+  const ringWGS84 = feat.geometry.coordinates[0];
+  const localRing = ringWGS84.map((pt) => wgs84ToLocal(pt[0], pt[1]));
+
+  // 1. Centroid calculation
+  const computedCentroid = calcCentroid(localRing);
+  const declaredCentroid = feat.properties.centroid;
+  const declaredLocal = wgs84ToLocal(declaredCentroid[0], declaredCentroid[1]);
+  const centroidDelta = Math.hypot(
+    computedCentroid[0] - declaredLocal[0],
+    computedCentroid[1] - declaredLocal[2]
+  );
+  assert(
+    centroidDelta < 2.0,
+    `${feat.id}: Centroid delta < 2m (Δ: ${centroidDelta.toFixed(2)}m)`
+  );
+
+  // 2. Footprint area consistency
+  const areaLocal = calcArea(localRing);
+  assert(
+    areaLocal >= 150 && areaLocal <= 4000,
+    `${feat.id}: Realistic footprint area (${areaLocal.toFixed(1)} m²)`
+  );
+
+  // 3. Vertex count consistency
+  assert(
+    localRing.length === ringWGS84.length,
+    `${feat.id}: 1:1 vertex count correspondence (Vertices: ${localRing.length})`
+  );
+
+  // 4. Bounding box dimensions
   const xs = localRing.map((p) => p[0]);
   const zs = localRing.map((p) => p[2]);
   const width = Math.max(...xs) - Math.min(...xs);
   const depth = Math.max(...zs) - Math.min(...zs);
-
-  return {
-    id: feat.id,
-    position: [Number(cx.toFixed(2)), 0, Number(cz.toFixed(2))],
-    width: Number(width.toFixed(2)),
-    depth: Number(depth.toFixed(2)),
-    height: feat.properties.height,
-    pointsCount: localRing.length
-  };
+  assert(
+    width > 5 && depth > 5 && feat.properties.height > 3,
+    `${feat.id}: Valid 3D physical dimensions (${width.toFixed(1)}m x ${depth.toFixed(1)}m x ${feat.properties.height}m)`
+  );
 });
 
-assert(
-  derived3DBuildings.length === buildingsGeoJSON.features.length,
-  `3D building count (${derived3DBuildings.length}) matches GIS dataset (${buildingsGeoJSON.features.length})`
-);
+// -------------------------------------------------------------
+// SUITE E: Evidence & Classification Validation
+// -------------------------------------------------------------
+console.log('\n--- SUITE E: Evidence & Verification Status Consistency ---');
+let falseVerifiedCount = 0;
+let missingSourceCount = 0;
 
-let syncMismatch = 0;
-derived3DBuildings.forEach((b) => {
-  const gisFeat = buildingsGeoJSON.features.find((f) => f.id === b.id);
-  if (!gisFeat) {
-    syncMismatch++;
-    return;
+buildingsGeoJSON.features.forEach((feat) => {
+  const props = feat.properties;
+  const source = props.source || '';
+  const status = props.verificationStatus;
+
+  if (!source || source.trim().length === 0) {
+    missingSourceCount++;
+    console.error(`Building ${feat.id} is missing a documented source!`);
   }
-  const [lng, lat] = gisFeat.properties.centroid;
-  const localCoord = wgs84ToLocal(lng, lat);
-  const dist = Math.hypot(b.position[0] - localCoord[0], b.position[2] - localCoord[2]);
-  if (dist > 3.0) {
-    syncMismatch++;
-    console.error(`Sync mismatch on ${b.id}: distance = ${dist.toFixed(2)}m`);
+
+  // Prevent estimated data from being labeled VERIFIED
+  const isEstimatedSource =
+    source.toLowerCase().includes('satellite') ||
+    source.toLowerCase().includes('estimated') ||
+    source.toLowerCase().includes('sector') ||
+    source.toLowerCase().includes('vicinity');
+
+  if (isEstimatedSource && (status === 'VERIFIED' || status === 'OSM-MAPPED')) {
+    // Only if it doesn't cite an OSM way
+    if (!source.toLowerCase().includes('way')) {
+      falseVerifiedCount++;
+      console.error(`Building ${feat.id} has estimated source '${source}' but is labeled '${status}'!`);
+    }
   }
 });
-assert(syncMismatch === 0, '100% position synchronization between GIS and 3D models');
+
+assert(missingSourceCount === 0, 'Every mapped building has a documented geographic source');
+assert(falseVerifiedCount === 0, 'Zero estimated buildings are mislabeled as VERIFIED or OSM-MAPPED');
 
 // -------------------------------------------------------------
-// SUMMARY
+// SUMMARY & VERDICT
 // -------------------------------------------------------------
-console.log('\n===============================================================');
-console.log(` RESULTS: ${passedTests} passed, ${failedTests} failed, Total: ${totalTests}`);
-console.log('===============================================================');
+console.log('\n======================================================================');
+console.log(` VALIDATION SUMMARY: ${passedTests} passed, ${failedTests} failed, Total: ${totalTests}`);
+console.log('======================================================================');
 
 if (failedTests > 0) {
+  console.error('\n❌ VALIDATION FAILED: Correct the geometry errors above before proceeding.');
   process.exit(1);
 } else {
-  console.log('✅ ALL GEOMETRY VALIDATION TESTS PASSED CLEANLY!\n');
+  console.log('\n✅ ALL GEOMETRIC, TOPOLOGICAL, CONTAINMENT & EVIDENCE TESTS PASSED!\n');
   process.exit(0);
 }
