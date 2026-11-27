@@ -3,7 +3,7 @@ const path = require('path');
 const puppeteer = require('puppeteer-core');
 
 const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const targetUrl = process.env.AUDIT_URL || 'http://localhost:5173/';
+const targetUrl = process.env.AUDIT_URL || 'https://pbrvits-dt.vercel.app/';
 const outputDir = path.resolve(__dirname, '..', 'public', 'audit', 'final');
 const artifactDir = 'C:\\Users\\tejag\\.gemini\\antigravity\\brain\\6c1052ac-5172-424c-ae6b-d2ed8b9d72b9\\audit\\final';
 
