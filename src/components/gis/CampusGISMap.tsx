@@ -17,8 +17,10 @@ import {
   CheckCircle2,
   AlertTriangle,
   HelpCircle,
-  Eye
+  Eye,
+  Crosshair
 } from 'lucide-react';
+import { FootprintAuditPanel, type AuditLayerState } from './FootprintAuditPanel';
 import {
   PBR_VITS_ORIGIN,
   BASEMAP_PROVIDERS,
@@ -45,12 +47,30 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const boundaryMarkersRef = useRef<maplibregl.Marker[]>([]);
+  const auditMarkersRef = useRef<maplibregl.Marker[]>([]);
 
   const selectedBuilding = useCampusStore((s) => s.selectedBuilding);
   const selectBuilding = useCampusStore((s) => s.selectBuilding);
   const activeRoute = useCampusStore((s) => s.activeRoute);
   const appViewMode = useCampusStore((s) => s.appViewMode);
   const setAppViewMode = useCampusStore((s) => s.setAppViewMode);
+
+  const [isAuditMode, setIsAuditMode] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const p = new URLSearchParams(window.location.search);
+      return p.get('audit') === 'true';
+    }
+    return false;
+  });
+
+  const [auditLayers, setAuditLayers] = useState<AuditLayerState>({
+    footprints: true,
+    verifiedOnly: false,
+    campusBoundary: true,
+    playground: true,
+    roads: true,
+    vecBoundary: true
+  });
 
   const [currentBasemap, setCurrentBasemap] = useState<BasemapId>(initialBasemap);
   const [cursorCoords, setCursorCoords] = useState<{ lng: number; lat: number }>({
@@ -134,6 +154,46 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
           ],
           'line-width': 2.0,
           'line-dasharray': [3, 2]
+        }
+      });
+
+      // Individual boundary layers for granular audit toggling
+      map.addLayer({
+        id: 'campus-boundary-academic-stroke',
+        type: 'line',
+        source: 'campus-boundary',
+        filter: ['==', ['get', 'id'], 'pbr-vits-academic-boundary'],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#38bdf8',
+          'line-width': 2.5,
+          'line-dasharray': [3, 2]
+        }
+      });
+
+      map.addLayer({
+        id: 'campus-boundary-playground-stroke',
+        type: 'line',
+        source: 'campus-boundary',
+        filter: ['==', ['get', 'id'], 'pbr-vits-playground-boundary'],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#4ade80',
+          'line-width': 2.5,
+          'line-dasharray': [3, 2]
+        }
+      });
+
+      map.addLayer({
+        id: 'campus-boundary-vec-stroke',
+        type: 'line',
+        source: 'campus-boundary',
+        filter: ['==', ['get', 'id'], 'neighboring-vec-campus'],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#f59e0b',
+          'line-width': 2.5,
+          'line-dasharray': [4, 2]
         }
       });
     }
@@ -247,6 +307,81 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
           'line-color': '#ffffff',
           'line-width': 1.5,
           'line-opacity': 0.85
+        }
+      });
+
+      // Audit 2D Footprint Overlays (Extrusion-free nadir comparison)
+      // 1. ALIGNED (OSM-Mapped / Ground Verified) - Emerald Green
+      map.addLayer({
+        id: 'campus-buildings-verified-fill',
+        type: 'fill',
+        source: 'campus-buildings',
+        filter: ['==', ['get', 'alignmentStatus'], 'ALIGNED'],
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-color': '#22c55e',
+          'fill-opacity': 0.15
+        }
+      });
+      map.addLayer({
+        id: 'campus-buildings-verified-stroke',
+        type: 'line',
+        source: 'campus-buildings',
+        filter: ['==', ['get', 'alignmentStatus'], 'ALIGNED'],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#22c55e',
+          'line-width': 2.5
+        }
+      });
+
+      // 2. PARTIALLY ALIGNED (Campus Zone Estimated) - Amber
+      map.addLayer({
+        id: 'campus-buildings-estimated-fill',
+        type: 'fill',
+        source: 'campus-buildings',
+        filter: ['==', ['get', 'alignmentStatus'], 'PARTIALLY ALIGNED'],
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-color': '#f59e0b',
+          'fill-opacity': 0.10
+        }
+      });
+      map.addLayer({
+        id: 'campus-buildings-estimated-stroke',
+        type: 'line',
+        source: 'campus-buildings',
+        filter: ['==', ['get', 'alignmentStatus'], 'PARTIALLY ALIGNED'],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#f59e0b',
+          'line-width': 2.0,
+          'line-dasharray': [4, 3]
+        }
+      });
+
+      // 3. UNVERIFIED (Estimated Quad - Excluded from Verified Layer) - Crimson Red
+      map.addLayer({
+        id: 'campus-buildings-unverified-fill',
+        type: 'fill',
+        source: 'campus-buildings',
+        filter: ['==', ['get', 'alignmentStatus'], 'UNVERIFIED'],
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-color': '#ef4444',
+          'fill-opacity': 0.06
+        }
+      });
+      map.addLayer({
+        id: 'campus-buildings-unverified-stroke',
+        type: 'line',
+        source: 'campus-buildings',
+        filter: ['==', ['get', 'alignmentStatus'], 'UNVERIFIED'],
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#ef4444',
+          'line-width': 1.5,
+          'line-dasharray': [2, 2]
         }
       });
     }
@@ -519,6 +654,164 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
     });
   };
 
+  // Handle toggling Audit Mode
+  const handleToggleAuditMode = useCallback(() => {
+    setIsAuditMode((prev) => {
+      const nextState = !prev;
+      if (!mapRef.current) return nextState;
+      const map = mapRef.current;
+
+      if (nextState) {
+        if (currentBasemap !== 'satellite') {
+          handleBasemapChange('satellite');
+        }
+        map.easeTo({
+          pitch: 0,
+          bearing: 0,
+          zoom: Math.max(map.getZoom(), 17.2),
+          duration: 900
+        });
+      } else {
+        map.easeTo({
+          pitch: 45,
+          bearing: 0,
+          duration: 900
+        });
+      }
+      return nextState;
+    });
+  }, [currentBasemap, handleBasemapChange]);
+
+  const handleAuditToggleLayer = useCallback((key: keyof AuditLayerState) => {
+    setAuditLayers((prev) => ({ ...prev, [key]: !prev[key] }));
+  }, []);
+
+  const handleAuditSetVerifiedOnly = useCallback((verifiedOnly: boolean) => {
+    setAuditLayers((prev) => ({ ...prev, verifiedOnly }));
+  }, []);
+
+  const handleAuditFlyToBuilding = useCallback((buildingId: string) => {
+    if (!mapRef.current) return;
+    const feat = (buildingsGeoJSON as any).features.find((f: any) => f.id === buildingId);
+    if (feat && feat.properties?.centroid) {
+      const [lng, lat] = feat.properties.centroid;
+      selectBuilding(buildingId);
+      mapRef.current.flyTo({
+        center: [lng, lat],
+        zoom: 17.8,
+        pitch: 0,
+        bearing: 0,
+        essential: true,
+        duration: 1200
+      });
+    }
+  }, [selectBuilding]);
+
+  // Synchronize Audit Mode visual layers & markers
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const map = mapRef.current;
+    if (!map.isStyleLoaded()) return;
+
+    // Manage Markers
+    auditMarkersRef.current.forEach((m) => m.remove());
+    auditMarkersRef.current = [];
+
+    if (isAuditMode) {
+      // Disable 3D extrusion and default stroke
+      if (map.getLayer('campus-buildings-extrusion')) {
+        map.setLayoutProperty('campus-buildings-extrusion', 'visibility', 'none');
+      }
+      if (map.getLayer('campus-buildings-stroke')) {
+        map.setLayoutProperty('campus-buildings-stroke', 'visibility', 'none');
+      }
+
+      // Audit Footprint Layers
+      const showVerified = auditLayers.footprints;
+      const showEstimated = auditLayers.footprints && !auditLayers.verifiedOnly;
+
+      if (map.getLayer('campus-buildings-verified-fill')) {
+        map.setLayoutProperty('campus-buildings-verified-fill', 'visibility', showVerified ? 'visible' : 'none');
+        map.setLayoutProperty('campus-buildings-verified-stroke', 'visibility', showVerified ? 'visible' : 'none');
+      }
+      if (map.getLayer('campus-buildings-estimated-fill')) {
+        map.setLayoutProperty('campus-buildings-estimated-fill', 'visibility', showEstimated ? 'visible' : 'none');
+        map.setLayoutProperty('campus-buildings-estimated-stroke', 'visibility', showEstimated ? 'visible' : 'none');
+      }
+      if (map.getLayer('campus-buildings-unverified-fill')) {
+        map.setLayoutProperty('campus-buildings-unverified-fill', 'visibility', showEstimated ? 'visible' : 'none');
+        map.setLayoutProperty('campus-buildings-unverified-stroke', 'visibility', showEstimated ? 'visible' : 'none');
+      }
+
+      // Granular Boundaries
+      if (map.getLayer('campus-boundary-stroke')) {
+        map.setLayoutProperty('campus-boundary-stroke', 'visibility', 'none');
+      }
+      if (map.getLayer('campus-boundary-academic-stroke')) {
+        map.setLayoutProperty('campus-boundary-academic-stroke', 'visibility', auditLayers.campusBoundary ? 'visible' : 'none');
+      }
+      if (map.getLayer('campus-boundary-playground-stroke')) {
+        map.setLayoutProperty('campus-boundary-playground-stroke', 'visibility', auditLayers.playground ? 'visible' : 'none');
+      }
+      if (map.getLayer('campus-boundary-vec-stroke')) {
+        map.setLayoutProperty('campus-boundary-vec-stroke', 'visibility', auditLayers.vecBoundary ? 'visible' : 'none');
+      }
+
+      // Roads
+      if (map.getLayer('campus-roads-inner')) {
+        map.setLayoutProperty('campus-roads-inner', 'visibility', auditLayers.roads ? 'visible' : 'none');
+        map.setLayoutProperty('campus-roads-casing', 'visibility', auditLayers.roads ? 'visible' : 'none');
+      }
+      if (map.getLayer('campus-pathways-line')) {
+        map.setLayoutProperty('campus-pathways-line', 'visibility', auditLayers.roads ? 'visible' : 'none');
+      }
+
+      // Render building centroid badges
+      if (auditLayers.footprints) {
+        const features = (buildingsGeoJSON as any).features || [];
+        features.forEach((feat: any) => {
+          const status = feat.properties?.alignmentStatus || 'PARTIALLY ALIGNED';
+          if (auditLayers.verifiedOnly && status !== 'ALIGNED') return;
+
+          const color = status === 'ALIGNED' ? '#22c55e' : status === 'PARTIALLY ALIGNED' ? '#f59e0b' : '#ef4444';
+          const el = document.createElement('div');
+          el.className = 'gis-audit-building-badge';
+          el.style.cssText = `background: rgba(15,23,42,0.92); backdrop-filter: blur(6px); border: 1.5px solid ${color}; border-radius: 6px; padding: 2px 7px; font-family: monospace; font-size: 10px; font-weight: 700; color: ${color}; box-shadow: 0 4px 14px rgba(0,0,0,0.7); pointer-events: none; display: flex; align-items: center; gap: 4px; white-space: nowrap;`;
+          el.innerHTML = `<span style="width:6px; height:6px; border-radius:50%; background:${color};"></span>${feat.properties.id} <span style="font-size:9px; opacity:0.8;">[${status}]</span>`;
+
+          const m = new maplibregl.Marker({ element: el })
+            .setLngLat(feat.properties.centroid)
+            .addTo(map);
+          auditMarkersRef.current.push(m);
+        });
+      }
+    } else {
+      // Normal Mode
+      if (map.getLayer('campus-buildings-extrusion')) {
+        map.setLayoutProperty('campus-buildings-extrusion', 'visibility', 'visible');
+      }
+      if (map.getLayer('campus-buildings-stroke')) {
+        map.setLayoutProperty('campus-buildings-stroke', 'visibility', 'visible');
+      }
+      if (map.getLayer('campus-buildings-verified-fill')) {
+        map.setLayoutProperty('campus-buildings-verified-fill', 'visibility', 'none');
+        map.setLayoutProperty('campus-buildings-verified-stroke', 'visibility', 'none');
+        map.setLayoutProperty('campus-buildings-estimated-fill', 'visibility', 'none');
+        map.setLayoutProperty('campus-buildings-estimated-stroke', 'visibility', 'none');
+        map.setLayoutProperty('campus-buildings-unverified-fill', 'visibility', 'none');
+        map.setLayoutProperty('campus-buildings-unverified-stroke', 'visibility', 'none');
+      }
+      if (map.getLayer('campus-boundary-stroke')) {
+        map.setLayoutProperty('campus-boundary-stroke', 'visibility', 'visible');
+      }
+      if (map.getLayer('campus-boundary-academic-stroke')) {
+        map.setLayoutProperty('campus-boundary-academic-stroke', 'visibility', 'none');
+        map.setLayoutProperty('campus-boundary-playground-stroke', 'visibility', 'none');
+        map.setLayoutProperty('campus-boundary-vec-stroke', 'visibility', 'none');
+      }
+    }
+  }, [isAuditMode, auditLayers]);
+
   return (
     <div className={`relative w-full h-full bg-slate-950 overflow-hidden select-none ${className}`}>
       {/* Map Canvas */}
@@ -574,7 +867,32 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
             <Eye className="w-3.5 h-3.5" />
             <span>First Person</span>
           </button>
+          <button
+            onClick={handleToggleAuditMode}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              isAuditMode
+                ? 'bg-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/30'
+                : 'text-amber-300 hover:text-white hover:bg-amber-500/20 border border-amber-500/30'
+            }`}
+            title="Toggle Orthographic Footprint Alignment Audit Mode (Pitch: 0°)"
+          >
+            <Crosshair className="w-3.5 h-3.5" />
+            <span>Audit Mode</span>
+          </button>
         </div>
+
+        {/* Footprint Alignment Audit Overlay Panel */}
+        <FootprintAuditPanel
+          isOpen={isAuditMode}
+          onClose={handleToggleAuditMode}
+          auditLayers={auditLayers}
+          onToggleLayer={handleAuditToggleLayer}
+          onSetVerifiedOnly={handleAuditSetVerifiedOnly}
+          onFlyToBuilding={handleAuditFlyToBuilding}
+          selectedBuildingId={selectedBuilding?.id || null}
+          currentZoom={mapZoom}
+          currentPitch={mapPitch}
+        />
       </div>
 
       {/* Top Right: Basemap Selector & Layer Control */}

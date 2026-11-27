@@ -17,7 +17,10 @@ export type VerificationStatus =
   | 'ESTIMATED'
   | 'UNKNOWN'
   | 'IMAGE-ESTIMATED'
+  | 'UNVERIFIED'
   | 'UNVERIFIED ESTIMATE';
+
+export type AlignmentStatus = 'ALIGNED' | 'PARTIALLY ALIGNED' | 'MISALIGNED' | 'UNVERIFIED';
 
 export type AppViewMode = '3d' | 'gis' | 'satellite' | 'firstPerson';
 
@@ -54,6 +57,7 @@ export interface BuildingData {
   departments: string[];
   facilities: string[];
   verified: VerificationStatus;
+  alignmentStatus?: AlignmentStatus;
   yearBuilt?: number;
   architecturalStyle?: string;
   hasSolarPanels?: boolean;
@@ -82,6 +86,7 @@ export interface CampusFacility {
   description: string;
   iconName: string;
   verified: VerificationStatus;
+  alignmentStatus?: AlignmentStatus;
 }
 
 export interface CampusZone {

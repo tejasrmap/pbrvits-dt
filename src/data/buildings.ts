@@ -298,6 +298,7 @@ export const campusBuildings: BuildingData[] = buildingsGeoJSON.features.map((fe
     departments: props.departments || [],
     facilities: props.facilities || [],
     verified: (props.verificationStatus as VerificationStatus) || 'IMAGE-ESTIMATED',
+    alignmentStatus: (props.alignmentStatus as any) || 'PARTIALLY ALIGNED',
     yearBuilt: style.yearBuilt,
     architecturalStyle: style.architecturalStyle,
     contact: style.contact,

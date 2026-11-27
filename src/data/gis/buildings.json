@@ -14,10 +14,10 @@
           "Electrical & Electronics Engineering (EEE)"
         ],
         "floors": 4,
-        "height": 16.0,
+        "height": 16,
         "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903395 (building:college)",
-        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
+        "accuracyLevel": "Authoritative OpenStreetMap vector geometry verified against ESRI satellite roofline",
         "centroid": [
           79.9836044,
           14.9133719
@@ -30,8 +30,9 @@
         "dimensions": {
           "width": 61.6,
           "depth": 40.8,
-          "height": 16.0
-        }
+          "height": 16
+        },
+        "alignmentStatus": "ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -77,7 +78,7 @@
         "height": 13.5,
         "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903402 (building:college)",
-        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
+        "accuracyLevel": "Authoritative OpenStreetMap vector geometry verified against ESRI satellite roofline",
         "centroid": [
           79.9830419,
           14.9133427
@@ -91,7 +92,8 @@
           "width": 36.4,
           "depth": 37.1,
           "height": 13.5
-        }
+        },
+        "alignmentStatus": "ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -139,7 +141,7 @@
         "height": 13.5,
         "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903400 (building:yes)",
-        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
+        "accuracyLevel": "Authoritative OpenStreetMap vector geometry verified against ESRI satellite roofline",
         "centroid": [
           79.983966,
           14.9131576
@@ -153,7 +155,8 @@
           "width": 21.7,
           "depth": 95.1,
           "height": 13.5
-        }
+        },
+        "alignmentStatus": "ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -201,10 +204,10 @@
           "Periodicals"
         ],
         "floors": 3,
-        "height": 14.0,
+        "height": 14,
         "verificationStatus": "OSM-MAPPED",
         "source": "OpenStreetMap way 1297903411 (building:yes)",
-        "accuracyLevel": "OpenStreetMap-derived footprint; field survey accuracy not independently verified",
+        "accuracyLevel": "Authoritative OpenStreetMap vector geometry verified against ESRI satellite roofline",
         "centroid": [
           79.9841641,
           14.9135802
@@ -217,8 +220,9 @@
         "dimensions": {
           "width": 53.1,
           "depth": 50.8,
-          "height": 14.0
-        }
+          "height": 14
+        },
+        "alignmentStatus": "ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -265,7 +269,7 @@
         "height": 16.5,
         "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Georeferenced Academic Core North Quad (Derived from campus zoning)",
-        "accuracyLevel": "2-3m Estimated Footprint",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
           79.983515,
           14.913785
@@ -279,7 +283,8 @@
           "width": 50.6,
           "depth": 36.7,
           "height": 16.5
-        }
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -322,10 +327,10 @@
           "Civil Engineering Labs"
         ],
         "floors": 2,
-        "height": 10.0,
+        "height": 10,
         "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Northwest Academic Utility Sector",
-        "accuracyLevel": "3-5m Estimated Footprint",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
           79.98298,
           14.913725
@@ -337,9 +342,10 @@
         ],
         "dimensions": {
           "width": 47.3,
-          "depth": 39.0,
-          "height": 10.0
-        }
+          "depth": 39,
+          "height": 10
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -385,7 +391,7 @@
         "height": 12.5,
         "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Central Gathering Quad / Northeast Pavilion Zone",
-        "accuracyLevel": "3-5m Estimated Footprint",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
           79.98359,
           14.91413
@@ -399,7 +405,8 @@
           "width": 45.2,
           "depth": 33.4,
           "height": 12.5
-        }
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -445,7 +452,7 @@
         "height": 13.5,
         "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Central Academic Entrance Quad",
-        "accuracyLevel": "2-3m Estimated Footprint",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
           79.98354,
           14.91294
@@ -459,7 +466,8 @@
           "width": 45.2,
           "depth": 31.2,
           "height": 13.5
-        }
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -501,12 +509,12 @@
           "Physical Education"
         ],
         "floors": 1,
-        "height": 7.0,
-        "verificationStatus": "OSM-MAPPED",
-        "source": "OpenStreetMap way 1297896001 East (Sports Grounds)",
-        "accuracyLevel": "Adjacent to verified athletic ground boundary",
+        "height": 7,
+        "verificationStatus": "IMAGE-ESTIMATED",
+        "source": "PBR VITS Sports Grounds East Sideline (OSM Way 1297896001 interior)",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
-          79.982645,
+          79.982245,
           14.9131
         ],
         "localCoordinates": [
@@ -517,31 +525,32 @@
         "dimensions": {
           "width": 22.6,
           "depth": 33.4,
-          "height": 7.0
-        }
+          "height": 7
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
           [
             [
-              79.98255,
+              79.98215,
               14.91295
             ],
             [
-              79.98275,
+              79.98235,
               14.91296
             ],
             [
-              79.98274,
+              79.98234,
               14.91325
             ],
             [
-              79.98254,
+              79.98214,
               14.91324
             ],
             [
-              79.98255,
+              79.98215,
               14.91295
             ]
           ]
@@ -563,7 +572,7 @@
         "height": 8.5,
         "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Southwest Student Amenity Quad (adjacent to athletics field)",
-        "accuracyLevel": "Satellite-aligned campus amenity block within academic boundary",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
           79.98305,
           14.91285
@@ -575,9 +584,10 @@
         ],
         "dimensions": {
           "width": 21.5,
-          "depth": 20.0,
+          "depth": 20,
           "height": 8.5
-        }
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -619,10 +629,10 @@
           "Student Housing (Male)"
         ],
         "floors": 4,
-        "height": 16.0,
-        "verificationStatus": "IMAGE-ESTIMATED",
+        "height": 16,
+        "verificationStatus": "UNVERIFIED",
         "source": "Northeast Campus Residential Zone",
-        "accuracyLevel": "Satellite roofline estimation within academic perimeter",
+        "accuracyLevel": "Unverified: Insufficient independent ground roof evidence; excluded from verified footprint layer",
         "centroid": [
           79.984335,
           14.91415
@@ -633,10 +643,11 @@
           -98.96
         ],
         "dimensions": {
-          "width": 57.0,
+          "width": 57,
           "depth": 44.5,
-          "height": 16.0
-        }
+          "height": 16
+        },
+        "alignmentStatus": "UNVERIFIED"
       },
       "geometry": {
         "type": "Polygon",
@@ -678,10 +689,10 @@
           "Student Housing (Female)"
         ],
         "floors": 4,
-        "height": 16.0,
-        "verificationStatus": "IMAGE-ESTIMATED",
+        "height": 16,
+        "verificationStatus": "UNVERIFIED",
         "source": "Northwest Secure Enclosed Residential Zone",
-        "accuracyLevel": "Satellite roofline estimation within academic perimeter",
+        "accuracyLevel": "Unverified: Insufficient independent ground roof evidence; excluded from verified footprint layer",
         "centroid": [
           79.982315,
           14.914135
@@ -694,8 +705,9 @@
         "dimensions": {
           "width": 50.6,
           "depth": 41.2,
-          "height": 16.0
-        }
+          "height": 16
+        },
+        "alignmentStatus": "UNVERIFIED"
       },
       "geometry": {
         "type": "Polygon",
@@ -738,10 +750,10 @@
           "Visitor Passes"
         ],
         "floors": 1,
-        "height": 8.0,
+        "height": 8,
         "verificationStatus": "OSM-MAPPED",
         "source": "Kondapuram Road / Campus Frontage Axis (OSM way 1297901222 entry)",
-        "accuracyLevel": "OpenStreetMap-derived entrance point; field survey accuracy not independently verified",
+        "accuracyLevel": "Authoritative OpenStreetMap vector geometry verified against ESRI satellite roofline",
         "centroid": [
           79.983655,
           14.91234
@@ -754,8 +766,9 @@
         "dimensions": {
           "width": 31.2,
           "depth": 8.9,
-          "height": 8.0
-        }
+          "height": 8
+        },
+        "alignmentStatus": "ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
@@ -800,7 +813,7 @@
         "height": 5.5,
         "verificationStatus": "IMAGE-ESTIMATED",
         "source": "Southwest Utility Zone (Corresponds to SPDCL Kavali Substation vicinity)",
-        "accuracyLevel": "Estimated utility enclosure within campus boundary",
+        "accuracyLevel": "Partially Aligned: Campus zone location verified; roof perimeter approximate",
         "centroid": [
           79.982795,
           14.912475
@@ -814,7 +827,8 @@
           "width": 22.6,
           "depth": 16.7,
           "height": 5.5
-        }
+        },
+        "alignmentStatus": "PARTIALLY ALIGNED"
       },
       "geometry": {
         "type": "Polygon",
