@@ -114,9 +114,9 @@ export const Sidebar: React.FC = () => {
                   <div className="text-[10px] text-slate-500">Autonomous Core</div>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-800/40 border border-white/5">
-                  <div className="text-slate-400 text-[10px]">Key Assets</div>
-                  <div className="text-sm font-bold text-sky-400">{buildings.length} Blocks</div>
-                  <div className="text-[10px] text-slate-500">Academic & Living</div>
+                  <div className="text-slate-400 text-[10px]">3D Campus Models</div>
+                  <div className="text-sm font-bold text-sky-400">11 Models (14 GIS)</div>
+                  <div className="text-[10px] text-slate-500">4 Aligned &bull; 7 Zonal</div>
                 </div>
                 <div className="p-2.5 rounded-xl bg-slate-800/40 border border-white/5">
                   <div className="text-slate-400 text-[10px]">Accreditation</div>
@@ -200,12 +200,22 @@ export const Sidebar: React.FC = () => {
                       <span className="font-bold text-white text-xs">{b.name}</span>
                       <span
                         className={`text-[8.5px] uppercase font-mono px-1.5 py-0.2 rounded border ${
-                          b.verified === 'OSM-MAPPED' || b.verified === 'VERIFIED'
+                          b.id === 'main-gate'
+                            ? 'bg-sky-500/10 text-sky-400 border-sky-400/30'
+                            : b.alignmentStatus === 'ALIGNED'
                             ? 'bg-emerald-500/10 text-emerald-400 border-emerald-400/30'
-                            : 'bg-amber-500/10 text-amber-400 border-amber-400/30'
+                            : b.alignmentStatus === 'PARTIALLY ALIGNED'
+                            ? 'bg-amber-500/10 text-amber-400 border-amber-400/30'
+                            : 'bg-rose-500/10 text-rose-400 border-rose-400/30'
                         }`}
                       >
-                        {b.verified}
+                        {b.id === 'main-gate'
+                          ? 'GATEWAY'
+                          : b.alignmentStatus === 'ALIGNED'
+                          ? 'ALIGNED'
+                          : b.alignmentStatus === 'PARTIALLY ALIGNED'
+                          ? 'PARTIAL'
+                          : 'EXCLUDED'}
                       </span>
                     </div>
                     <div className="text-[10px] text-slate-400 flex items-center justify-between">

@@ -297,7 +297,11 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
         id: 'campus-buildings-extrusion',
         type: 'fill-extrusion',
         source: 'campus-buildings',
-        filter: ['!=', ['get', 'alignmentStatus'], 'UNVERIFIED'],
+        filter: [
+          'all',
+          ['!=', ['get', 'id'], 'main-gate'],
+          ['!=', ['get', 'alignmentStatus'], 'UNVERIFIED']
+        ],
         paint: {
           'fill-extrusion-color': [
             'match',
@@ -306,7 +310,6 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
             'ece-eee-block', '#ece6dc', // ECE academic concrete masonry
             'mech-civil-block', '#e2ded6', // Mechanical engineering masonry
             'central-library', '#dbe4ee', // Central Library slate-blue tone
-            'main-gate', '#334155', // Granite entrance gateway pylons
             'sh-mba-block', '#eae4dc', // S&H classroom wing
             'canteen-cafeteria', '#ded7cc', // Student dining pavilion
             'central-workshops', '#d2cdc4', // High-bay mechanical workshops
@@ -316,7 +319,11 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
           ],
           'fill-extrusion-height': ['get', 'height'],
           'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': 0.92
+          'fill-extrusion-opacity': [
+            'case',
+            ['==', ['get', 'alignmentStatus'], 'PARTIALLY ALIGNED'], 0.72,
+            0.92
+          ]
         }
       });
 
@@ -324,6 +331,11 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
         id: 'campus-buildings-stroke',
         type: 'line',
         source: 'campus-buildings',
+        filter: [
+          'all',
+          ['!=', ['get', 'id'], 'main-gate'],
+          ['!=', ['get', 'alignmentStatus'], 'UNVERIFIED']
+        ],
         paint: {
           'line-color': '#ffffff',
           'line-width': 1.5,

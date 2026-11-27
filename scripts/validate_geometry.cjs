@@ -361,6 +361,18 @@ const girlsHostel = buildingsGeoJSON.features.find((f) => f.id === 'girls-hostel
 assert(boysHostel && boysHostel.properties.alignmentStatus === 'UNVERIFIED', 'boys-hostel status is UNVERIFIED');
 assert(girlsHostel && girlsHostel.properties.alignmentStatus === 'UNVERIFIED', 'girls-hostel status is UNVERIFIED');
 
+// 3D Rendering Selector & GIS Dataset Consistency
+const permitted3D = buildingsGeoJSON.features.filter(
+  (f) => f.properties.id !== 'main-gate' && f.properties.alignmentStatus !== 'UNVERIFIED'
+);
+assert(permitted3D.length === 11, `Single 3D rendering selector filters to exactly 11 buildings (Found: ${permitted3D.length})`);
+
+const excluded3D = buildingsGeoJSON.features.filter(
+  (f) => f.properties.id === 'main-gate' || f.properties.alignmentStatus === 'UNVERIFIED'
+);
+assert(excluded3D.length === 3, 'Exactly 3 assets excluded from solid 3D building massing (main-gate, boys-hostel, girls-hostel)');
+assert(buildingsGeoJSON.features.length === 14, 'GIS investigation database retains all 14 features without data deletion');
+
 // -------------------------------------------------------------
 // SUMMARY & VERDICT
 // -------------------------------------------------------------

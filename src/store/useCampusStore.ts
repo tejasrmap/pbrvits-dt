@@ -21,6 +21,10 @@ interface CampusState {
   selectedBuilding: BuildingData | null;
   hoveredBuilding: BuildingData | null;
   
+  // 3D vs GIS Selectors
+  get3DBuildings: () => BuildingData[];
+  getGISBuildings: () => BuildingData[];
+  
   // Facilities
   facilities: CampusFacility[];
   selectedFacility: CampusFacility | null;
@@ -101,8 +105,17 @@ interface CampusState {
   stopTour: () => void;
 }
 
+export const select3DBuildings = (buildings: BuildingData[]): BuildingData[] => {
+  return buildings.filter(
+    (b) => b.id !== 'main-gate' && b.alignmentStatus !== 'UNVERIFIED'
+  );
+};
+
 export const useCampusStore = create<CampusState>((set, get) => ({
   buildings: campusBuildings,
+
+  get3DBuildings: () => select3DBuildings(get().buildings),
+  getGISBuildings: () => get().buildings,
   selectedBuilding: null,
   hoveredBuilding: null,
 

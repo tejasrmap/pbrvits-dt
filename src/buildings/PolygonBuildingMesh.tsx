@@ -25,6 +25,12 @@ export const PolygonBuildingMesh: React.FC<PolygonBuildingMeshProps> = ({
   isSelected,
   isHovered
 }) => {
+  // Guard: UNVERIFIED buildings must NEVER render solid 3D building meshes
+  if (data.alignmentStatus === 'UNVERIFIED') {
+    return null;
+  }
+
+  const isPartial = data.alignmentStatus === 'PARTIALLY ALIGNED';
   const { height } = data.dimensions;
   const floors = data.floors || 3;
   const floorHeight = data.floorHeight || height / floors;
@@ -100,12 +106,14 @@ export const PolygonBuildingMesh: React.FC<PolygonBuildingMeshProps> = ({
   const wallMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: isSelected ? '#38bdf8' : data.color || '#e2d9cc',
-      roughness: 0.85,
+      roughness: isPartial ? 0.95 : 0.85,
       metalness: 0.05,
+      transparent: isPartial,
+      opacity: isPartial ? 0.78 : 1.0,
       emissive: isSelected ? '#0284c7' : isHovered ? '#0ea5e9' : '#000000',
       emissiveIntensity: isSelected ? 0.35 : isHovered ? 0.15 : 0
     });
-  }, [isSelected, isHovered, data.color]);
+  }, [isSelected, isHovered, data.color, isPartial]);
 
   const plinthMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({

@@ -18,8 +18,13 @@ export const Building: React.FC<BuildingProps> = ({ data, timeOfDay }) => {
   const isSelected = selectedBuilding?.id === data.id;
   const isHovered = hoveredBuilding?.id === data.id;
 
-  // If this is the main gate, it's rendered distinctly by MainGateArch
+  // Guard 1: Main gate is campus infrastructure, rendered distinctly by MainGateArch
   if (data.id === 'main-gate') {
+    return null;
+  }
+
+  // Guard 2: UNVERIFIED buildings (hostels) must NEVER render solid 3D building meshes
+  if (data.alignmentStatus === 'UNVERIFIED') {
     return null;
   }
 

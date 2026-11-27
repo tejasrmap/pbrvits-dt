@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCampusStore } from '../store/useCampusStore';
+import { useCampusStore, select3DBuildings } from '../store/useCampusStore';
 import { MainGateArch } from '../buildings/MainGateArch';
 import { Building } from '../buildings/Building';
 import { CampusBoundary } from './CampusBoundary';
@@ -10,14 +10,10 @@ import { CameraManager } from '../camera/CameraManager';
 import { StreetFurniture } from './StreetFurniture';
 
 export const CampusScene: React.FC = () => {
-  const buildings = useCampusStore((s) => s.buildings);
+  // Use the single authoritative 3D rendering selector
+  const buildings3D = useCampusStore((s) => select3DBuildings(s.buildings));
   const timeOfDay = useCampusStore((s) => s.timeOfDay);
   const layers = useCampusStore((s) => s.layers);
-
-  // Exclude unverified buildings (e.g. hostels with unverified roof geometry)
-  const verifiedBuildings = buildings.filter(
-    (b) => (b as any).alignmentStatus !== 'UNVERIFIED'
-  );
 
   return (
     <>
@@ -28,13 +24,13 @@ export const CampusScene: React.FC = () => {
       {/* Surrounding Geographic Campus Boundary */}
       <CampusBoundary />
 
-      {/* Iconic Entrance Gateway Arch */}
+      {/* Iconic Entrance Gateway Arch (Infrastructure) */}
       {layers.boundary && <MainGateArch />}
 
-      {/* Authoritatively Verified Campus Buildings */}
+      {/* Permitted 3D Campus Buildings (Filtered: ALIGNED & PARTIALLY ALIGNED only; Hostels Excluded) */}
       {layers.buildings && (
         <group>
-          {verifiedBuildings.map((b) => (
+          {buildings3D.map((b) => (
             <Building key={b.id} data={b} timeOfDay={timeOfDay} />
           ))}
         </group>
