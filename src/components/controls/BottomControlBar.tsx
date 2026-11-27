@@ -21,30 +21,50 @@ export const BottomControlBar: React.FC = () => {
     {
       id: 'overview',
       name: 'Campus Overview',
+      center: [79.9835, 14.9132] as [number, number],
+      zoom: 16.8,
+      pitch: 55,
+      bearing: -15,
       pos: [0, 105, 205] as [number, number, number],
       look: [0, 0, 0] as [number, number, number]
     },
     {
       id: 'gate',
       name: 'Main Gate',
+      center: [79.983655, 14.91234] as [number, number],
+      zoom: 18.2,
+      pitch: 50,
+      bearing: 0,
       pos: [0, 18, 140] as [number, number, number],
       look: [0, 6, 95] as [number, number, number]
     },
     {
       id: 'academic',
       name: 'Academic Blocks',
+      center: [79.98355, 14.91335] as [number, number],
+      zoom: 17.8,
+      pitch: 58,
+      bearing: 0,
       pos: [20, 40, 60] as [number, number, number],
       look: [0, 8, -10] as [number, number, number]
     },
     {
       id: 'library',
       name: 'Library',
+      center: [79.98416, 14.91358] as [number, number],
+      zoom: 18.2,
+      pitch: 52,
+      bearing: -20,
       pos: [65, 30, -5] as [number, number, number],
       look: [53.6, 6, -35.5] as [number, number, number]
     },
     {
       id: 'playground',
       name: 'Playground',
+      center: [79.9818, 14.9131] as [number, number],
+      zoom: 17.2,
+      pitch: 52,
+      bearing: 25,
       pos: [-160, 50, 90] as [number, number, number],
       look: [-199, 0, 0] as [number, number, number]
     }
@@ -53,8 +73,31 @@ export const BottomControlBar: React.FC = () => {
   const handleSelectPreset = (p: (typeof presets)[0]) => {
     setSelectedPresetName(p.name);
     setPresetDropdownOpen(false);
-    if (appViewMode !== '3d') setAppViewMode('3d');
+    if ((window as any).gisMapInstance) {
+      (window as any).gisMapInstance.flyTo({
+        center: p.center,
+        zoom: p.zoom,
+        pitch: p.pitch,
+        bearing: p.bearing,
+        duration: 1200,
+        essential: true
+      });
+    }
     flyTo(p.pos, p.look);
+  };
+
+  const handleResetCamera = () => {
+    resetCameraTarget();
+    if ((window as any).gisMapInstance) {
+      (window as any).gisMapInstance.flyTo({
+        center: [79.9835, 14.9132],
+        zoom: 16.8,
+        pitch: 55,
+        bearing: -15,
+        duration: 1200,
+        essential: true
+      });
+    }
   };
 
   return (
@@ -137,7 +180,7 @@ export const BottomControlBar: React.FC = () => {
 
         {/* Reset Camera View Button */}
         <button
-          onClick={resetCameraTarget}
+          onClick={handleResetCamera}
           title="Reset Camera View"
           className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
         >

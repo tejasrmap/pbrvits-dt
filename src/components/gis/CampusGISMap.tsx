@@ -291,11 +291,26 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
         id: 'campus-buildings-extrusion',
         type: 'fill-extrusion',
         source: 'campus-buildings',
+        filter: ['!=', ['get', 'alignmentStatus'], 'UNVERIFIED'],
         paint: {
-          'fill-extrusion-color': '#e2e8f0', // Restrained, elegant neutral architectural footprint
+          'fill-extrusion-color': [
+            'match',
+            ['get', 'id'],
+            'admin-block', '#f6f0e6', // Visvodaya Bhavan warm institutional limestone
+            'ece-eee-block', '#ece6dc', // ECE academic concrete masonry
+            'mech-civil-block', '#e2ded6', // Mechanical engineering masonry
+            'central-library', '#dbe4ee', // Central Library slate-blue tone
+            'main-gate', '#334155', // Granite entrance gateway pylons
+            'sh-mba-block', '#eae4dc', // S&H classroom wing
+            'canteen-cafeteria', '#ded7cc', // Student dining pavilion
+            'central-workshops', '#d2cdc4', // High-bay mechanical workshops
+            'solar-substation', '#64748b', // Electrical utility enclosure
+            'sports-pavilion', '#e2dcd3', // Athletics ground pavilion
+            '#e2e8f0'
+          ],
           'fill-extrusion-height': ['get', 'height'],
           'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': 0.75
+          'fill-extrusion-opacity': 0.92
         }
       });
 
@@ -424,13 +439,17 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
+    const initialPitch = appViewMode === '3d' ? 55 : appViewMode === 'satellite' ? 0 : 45;
+    const initialBearing = appViewMode === '3d' ? -15 : 0;
+
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
       style: getStyleForBasemap(currentBasemap),
       center: [PBR_VITS_ORIGIN.lng, PBR_VITS_ORIGIN.lat],
-      zoom: 17.2,
-      pitch: 45,
-      bearing: 0
+      zoom: 17.0,
+      pitch: initialPitch,
+      bearing: initialBearing,
+      maxPitch: 75
     });
 
     mapRef.current = map;
@@ -444,6 +463,14 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
 
     map.on('load', () => {
       addCampusVectorLayers(map);
+
+      // Add realistic 3D sunlight
+      map.setLight({
+        anchor: 'viewport',
+        color: '#ffffff',
+        intensity: 0.52,
+        position: [1.2, 210, 52]
+      });
 
       // Create boundary label badges
       const createBadge = (text: string, color: string, dotColor: string) => {
@@ -621,12 +648,23 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
     });
   }, [addCampusVectorLayers, getStyleForBasemap]);
 
-  // Sync appViewMode with basemap
+  // Sync appViewMode with basemap and camera
   useEffect(() => {
-    if (appViewMode === 'satellite' && currentBasemap !== 'satellite') {
-      handleBasemapChange('satellite');
-    } else if (appViewMode === 'gis' && currentBasemap === 'satellite') {
-      handleBasemapChange('osm');
+    if (!mapRef.current) return;
+    const map = mapRef.current;
+
+    if (appViewMode === '3d') {
+      if (currentBasemap !== 'satellite') handleBasemapChange('satellite');
+      map.easeTo({ pitch: 55, bearing: -15, duration: 800 });
+    } else if (appViewMode === 'satellite') {
+      if (currentBasemap !== 'satellite') handleBasemapChange('satellite');
+      map.easeTo({ pitch: 0, bearing: 0, duration: 800 });
+    } else if (appViewMode === 'gis') {
+      if (currentBasemap === 'satellite') handleBasemapChange('osm');
+      map.easeTo({ pitch: 45, bearing: 0, duration: 800 });
+    } else if (appViewMode === 'firstPerson') {
+      if (currentBasemap !== 'satellite') handleBasemapChange('satellite');
+      map.easeTo({ pitch: 75, zoom: 18.5, duration: 900 });
     }
   }, [appViewMode, currentBasemap, handleBasemapChange]);
 

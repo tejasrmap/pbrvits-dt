@@ -3,132 +3,32 @@
   "features": [
     {
       "type": "Feature",
-      "id": "facility-cricket-ground",
+      "id": "pbr-vits-sports-ground",
       "properties": {
-        "id": "facility-cricket-ground",
-        "name": "PBR VITS Cricket & Multi-Sport Oval",
+        "id": "pbr-vits-sports-ground",
+        "name": "PBR VITS Sports Ground & Playground",
         "category": "sports",
-        "sport": "cricket",
-        "surface": "turf_grass",
+        "sport": "multi-sport",
+        "surface": "natural_grass",
         "verificationStatus": "OSM-MAPPED",
-        "source": "OpenStreetMap way 1297896001 (PBR VITS playground)",
-        "dimensionsMeters": [
-          110,
-          85
-        ]
+        "source": "OpenStreetMap way 1297896001 (PBR Visvodaya Institute of Technology & Science playground)",
+        "accuracyLevel": "Authoritative OpenStreetMap vector parcel"
       },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
           [
-            [
-              79.9813,
-              14.9123
-            ],
-            [
-              79.9824,
-              14.91235
-            ],
-            [
-              79.98245,
-              14.9136
-            ],
-            [
-              79.98135,
-              14.91355
-            ],
-            [
-              79.9813,
-              14.9123
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "facility-basketball-court",
-      "properties": {
-        "id": "facility-basketball-court",
-        "name": "Standard Concrete Basketball Court",
-        "category": "sports",
-        "sport": "basketball",
-        "surface": "acrylic_hardcourt",
-        "verificationStatus": "IMAGE-ESTIMATED",
-        "source": "Northeast zone of athletic ground",
-        "dimensionsMeters": [
-          28,
-          15
-        ]
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              79.98225,
-              14.91365
-            ],
-            [
-              79.98255,
-              14.91366
-            ],
-            [
-              79.98253,
-              14.9138
-            ],
-            [
-              79.98223,
-              14.91379
-            ],
-            [
-              79.98225,
-              14.91365
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "facility-volleyball-courts",
-      "properties": {
-        "id": "facility-volleyball-courts",
-        "name": "Dual Outdoor Volleyball Courts",
-        "category": "sports",
-        "sport": "volleyball",
-        "surface": "compacted_clay",
-        "verificationStatus": "IMAGE-ESTIMATED",
-        "source": "East perimeter of sports ground",
-        "dimensionsMeters": [
-          24,
-          18
-        ]
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              79.98225,
-              14.9124
-            ],
-            [
-              79.98255,
-              14.91241
-            ],
-            [
-              79.98254,
-              14.9126
-            ],
-            [
-              79.98224,
-              14.91259
-            ],
-            [
-              79.98225,
-              14.9124
-            ]
+            [79.9811385, 14.9138698],
+            [79.981804, 14.9139174],
+            [79.9825558, 14.9139234],
+            [79.9826482, 14.9131731],
+            [79.982679, 14.9127503],
+            [79.9826913, 14.9121549],
+            [79.9818533, 14.912143],
+            [79.9811755, 14.9120834],
+            [79.9811631, 14.9128575],
+            [79.9811385, 14.9134351],
+            [79.9811385, 14.9138698]
           ]
         ]
       }
