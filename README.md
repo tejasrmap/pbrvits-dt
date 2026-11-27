@@ -9,7 +9,7 @@
 
 The **PBR VITS Digital Twin** is an interactive, browser-based GIS and 3D digital twin of the PBR Visvodaya Institute of Technology & Science campus located along Kondapuram Road in Kavali, SPSR Nellore District, Andhra Pradesh.
 
-Built upon **genuine OpenStreetMap cadastral survey data and satellite imagery**, this platform unifies an interactive **MapLibre GL GIS Map** with a **Three.js 3D Smart Campus Environment**. All 3D building locations, road alignments, sports grounds, and pedestrian navigation networks are mathematically georeferenced from real-world WGS84 geographic footprints.
+Built upon **genuine OpenStreetMap geospatial vector data and high-resolution satellite imagery**, this platform unifies an interactive **MapLibre GL GIS Map** with a **georeferenced 3D Smart Campus Environment**. All 3D building locations, road alignments, sports grounds, and pedestrian navigation networks are mathematically georeferenced from real-world WGS84 geographic footprints.
 
 ---
 
@@ -17,12 +17,12 @@ Built upon **genuine OpenStreetMap cadastral survey data and satellite imagery**
 
 ### 1. Geographic Anchor & Coordinate Projection
 - **Campus Anchor:** Latitude `14.913261° N`, Longitude `79.983666° E` (EPSG:4326 WGS84).
-- **Metric Local Projection:** Local tangent plane centered on the academic core, converting geographic longitude/latitude directly to metric Three.js units (1 unit = 1 meter):
+- **Metric Local Projection:** Local tangent plane centered on the academic core, converting geographic longitude/latitude directly to metric units (1 unit = 1 meter):
   - $+X$ = Easting ($(\text{lng} - \text{lng}_0) \times R_{\text{lng}}$)
   - $-Z$ = Northing ($(\text{lat} - \text{lat}_0) \times R_{\text{lat}}$)
   - $+Y$ = Elevation above terrain ($0\text{m}$ base plane)
 
-### 2. OpenStreetMap Cadastral Data Sources
+### 2. OpenStreetMap Vector Geospatial Sources
 - **Academic Campus Perimeter:** OSM Way `1297901220` (`amenity: college`, Visvodaya Institute of Technology & Science).
 - **Athletic Grounds & Playground:** OSM Way `1297896001` (`leisure: playground`, PBR VITS playground).
 - **Electronics & Electrical Sciences Block:** OSM Way `1297903395` (`building: college`).
@@ -32,10 +32,12 @@ Built upon **genuine OpenStreetMap cadastral survey data and satellite imagery**
 - **Kondapuram Road / State Highway Frontage:** OSM Way `1297896011` (`highway: secondary`).
 - **Central Boulevard Walkway:** OSM Way `1297901222` (`highway: path/pedestrian`).
 
-### 3. Transparent Accuracy Classifications
-- `VERIFIED`: Directly surveyed OpenStreetMap footprint or GPS survey ground anchor.
-- `APPROXIMATE`: Geographically grounded from aerial imagery and architectural evidence.
-- `ESTIMATED`: Zone sector placement based on official campus layout documentation.
+### 3. Transparent Accuracy Classifications (Non-Survey Grade)
+- **ALIGNED ACADEMIC (4 Buildings):** OpenStreetMap vector polygon sits directly on physical satellite roofline (`ece-eee-block`, `mech-civil-block`, `admin-block`, `central-library`).
+- **ALIGNED GATEWAY (1 Structure):** Main entrance gate infrastructure on Udayagiri Road axis (`main-gate`).
+- **PARTIALLY ALIGNED (7 Facilities):** Campus sector position verified from imagery; architectural perimeter approximate (`central-workshops`, `sh-mba-block`, `canteen-cafeteria`, `solar-substation`, `cse-it-block`, `auditorium`, `sports-pavilion`).
+- **UNVERIFIED (2 Hostels):** Approximate location without visible roof verification; excluded from 3D models (`boys-hostel`, `girls-hostel`).
+- *Notice:* Data is aligned to ESRI satellite imagery and OSM vector geometry; it does not constitute legal cadastral or total-station land survey.
 
 ---
 

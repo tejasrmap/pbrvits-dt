@@ -109,7 +109,11 @@ export const useCampusStore = create<CampusState>((set, get) => ({
   facilities: campusFacilities,
   selectedFacility: null,
 
-  appViewMode: '3d',
+  appViewMode:
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('audit') === 'true'
+      ? 'satellite'
+      : '3d',
   activeBasemap: 'satellite',
   timeOfDay: 'day',
   cameraMode: 'orbit',
@@ -166,7 +170,11 @@ export const useCampusStore = create<CampusState>((set, get) => ({
       });
     } else if (appViewMode === '3d') {
       set({
-        appViewMode: '3d',
+        appViewMode:
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('audit') === 'true'
+      ? 'satellite'
+      : '3d',
         cameraMode: 'orbit',
         isFirstPersonWalking: false
       });

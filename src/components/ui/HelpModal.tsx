@@ -94,7 +94,7 @@ export const HelpModal: React.FC = () => {
                 <strong className="text-white">Real GIS Map Mode:</strong> Interactive MapLibre GL engine with OpenStreetMap, ESRI World Satellite imagery, and Topographic layers centered at 14.91326° N, 79.98367° E.
               </div>
               <div className="p-2 rounded-lg bg-slate-800/40">
-                <strong className="text-white">Cadastral Data Accuracy:</strong> Buildings and sports ground boundaries are georeferenced from OpenStreetMap survey ways (1297901220, 1297896001, 1297903395, 1297903402) with transparent VERIFIED, APPROXIMATE, and ESTIMATED classifications.
+                <strong className="text-white">Geospatial Data Accuracy:</strong> Buildings and sports ground boundaries are georeferenced from OpenStreetMap vector ways (1297901220, 1297896001, 1297903395, 1297903402) with transparent ALIGNED, PARTIAL, and UNVERIFIED classifications (satellite-referenced, non-survey grade).
               </div>
               <div className="p-2 rounded-lg bg-slate-800/40">
                 <strong className="text-white">3D & GIS Synchronization:</strong> Selecting a building, searching a facility, or planning an A* pedestrian route synchronizes seamlessly across both the 2D GIS map and the 3D Digital Twin.

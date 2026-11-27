@@ -42,9 +42,18 @@ export const FootprintAuditPanel: React.FC<FootprintAuditPanelProps> = ({
   if (!isOpen) return null;
 
   const buildings = (buildingsGeoJSON as any).features || [];
-  const alignedCount = buildings.filter((b: any) => b.properties?.alignmentStatus === 'ALIGNED').length;
-  const partialCount = buildings.filter((b: any) => b.properties?.alignmentStatus === 'PARTIALLY ALIGNED').length;
-  const unverifiedCount = buildings.filter((b: any) => b.properties?.alignmentStatus === 'UNVERIFIED').length;
+  const alignedAcademic = buildings.filter(
+    (b: any) => b.properties?.alignmentStatus === 'ALIGNED' && b.properties?.id !== 'main-gate'
+  );
+  const alignedInfra = buildings.filter(
+    (b: any) => b.properties?.alignmentStatus === 'ALIGNED' && b.properties?.id === 'main-gate'
+  );
+  const partialCount = buildings.filter(
+    (b: any) => b.properties?.alignmentStatus === 'PARTIALLY ALIGNED'
+  ).length;
+  const unverifiedCount = buildings.filter(
+    (b: any) => b.properties?.alignmentStatus === 'UNVERIFIED'
+  ).length;
 
   return (
     <div className="absolute top-20 left-4 z-20 w-84 glass-panel p-4 rounded-2xl border border-sky-500/40 shadow-2xl backdrop-blur-xl text-white flex flex-col gap-3 max-h-[calc(100vh-120px)] overflow-y-auto">
@@ -76,21 +85,26 @@ export const FootprintAuditPanel: React.FC<FootprintAuditPanelProps> = ({
       </div>
 
       {/* Alignment Verification Metrics */}
-      <div className="grid grid-cols-3 gap-1.5 text-center">
-        <div className="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex flex-col items-center">
-          <span className="text-sm font-bold text-emerald-400">{alignedCount}</span>
-          <span className="text-[9px] text-emerald-300/80 uppercase font-semibold">Aligned</span>
-          <span className="text-[8px] text-slate-400">OSM Survey</span>
+      <div className="grid grid-cols-4 gap-1 text-center">
+        <div className="p-1.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex flex-col items-center">
+          <span className="text-sm font-bold text-emerald-400">{alignedAcademic.length}</span>
+          <span className="text-[9px] text-emerald-300/80 uppercase font-semibold">Academic</span>
+          <span className="text-[8px] text-slate-400">OSM Aligned</span>
         </div>
-        <div className="p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 flex flex-col items-center">
+        <div className="p-1.5 rounded-xl bg-sky-950/40 border border-sky-500/30 flex flex-col items-center">
+          <span className="text-sm font-bold text-sky-400">{alignedInfra.length}</span>
+          <span className="text-[9px] text-sky-300/80 uppercase font-semibold">Gateway</span>
+          <span className="text-[8px] text-slate-400">Portal</span>
+        </div>
+        <div className="p-1.5 rounded-xl bg-amber-950/40 border border-amber-500/30 flex flex-col items-center">
           <span className="text-sm font-bold text-amber-400">{partialCount}</span>
           <span className="text-[9px] text-amber-300/80 uppercase font-semibold">Partial</span>
           <span className="text-[8px] text-slate-400">Zone Approx</span>
         </div>
-        <div className="p-2 rounded-xl bg-rose-950/40 border border-rose-500/30 flex flex-col items-center">
+        <div className="p-1.5 rounded-xl bg-rose-950/40 border border-rose-500/30 flex flex-col items-center">
           <span className="text-sm font-bold text-rose-400">{unverifiedCount}</span>
-          <span className="text-[9px] text-rose-300/80 uppercase font-semibold">Unverified</span>
-          <span className="text-[8px] text-slate-400">Excluded</span>
+          <span className="text-[9px] text-rose-300/80 uppercase font-semibold">Excluded</span>
+          <span className="text-[8px] text-slate-400">Hostels</span>
         </div>
       </div>
 
@@ -109,7 +123,7 @@ export const FootprintAuditPanel: React.FC<FootprintAuditPanelProps> = ({
               !auditLayers.verifiedOnly ? 'bg-sky-500 text-white shadow' : 'text-slate-400 hover:text-white'
             }`}
           >
-            All Footprints ({buildings.length})
+            All Features ({buildings.length})
           </button>
           <button
             onClick={() => onSetVerifiedOnly(true)}
@@ -118,7 +132,7 @@ export const FootprintAuditPanel: React.FC<FootprintAuditPanelProps> = ({
             }`}
           >
             <ShieldCheck className="w-3 h-3" />
-            Verified Only ({alignedCount})
+            Verified ({alignedAcademic.length + alignedInfra.length})
           </button>
         </div>
 
@@ -203,15 +217,17 @@ export const FootprintAuditPanel: React.FC<FootprintAuditPanelProps> = ({
           }}
           className="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-sky-400 cursor-pointer"
         >
-          <option value="">-- Select Building to Inspect --</option>
+          <option value="">-- Select Feature to Inspect --</option>
           {buildings.map((b: any) => {
             const p = b.properties;
             const prefix =
-              p.alignmentStatus === 'ALIGNED'
-                ? '🟢 [ALIGNED]'
+              p.id === 'main-gate'
+                ? '🔵 [ALIGNED GATEWAY]'
+                : p.alignmentStatus === 'ALIGNED'
+                ? '🟢 [ALIGNED ACADEMIC]'
                 : p.alignmentStatus === 'PARTIALLY ALIGNED'
-                ? '🟡 [PARTIAL]'
-                : '🔴 [UNVERIFIED]';
+                ? '🟡 [PARTIAL ZONE]'
+                : '🔴 [UNVERIFIED EXCLUDED]';
             return (
               <option key={p.id} value={p.id}>
                 {prefix} {p.shortName || p.name}
@@ -221,20 +237,27 @@ export const FootprintAuditPanel: React.FC<FootprintAuditPanelProps> = ({
         </select>
       </div>
 
-      {/* Legend & Instructions */}
-      <div className="text-[10px] text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-white/5 flex flex-col gap-1 font-mono">
-        <div className="text-slate-300 font-bold mb-0.5">Legend & Verification Criteria:</div>
+      {/* Legend & Verification Criteria */}
+      <div className="text-[10px] text-slate-400 bg-slate-900/60 p-2.5 rounded-xl border border-white/5 flex flex-col gap-1.5 font-mono">
+        <div className="text-slate-300 font-bold mb-0.5">Geometry Source Distinctions:</div>
         <div className="text-emerald-400 flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
-          <span>ALIGNED: OSM polygon directly on satellite roof</span>
+          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shrink-0" />
+          <span>OSM-Mapped Academic (4): Vector ways sitting directly on satellite rooflines</span>
+        </div>
+        <div className="text-sky-400 flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-sky-400 inline-block shrink-0" />
+          <span>OSM-Mapped Gateway (1): Main entrance arch on Udayagiri frontage</span>
         </div>
         <div className="text-amber-400 flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block" />
-          <span>PARTIALLY ALIGNED: Campus sector verified</span>
+          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shrink-0" />
+          <span>Image-Estimated Zonal (7): Campus sector verified; polygon approximate</span>
         </div>
         <div className="text-rose-400 flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-rose-400 inline-block" />
-          <span>UNVERIFIED: Excluded from verified layer</span>
+          <span className="w-2 h-2 rounded-full bg-rose-400 inline-block shrink-0" />
+          <span>Unverified Hostels (2): No roof visible; excluded from 3D models</span>
+        </div>
+        <div className="border-t border-white/10 pt-1 text-[9px] text-slate-400 leading-tight">
+          * Non-Survey Grade: Geographic GIS alignment referenced to ESRI imagery and OSM ways; does not represent total-station or legal cadastral survey.
         </div>
       </div>
     </div>

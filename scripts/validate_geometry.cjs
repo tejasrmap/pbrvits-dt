@@ -326,6 +326,42 @@ assert(missingSourceCount === 0, 'Every mapped building has a documented geograp
 assert(falseVerifiedCount === 0, 'Zero estimated buildings are mislabeled as VERIFIED or OSM-MAPPED');
 
 // -------------------------------------------------------------
+// SUITE F: Final Acceptance Classification & Accuracy Guardrails
+// -------------------------------------------------------------
+console.log('\n--- SUITE F: Final Acceptance Classification & Accuracy Guardrails ---');
+
+const alignedAcademic = buildingsGeoJSON.features.filter(
+  (f) => f.properties.alignmentStatus === 'ALIGNED' && f.properties.id !== 'main-gate'
+);
+const alignedInfra = buildingsGeoJSON.features.filter(
+  (f) => f.properties.alignmentStatus === 'ALIGNED' && f.properties.id === 'main-gate'
+);
+const partialFacilities = buildingsGeoJSON.features.filter(
+  (f) => f.properties.alignmentStatus === 'PARTIALLY ALIGNED'
+);
+const unverifiedHostels = buildingsGeoJSON.features.filter(
+  (f) => f.properties.alignmentStatus === 'UNVERIFIED'
+);
+
+assert(alignedAcademic.length === 4, `Exactly 4 ALIGNED academic building footprints (Found: ${alignedAcademic.length})`);
+assert(alignedInfra.length === 1, `Exactly 1 ALIGNED gateway infrastructure portal (Found: ${alignedInfra.length})`);
+assert(partialFacilities.length === 7, `Exactly 7 PARTIALLY ALIGNED zonal facilities (Found: ${partialFacilities.length})`);
+assert(unverifiedHostels.length === 2, `Exactly 2 UNVERIFIED excluded residential hostels (Found: ${unverifiedHostels.length})`);
+
+// Explicit check for sports-pavilion
+const sportsPavilion = buildingsGeoJSON.features.find((f) => f.id === 'sports-pavilion');
+assert(
+  sportsPavilion && sportsPavilion.properties.alignmentStatus === 'PARTIALLY ALIGNED',
+  'sports-pavilion remains PARTIALLY ALIGNED until physical footprint is independently identified'
+);
+
+// Hostels must be unverified and excluded
+const boysHostel = buildingsGeoJSON.features.find((f) => f.id === 'boys-hostel');
+const girlsHostel = buildingsGeoJSON.features.find((f) => f.id === 'girls-hostel');
+assert(boysHostel && boysHostel.properties.alignmentStatus === 'UNVERIFIED', 'boys-hostel status is UNVERIFIED');
+assert(girlsHostel && girlsHostel.properties.alignmentStatus === 'UNVERIFIED', 'girls-hostel status is UNVERIFIED');
+
+// -------------------------------------------------------------
 // SUMMARY & VERDICT
 // -------------------------------------------------------------
 console.log('\n======================================================================');

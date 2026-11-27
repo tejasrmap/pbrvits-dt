@@ -72,7 +72,13 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
     vecBoundary: true
   });
 
-  const [currentBasemap, setCurrentBasemap] = useState<BasemapId>(initialBasemap);
+  const [currentBasemap, setCurrentBasemap] = useState<BasemapId>(() => {
+    if (typeof window !== 'undefined') {
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('audit') === 'true') return 'satellite';
+    }
+    return initialBasemap;
+  });
   const [cursorCoords, setCursorCoords] = useState<{ lng: number; lat: number }>({
     lng: PBR_VITS_ORIGIN.lng,
     lat: PBR_VITS_ORIGIN.lat
@@ -439,8 +445,9 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    const initialPitch = appViewMode === '3d' ? 55 : appViewMode === 'satellite' ? 0 : 45;
-    const initialBearing = appViewMode === '3d' ? -15 : 0;
+    const isAuditParam = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('audit') === 'true';
+    const initialPitch = isAuditParam || isAuditMode ? 0 : appViewMode === '3d' ? 55 : appViewMode === 'satellite' ? 0 : 45;
+    const initialBearing = isAuditParam || isAuditMode ? 0 : appViewMode === '3d' ? -15 : 0;
 
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
@@ -463,6 +470,11 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
 
     map.on('load', () => {
       addCampusVectorLayers(map);
+
+      if (isAuditParam || isAuditMode) {
+        map.setPitch(0);
+        map.setBearing(0);
+      }
 
       // Add realistic 3D sunlight
       map.setLight({
@@ -811,11 +823,27 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
           const status = feat.properties?.alignmentStatus || 'PARTIALLY ALIGNED';
           if (auditLayers.verifiedOnly && status !== 'ALIGNED') return;
 
-          const color = status === 'ALIGNED' ? '#22c55e' : status === 'PARTIALLY ALIGNED' ? '#f59e0b' : '#ef4444';
+          const isMainGate = feat.properties.id === 'main-gate';
+          const label = isMainGate
+            ? 'ALIGNED GATEWAY'
+            : status === 'ALIGNED'
+            ? 'ALIGNED ACADEMIC'
+            : status === 'PARTIALLY ALIGNED'
+            ? 'PARTIAL ZONE'
+            : 'UNVERIFIED EXCLUDED';
+
+          const color = isMainGate
+            ? '#38bdf8'
+            : status === 'ALIGNED'
+            ? '#22c55e'
+            : status === 'PARTIALLY ALIGNED'
+            ? '#f59e0b'
+            : '#ef4444';
+
           const el = document.createElement('div');
           el.className = 'gis-audit-building-badge';
           el.style.cssText = `background: rgba(15,23,42,0.92); backdrop-filter: blur(6px); border: 1.5px solid ${color}; border-radius: 6px; padding: 2px 7px; font-family: monospace; font-size: 10px; font-weight: 700; color: ${color}; box-shadow: 0 4px 14px rgba(0,0,0,0.7); pointer-events: none; display: flex; align-items: center; gap: 4px; white-space: nowrap;`;
-          el.innerHTML = `<span style="width:6px; height:6px; border-radius:50%; background:${color};"></span>${feat.properties.id} <span style="font-size:9px; opacity:0.8;">[${status}]</span>`;
+          el.innerHTML = `<span style="width:6px; height:6px; border-radius:50%; background:${color};"></span>${feat.properties.id} <span style="font-size:9px; opacity:0.8;">[${label}]</span>`;
 
           const m = new maplibregl.Marker({ element: el })
             .setLngLat(feat.properties.centroid)
