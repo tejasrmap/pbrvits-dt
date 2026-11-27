@@ -319,11 +319,7 @@ export const CampusGISMap: React.FC<CampusGISMapProps> = ({
           ],
           'fill-extrusion-height': ['get', 'height'],
           'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': [
-            'case',
-            ['==', ['get', 'alignmentStatus'], 'PARTIALLY ALIGNED'], 0.72,
-            0.92
-          ]
+          'fill-extrusion-opacity': 0.88
         }
       });
 
