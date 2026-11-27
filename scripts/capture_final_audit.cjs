@@ -350,7 +350,8 @@ async function run() {
     window.useCampusStore.getState().flyTo([30, 26, 45], [0, 8, 0]);
   });
   await page.waitForFunction(() => {
-    return window.useCampusStore.getState().selectedBuildingId === 'admin-block';
+    const b = window.useCampusStore.getState().selectedBuilding;
+    return b && b.id === 'admin-block';
   }, { timeout: 10000 });
   await new Promise(r => setTimeout(r, 4500));
   await recordScreenshot(

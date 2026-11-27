@@ -1,0 +1,237 @@
+[
+  {
+    "id": 1,
+    "filename": "01-full-campus-satellite.png",
+    "viewName": "Full Campus Satellite Imagery",
+    "description": "High-resolution ESRI satellite basemap centered at 14.9132° N, 79.9835° E showing real-world ground context",
+    "targetViewMode": "satellite",
+    "cameraConfig": {
+      "center": [
+        79.9835,
+        14.9132
+      ],
+      "zoom": 16.5,
+      "pitch": 15
+    },
+    "fileSize": 3151428,
+    "capturedAt": "2026-11-27T00:48:36.598Z"
+  },
+  {
+    "id": 2,
+    "filename": "02-campus-boundary.png",
+    "viewName": "Authoritative Campus Boundaries",
+    "description": "MapLibre vector view showing PBR VITS Academic Boundary (OSM Way 1297901220) and Athletic Boundary (OSM Way 1297896001)",
+    "targetViewMode": "gis",
+    "cameraConfig": {
+      "center": [
+        79.983,
+        14.913
+      ],
+      "zoom": 16.8,
+      "pitch": 20
+    },
+    "fileSize": 517888,
+    "capturedAt": "2026-11-27T00:48:41.840Z"
+  },
+  {
+    "id": 3,
+    "filename": "03-individual-building-footprints.png",
+    "viewName": "3D Extruded Building Footprints (GIS)",
+    "description": "Isometric perspective of georeferenced building polygons extruded to physical heights",
+    "targetViewMode": "gis",
+    "cameraConfig": {
+      "center": [
+        79.9835,
+        14.9133
+      ],
+      "zoom": 17.8,
+      "pitch": 52,
+      "bearing": -15
+    },
+    "fileSize": 467581,
+    "capturedAt": "2026-11-27T00:48:47.112Z"
+  },
+  {
+    "id": 4,
+    "filename": "04-building-overlay-on-satellite.png",
+    "viewName": "Building Footprint Alignment on Satellite",
+    "description": "Direct overlay of georeferenced vector footprints on ESRI World Imagery confirming zero spatial offset",
+    "targetViewMode": "satellite",
+    "cameraConfig": {
+      "center": [
+        79.9836,
+        14.9133
+      ],
+      "zoom": 17.8,
+      "pitch": 45
+    },
+    "fileSize": 3151864,
+    "capturedAt": "2026-11-27T00:48:53.302Z"
+  },
+  {
+    "id": 5,
+    "filename": "05-main-entrance.png",
+    "viewName": "Main Entrance Gateway (3D Scene)",
+    "description": "Three.js ground-level perspective at southern institutional boundary along Kavali-Udayagiri Highway",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "cameraPos": [
+        0,
+        16,
+        138
+      ],
+      "target": [
+        0,
+        6,
+        95
+      ]
+    },
+    "fileSize": 514989,
+    "capturedAt": "2026-11-27T00:48:58.190Z"
+  },
+  {
+    "id": 6,
+    "filename": "06-playground.png",
+    "viewName": "Athletic Complex & Sports Pavilion",
+    "description": "3D perspective of the western athletic grounds (400m track area) and Sports Pavilion",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "cameraPos": [
+        -150,
+        48,
+        85
+      ],
+      "target": [
+        -199,
+        0,
+        0
+      ]
+    },
+    "fileSize": 1305587,
+    "capturedAt": "2026-11-27T00:49:03.487Z"
+  },
+  {
+    "id": 7,
+    "filename": "07-academic-blocks.png",
+    "viewName": "Core Academic Quadrangle",
+    "description": "Close view of Visvodaya Bhavan (Admin Block), ECE & EEE Block, and Mech-Civil Block with zero invented architectural appendages",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "cameraPos": [
+        20,
+        38,
+        55
+      ],
+      "target": [
+        0,
+        8,
+        -10
+      ]
+    },
+    "fileSize": 386286,
+    "capturedAt": "2026-11-27T00:49:08.215Z"
+  },
+  {
+    "id": 8,
+    "filename": "08-pbr-vits-vs-vec-boundaries.png",
+    "viewName": "PBR VITS vs Neighboring VEC Demarcation",
+    "description": "GIS map explicitly displaying PBR VITS perimeter and neighboring Visvodaya Engineering College (OSM Way 1297901221) as distinct parcels",
+    "targetViewMode": "gis",
+    "cameraConfig": {
+      "center": [
+        79.9845,
+        14.9133
+      ],
+      "zoom": 15.8,
+      "pitch": 20
+    },
+    "fileSize": 517804,
+    "capturedAt": "2026-11-27T00:49:13.484Z"
+  },
+  {
+    "id": 9,
+    "filename": "09-3d-overview.png",
+    "viewName": "Complete 3D Campus Overview",
+    "description": "Aerial perspective of all 14 georeferenced polygon-extruded structures across the campus estate",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "cameraPos": [
+        0,
+        110,
+        210
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fileSize": 1031953,
+    "capturedAt": "2026-11-27T00:49:19.177Z"
+  },
+  {
+    "id": 10,
+    "filename": "10-gis-and-3d-comparison.png",
+    "viewName": "Central Library & Eastern Wing",
+    "description": "Three.js perspective highlighting Central Library footprint alignment, authentic massing and clean parapets",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "cameraPos": [
+        68,
+        26,
+        -2
+      ],
+      "target": [
+        53.6,
+        8,
+        -35.5
+      ]
+    },
+    "fileSize": 133716,
+    "capturedAt": "2026-11-27T00:49:23.827Z"
+  },
+  {
+    "id": 11,
+    "filename": "11-building-selection.png",
+    "viewName": "Interactive Inspection & Place Card UI",
+    "description": "Active building selection demonstrating synchronized telemetry, verified coordinates, physical dimensions, and clean UI",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "selectedBuildingId": "admin-block",
+      "cameraPos": [
+        30,
+        26,
+        45
+      ],
+      "target": [
+        0,
+        8,
+        0
+      ]
+    },
+    "fileSize": 424551,
+    "capturedAt": "2026-11-27T00:49:28.686Z"
+  },
+  {
+    "id": 12,
+    "filename": "12-mobile-view.png",
+    "viewName": "Mobile Responsive Experience",
+    "description": "Audit of iPhone 14/15 viewport (390x844) validating clean non-intrusive floating HUD and touch controls",
+    "targetViewMode": "3d",
+    "cameraConfig": {
+      "viewport": "390x844",
+      "cameraPos": [
+        0,
+        110,
+        210
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fileSize": 158138,
+    "capturedAt": "2026-11-27T00:49:38.312Z"
+  }
+]
