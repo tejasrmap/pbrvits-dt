@@ -1,0 +1,60 @@
+{
+  "institution": "PBR Visvodaya Institute of Technology & Science (PBR VITS)",
+  "location": "Kavali, SPSR Nellore District, Andhra Pradesh 524201, India",
+  "geographicAnchor": {
+    "latitude": 14.913261,
+    "longitude": 79.983666,
+    "coordinateSystem": "EPSG:4326 (WGS84)"
+  },
+  "productionDeployment": {
+    "url": "https://pbrvits-dt.vercel.app/",
+    "directAuditUrl": "https://pbrvits-dt.vercel.app/?audit=true",
+    "gitCommitSha": "e87072c30cd95ec351ff01ff88e7a4a9e98b67cd",
+    "gitBranch": "main",
+    "httpStatus": 200,
+    "consoleErrors": 0
+  },
+  "assetCounts": {
+    "gisInvestigationAssets": 14,
+    "filtered3DBuildingAssets": 11,
+    "excludedFrom3DBuildingMassing": 3
+  },
+  "buildingBreakdown": {
+    "alignedAcademicBuildings": [
+      { "id": "admin-block", "name": "Visvodaya Bhavan (Administration)", "source": "OSM Way 1297903400" },
+      { "id": "ece-eee-block", "name": "Electronics & Electrical Sciences Block", "source": "OSM Way 1297903395" },
+      { "id": "mech-civil-block", "name": "Mechanical & Civil Engineering Block", "source": "OSM Way 1297903402" },
+      { "id": "central-library", "name": "Central Library & Knowledge Center", "source": "OSM Way 1297903411" }
+    ],
+    "alignedCampusInfrastructure": [
+      { "id": "main-gate", "name": "Main Entrance Gate Arch Portal", "source": "OSM Way 1297901222 entrance axis", "renderedVia": "MainGateArch" }
+    ],
+    "partiallyAlignedZonalFacilities": [
+      { "id": "cse-it-block", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry" },
+      { "id": "central-workshops", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry" },
+      { "id": "auditorium", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry" },
+      { "id": "sh-mba-block", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry" },
+      { "id": "sports-pavilion", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry inside OSM Way 1297896001" },
+      { "id": "canteen-cafeteria", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry" },
+      { "id": "solar-substation", "status": "PARTIALLY ALIGNED", "rendering": "Approximate geometry" }
+    ],
+    "unverifiedExcludedHostels": [
+      { "id": "boys-hostel", "status": "UNVERIFIED", "renderedIn3D": false, "retainedInGIS": true },
+      { "id": "girls-hostel", "status": "UNVERIFIED", "renderedIn3D": false, "retainedInGIS": true }
+    ]
+  },
+  "liveAuditTest": {
+    "pitch": 0,
+    "bearing": 0,
+    "zoom": 17,
+    "appViewMode": "satellite",
+    "panelVisible": true,
+    "tilesLoaded": true,
+    "userInteractionRequired": false
+  },
+  "validationSuite": {
+    "testsPassed": 147,
+    "testsFailed": 0,
+    "total": 147
+  }
+}
